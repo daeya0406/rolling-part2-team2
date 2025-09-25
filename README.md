@@ -90,7 +90,7 @@ npm run test
 
 ---
 
-🛠️ Git 가이드라인
+## 🛠️ Git 가이드라인
 
 1. 브랜치 전략
    - main: 배포  
@@ -109,7 +109,7 @@ npm run test
 
 ---
 
-📅 일정 계획
+## 📅 일정 계획
 - 9/25 - 9/26 : 요구사항 체크, 환경셋업, 컴포넌트 분리 및 가이드  
 - 9/27 - 9/28 : 각 페이지 구조 세팅  
 - 9/29 - 10/04 : 핵심 기능 개발 및 1차 피드백  
@@ -122,7 +122,7 @@ npm run test
 
 ---
 
-🔗 링크
+## 🔗 링크
 - Notion 기획 문서()
 - [Figma 디자인](https://www.figma.com/design/cbZ9PNKSFg4mS7Lf1roZlp/-AAA-%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC?node-id=0-1&t=9ro8YozglWSgW6hw-1)
 - GitHub Projects()
@@ -130,3 +130,15 @@ npm run test
 
 ---
 
+## 🛠️ 포매팅 환경 설정
+
+이 프로젝트에는 VS Code 팀 공용 설정이 포함되어 있습니다.
+
+- `.gitignore` : 설정 변경
+    .vscode/*
+    !.vscode/settings.json
+    !.vscode/extensions.json
+- `.vscode/settings.json`: 저장 시 ESLint / Prettier 자동 적용
+- `.vscode/extensions.json`: 권장 확장 자동 안내 (ESLint, Prettier, Tailwind CSS 등)
+
+👉 별도 세팅할 필요 없이 VS Code에서 프로젝트를 열면 동일한 개발 환경이 적용됩니다.
