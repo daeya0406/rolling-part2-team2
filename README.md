@@ -55,11 +55,14 @@ src/
     WritePage.jsx      
     scss/
       home-page.scss
-      write-page.scss
+      write-page.scss             
   router/
     routes.jsx
-  styles/
-    index.css
+  modules/             # 개발하면서 필요한 디렉토리 추가
+  features/
+  hooks/
+  lib/   
+  mocks/
   main.jsx
   App.jsx
 ```
