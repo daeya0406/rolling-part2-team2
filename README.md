@@ -74,7 +74,7 @@ src/
 ```bash
 # 1. 레포 클론
 git clone https://github.com/daeya0406/rolling-part2-team2.git
-cd rolling-paper
+cd rolling-part2-team2
 
 # 2. 패키지 설치
 npm install
