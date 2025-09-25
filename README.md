@@ -34,28 +34,30 @@
 src/
   components/          # 재사용 UI (버튼, 모달 등)
     ui/
-      Button.jsx       # 컴포넌트는 파스칼 표기법 (맨앞에 대문자, 띄우지말고 대문자 예시 UserCard.jsx) 
+      Button.jsx       # 컴포넌트는 파스칼 표기법 (맨앞에 대문자, 띄우지말고 대문자 예시 UserCard.jsx)
+      button.scss    # scss는 케밥 케이스 표기법( 예시 type-name.scss )
       Modal.jsx
+      modal.scss
       Badge.jsx
-      scss/            # scss는 케밥 케이스 표기법( 예시 type-name.scss )
-        button.scss
-        modal.scss
-        badge.scss
-    home/              # 메인페이지 안의 컴포넌트
-      MainPoint01.jsx
-      MainPoint02.jsx
+      badge.scss
+  scss/
+    _color.scss
+    _variables.scss
+    _mixins.scss
+    reset.scss
   layouts/             # 공통 레이아웃
     DefaultLayout.jsx
+    default-layout.scss
     MainLayout.jsx
-    scss/
-      default-layout.scss
-      main-layout.scss
+    main-layout.scss
   pages/               # 라우트 엔트리
     HomePage.jsx
+    home-page.scss
     WritePage.jsx      
-    scss/
-      home-page.scss
-      write-page.scss             
+    write-page.scss   
+    components/        # 메인페이지 안의 컴포넌트
+      MainPoint01.jsx
+      MainPoint02.jsx          
   router/
     routes.jsx
   modules/             # 개발하면서 필요한 디렉토리 추가
