@@ -116,7 +116,7 @@ npm run test
 
 🔗 링크
 	•	Notion 기획 문서()
-	•	Figma 디자인(https://www.figma.com/design/cbZ9PNKSFg4mS7Lf1roZlp/-AAA-%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC?node-id=0-1&t=9ro8YozglWSgW6hw-1)
+	•	(Figma 디자인)[https://www.figma.com/design/cbZ9PNKSFg4mS7Lf1roZlp/-AAA-%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC?node-id=0-1&t=9ro8YozglWSgW6hw-1]
 	•	GitHub Projects()
 	•	배포 URL ()
 
