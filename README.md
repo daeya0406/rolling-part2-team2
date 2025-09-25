@@ -51,13 +51,16 @@ src/
     MainLayout.jsx
     main-layout.scss
   pages/               # 라우트 엔트리
-    MainPage.jsx
-    main-page.scss
-    WritePage.jsx      
-    write-page.scss   
-    components/        # 메인페이지 안의 컴포넌트
-      MainPoint01.jsx
-      MainPoint02.jsx          
+    Main/
+      index.jsx
+      style.scss
+      components/      # 해당 페이지에 사용할 컴포넌트 분리
+        MainPoint01.jsx
+        MainPoint02.jsx
+    List/
+      index.jsx
+      style.scss
+      components/
   router/
     routes.jsx
   modules/             # 개발하면서 필요한 디렉토리 추가
