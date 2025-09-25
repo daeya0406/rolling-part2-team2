@@ -6,9 +6,9 @@
 
 ## 기술 스택
 
-- **프레임워크**: React + Vite + TypeScript
+- **프레임워크**: React + Vite + ES6
 - **라우팅**: React Router
-- **상태 관리**: Redux Toolkit
+- **상태 관리**:
 - **스타일링**: SCSS
 
 ---
@@ -33,6 +33,8 @@
 ```
 src/
   components/          # 재사용 UI (버튼, 모달 등)
+    header.jsx
+    header.scss
     ui/
       Button.jsx       # 컴포넌트는 파스칼 표기법 (맨앞에 대문자, 띄우지말고 대문자 예시 UserCard.jsx)
       button.scss      # scss는 케밥 케이스 표기법( 예시 type-name.scss )
@@ -54,13 +56,10 @@ src/
     Main/
       index.jsx
       style.scss
-      components/      # 해당 페이지에 사용할 컴포넌트 분리
-        MainPoint01.jsx
-        MainPoint02.jsx
+      components/      # 필요하면 추가
     List/
       index.jsx
       style.scss
-      components/
   router/
     routes.jsx
   modules/             # 개발하면서 필요한 디렉토리 추가
