@@ -51,8 +51,8 @@ src/
     MainLayout.jsx
     main-layout.scss
   pages/               # 라우트 엔트리
-    HomePage.jsx
-    home-page.scss
+    MainPage.jsx
+    main-page.scss
     WritePage.jsx      
     write-page.scss   
     components/        # 메인페이지 안의 컴포넌트
