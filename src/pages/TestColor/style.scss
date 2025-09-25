@@ -1,0 +1,164 @@
+/* 레이아웃 */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Noto Sans KR", sans-serif;
+  color: #111;
+}
+
+.palette {
+  padding: 16px 24px 40px;
+}
+
+.group {
+  margin: 16px 0 28px;
+}
+.group > h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+.group {
+}
+h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+p {
+  font-size: 14px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  .swatch {
+    width: 88px;
+    height: 36px;
+    border-radius: 4px;
+  }
+}
+
+.utilities {
+  display: flex;
+  gap: 24px 24px;
+  align-items: start;
+  h4 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+  }
+  .swatch {
+    width: 96px;
+    height: 48px;
+    border-radius: 4px;
+  }
+}
+
+/* visual touches */
+.swatch.outline {
+  border: 1px solid #e5e5e5;
+}
+.swatch.selected {
+  outline: 3px solid #1e88e5;
+  outline-offset: 2px;
+}
+
+/* 활용 데모 */
+.test .row.vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.demo-text.purple600 {
+  color: var(--c-purple600); // 컬러 사용할 때 var(--c-컬러농도)
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.demo-btn.purple600 {
+  background-color: var(--c-purple600); // 컬러 사용할 때 var(--c-컬러농도)
+  color: var(--c-white); // 컬러 사용할 때 var(--c-컬러)
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+// hover 색상 표출
+.swatch {
+  position: relative;
+  cursor: pointer;
+
+  &::after {
+    content: attr(data-var); // data-var 속성에 들어있는 값 표시
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2px 6px;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+
+  &.selected {
+    outline: 3px solid #1e88e5;
+    outline-offset: 2px;
+  }
+}
+
+// test
+.group.test {
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+}
+.error-test {
+  color: var(--c-error);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.demo-btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 0;
+}
+
+.demo-box {
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.scoped-typo {
+  color: var(--c-gray700);
+  font-weight: 600;
+}
+.scoped-btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--c-green500);
+  color: var(--c-white);
+}
+.scoped-card {
+  padding: 8px;
+  border: 1px solid var(--c-gray300);
+  border-radius: 6px;
+}

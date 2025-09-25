@@ -1,0 +1,100 @@
+// 레이아웃
+.typo-spec {
+  padding: 24px;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+
+  .row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+    padding: 18px 0;
+    border-top: 1px solid #eee;
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+
+    .label-font {
+      font-weight: 600;
+    }
+    .muted {
+      color: #767676;
+      font-weight: 500;
+    }
+  }
+
+  .samples {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .line {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+// 사이즈별 샘플 클래스 적용 방법(해당 부분 활용)
+.sample-28-700 {
+  @include typo(28, 700);
+}
+.sample-28-400 {
+  @include typo(28, 400);
+}
+
+.sample-24-700 {
+  @include typo(24, 700);
+}
+.sample-24-400 {
+  @include typo(24, 400);
+}
+
+.sample-20-700 {
+  @include typo(20, 700);
+}
+.sample-20-400 {
+  @include typo(20, 400);
+}
+
+.sample-18-700 {
+  @include typo(18, 700);
+}
+.sample-18-400 {
+  @include typo(18, 400);
+}
+
+.sample-16-700 {
+  @include typo(16, 700);
+}
+.sample-16-400 {
+  @include typo(16, 400);
+}
+
+.sample-15-700 {
+  @include typo(15, 700);
+}
+.sample-15-400 {
+  @include typo(15, 400);
+}
+
+.sample-14-700 {
+  @include typo(14, 700);
+}
+.sample-14-400 {
+  @include typo(14, 400);
+}
+
+.sample-12-700 {
+  @include typo(12, 700);
+}
+.sample-12-400 {
+  @include typo(12, 400);
+}

@@ -1,0 +1,45 @@
+@use "sass:map";
+
+// 토큰 맵
+$font-sizes: (
+  28: (
+    size: 28px,
+    line: 42px,
+  ),
+  24: (
+    size: 24px,
+    line: 36px,
+  ),
+  20: (
+    size: 20px,
+    line: 30px,
+  ),
+  18: (
+    size: 18px,
+    line: 28px,
+  ),
+  16: (
+    size: 16px,
+    line: 26px,
+  ),
+  15: (
+    size: 15px,
+    line: 22px,
+  ),
+  14: (
+    size: 14px,
+    line: 20px,
+  ),
+  12: (
+    size: 12px,
+    line: 18px,
+  ),
+);
+
+// 믹스인
+@mixin typo($size, $weight: 400) {
+  $set: map.get($font-sizes, $size);
+  font-size: map.get($set, size);
+  line-height: map.get($set, line);
+  font-weight: $weight;
+}
