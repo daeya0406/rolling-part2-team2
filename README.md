@@ -35,7 +35,7 @@ src/
   components/          # 재사용 UI (버튼, 모달 등)
     ui/
       Button.jsx       # 컴포넌트는 파스칼 표기법 (맨앞에 대문자, 띄우지말고 대문자 예시 UserCard.jsx)
-      button.scss    # scss는 케밥 케이스 표기법( 예시 type-name.scss )
+      button.scss      # scss는 케밥 케이스 표기법( 예시 type-name.scss )
       Modal.jsx
       modal.scss
       Badge.jsx
