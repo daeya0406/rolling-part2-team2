@@ -135,9 +135,11 @@ npm run test
 이 프로젝트에는 VS Code 팀 공용 설정이 포함되어 있습니다.
 
 - `.gitignore` : 설정 변경
+```
     .vscode/*
     !.vscode/settings.json
     !.vscode/extensions.json
+```
 - `.vscode/settings.json`: 저장 시 ESLint / Prettier 자동 적용
 - `.vscode/extensions.json`: 권장 확장 자동 안내 (ESLint, Prettier, Tailwind CSS 등)
 
