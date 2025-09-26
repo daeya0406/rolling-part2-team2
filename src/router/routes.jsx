@@ -3,10 +3,10 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import MainPage from "../pages/Main";
 
 // 테스트용 페이지
-import Components1 from "../pages/TestComponents1";
-import Components2 from "../pages/TestComponents2";
-import TypoPage from "../pages/TestTypo";
-import ColorPage from "../pages/TestColor";
+import Components1 from "../pages/Test/TestComponents1";
+import Components2 from "../pages/Test/TestComponents2";
+import TypoPage from "../pages/Test/TestTypo";
+import ColorPage from "../pages/Test/TestColor";
 
 export const router = createBrowserRouter([
   {
