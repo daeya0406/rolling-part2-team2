@@ -7,7 +7,7 @@
 
   // 저장 시 ESLint 자동 fix
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "always"
   },
 
   // ESLint 검사할 파일 확장자
