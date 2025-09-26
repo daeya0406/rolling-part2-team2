@@ -1,7 +1,5 @@
 import "./Badge.scss";
 
-function Badge({ relationship }) {
+export default function TestBadge({ relationship }) {
   return <span className={`badge badge--${relationship}`}>{relationship}</span>;
 }
-
-export default Badge;
