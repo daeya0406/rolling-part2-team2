@@ -1,0 +1,309 @@
+/* Page Wrapper - 다른 페이지에 영향 없이 이 페이지만 배경색 적용 */
+.test2-page-wrapper {
+  background: #ffe2ad;
+  min-height: 100vh;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header Service */
+.header-service {
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 20px 0;
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .avatar-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .avatar-images {
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          border: 1.4px solid white;
+          margin-left: -8px;
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+
+        .avatar-count {
+          background: #fff;
+          color: #484848;
+          font-size: 12px;
+          font-weight: 500;
+          min-width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          margin-left: -8px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0 4px;
+          box-sizing: border-box;
+          border: 1px solid #e3e3e3;
+        }
+      }
+
+      p {
+        margin: 0;
+        font-size: 18px;
+        color: #333;
+        font-weight: 400;
+      }
+    }
+
+    .divider {
+      background-color: var(--c-gray200, #ddd);
+      width: 1px;
+      height: 28px;
+    }
+
+    .emoji-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .emoji-badges {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .emoji-badge {
+          background: #f8f9fa;
+          border: 1px solid #e9ecef;
+          border-radius: 32px;
+          padding: 6px 12px;
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .emoji-dropdown {
+          color: #999;
+          font-size: 12px;
+          margin-left: 4px;
+        }
+      }
+    }
+
+    .emoji-add-button,
+    .share-button {
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #f5f5f5;
+        border-color: #999;
+      }
+    }
+
+    .share-button {
+      background: #007bff;
+      color: white;
+      border-color: #007bff;
+
+      &:hover {
+        background: #0056b3;
+        border-color: #0056b3;
+      }
+    }
+  }
+}
+
+.test2-container {
+  min-height: 100vh;
+  padding: 40px 20px;
+
+  .contents-area {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 384px);
+      gap: 28px 24px;
+      justify-content: center;
+
+      .card {
+        width: 384px;
+        height: 280px;
+        border-radius: 16px;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        // 새 메시지 추가 카드 (+ 아이콘)
+        &.create-card {
+          border: 2px dashed #e0e0e0;
+          background: #fafafa;
+
+          &:hover {
+            border-color: #bbb;
+            background: #f0f0f0;
+          }
+
+          .card-content {
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .plus-icon {
+              width: 56px;
+              height: 56px;
+              border-radius: 50%;
+              background: #e0e0e0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 32px;
+              color: #999;
+              font-weight: 300;
+            }
+          }
+        }
+
+        // 메시지가 없는 카드 (배경 이미지만)
+        &.empty-card {
+          .card-background {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+          }
+        }
+
+        // 메시지가 있는 카드
+        &.message-card {
+          background: white;
+
+          .message-content {
+            padding: 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            .message-header {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+
+              .profile-image {
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                object-fit: cover;
+              }
+
+              .sender-info {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+
+                .sender-name {
+                  font-size: 14px;
+                  font-weight: 400;
+                  color: #000;
+                  line-height: 1.2;
+                }
+              }
+            }
+
+            .message-text {
+              flex: 1;
+              font-size: 18px;
+              line-height: 1.6;
+              color: #5a5a5a;
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-line-clamp: 3;
+              line-clamp: 3;
+              -webkit-box-orient: vertical;
+              text-overflow: ellipsis;
+              max-height: calc(1.6em * 3);
+              word-break: break-word;
+            }
+
+            .message-footer {
+              display: flex;
+              justify-content: flex-start;
+              margin-top: auto;
+
+              .message-date {
+                font-size: 12px;
+                color: #999;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 반응형 처리
+@media (max-width: 1248px) {
+  .test2-container {
+    .contents-area {
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 24x;
+
+      .card-grid {
+        grid-template-columns: repeat(auto-fit, 384px);
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 840px) {
+  .test2-container {
+    .contents-area {
+      .card-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 384px));
+
+        .card {
+          width: 100%;
+          min-width: 300px;
+        }
+      }
+    }
+  }
+}
