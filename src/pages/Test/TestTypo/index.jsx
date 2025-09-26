@@ -165,15 +165,12 @@ export default function TypoPage() {
       {/* 12 */}
       <div className="row">
         <div className="label">
-          <div className="label-font">Font / 12 - Bold</div>
           <div className="label-font muted">Font / 12 - Regular</div>
         </div>
         <div className="label">
-          <CodeCopy text="@include typo(12, 700);" />
           <CodeCopy text="@include typo(12, 400);" muted />
         </div>
         <div className="samples">
-          <div className="line sample-12-700">가나다라마바사아자차카타파하</div>
           <div className="line sample-12-400">가나다라마바사아자차카타파하</div>
         </div>
       </div>

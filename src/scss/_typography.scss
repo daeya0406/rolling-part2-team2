@@ -1,45 +1,78 @@
 @use "sass:map";
+@use "sass:math";
+
+// 기본 폰트 : 프리텐다드 설정
+:root {
+  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, system-ui, sans-serif;
+}
+html,
+body {
+  font-family: var(--font-sans);
+}
 
 // 토큰 맵
 $font-sizes: (
   28: (
     size: 28px,
     line: 42px,
+    spacing: -1%,
   ),
   24: (
     size: 24px,
     line: 36px,
+    spacing: -1%,
   ),
   20: (
     size: 20px,
     line: 30px,
+    spacing: -1%,
   ),
   18: (
     size: 18px,
     line: 28px,
+    spacing: -1%,
   ),
   16: (
     size: 16px,
     line: 26px,
+    spacing: -1%,
   ),
   15: (
     size: 15px,
     line: 22px,
+    spacing: -1%,
   ),
   14: (
     size: 14px,
     line: 20px,
+    spacing: -0.5%,
   ),
   12: (
     size: 12px,
     line: 18px,
+    spacing: -0.5%,
   ),
 );
 
 // 믹스인
 @mixin typo($size, $weight: 400) {
   $set: map.get($font-sizes, $size);
-  font-size: map.get($set, size);
-  line-height: map.get($set, line);
+  @if $set == null {
+    @error "정의되지 않은 글자 크기 `#{$size}` 입니다. $font-sizes 맵에 있는 키를 확인하세요.";
+  }
+
+  $fs: map.get($set, size);
+  $lh: map.get($set, line);
+  $sp: map.get($set, spacing);
+
+  font-size: $fs;
+  line-height: $lh;
   font-weight: $weight;
+
+  @if $sp != null {
+    $ratio: math.div($sp, 100%);
+    letter-spacing: $fs * $ratio;
+  }
 }

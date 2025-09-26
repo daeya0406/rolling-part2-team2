@@ -8,6 +8,9 @@ import Components2 from "../pages/Test/TestComponents2";
 import TypoPage from "../pages/Test/TestTypo";
 import ColorPage from "../pages/Test/TestColor";
 
+// 작업 페이지
+import Post from "../pages/Post";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +23,9 @@ export const router = createBrowserRouter([
       { path: "components2", element: <Components2 /> }, // /test2
       { path: "typo", element: <TypoPage /> }, // /typo
       { path: "color", element: <ColorPage /> }, // /color
+
+      // 페이지 작업
+      { path: "post", element: <Post /> }, // /Post
     ],
   },
 ]);
