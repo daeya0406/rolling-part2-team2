@@ -20,3 +20,66 @@ h2 {
     }
   }
 }
+
+.write-wrap {
+  display: grid;
+  row-gap: 40px;
+
+  .title-wrap {
+    margin-bottom: 16px;
+  }
+
+  .tabs {
+    display: inline-flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    .tab {
+      @include typo(16, 400);
+      min-width: 122px;
+      text-align: center;
+      padding: 7px 16px;
+      background: var(--c-gray100);
+      border: 2px solid rgba(0, 0, 0, 0);
+      border-radius: 8px;
+    }
+    .active {
+      @include typo(16, 700);
+      background: var(--c-white);
+      border: 2px solid var(--c-purple600);
+      color: var(--c-purple600);
+    }
+  }
+
+  .color-grid,
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(72px, 1fr));
+    gap: 16px;
+    li {
+      list-style: none;
+    }
+  }
+
+  .color-chip {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 16px;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    .check {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--c-gray500);
+      color: #fff;
+      border-radius: 50%;
+      padding: 2px 6px;
+    }
+  }
+}
