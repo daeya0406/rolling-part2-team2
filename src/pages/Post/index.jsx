@@ -1,12 +1,7 @@
 import { useState } from "react";
 import "./style.scss";
 
-const COLORS = [
-  "bg--c-beige200",
-  "bg--c-purple200",
-  "bg--c-blue200",
-  "bg--c-green200",
-];
+const COLORS = ["beige", "purple", "blue", "green"];
 
 export default function Post() {
   const [name, setName] = useState("");
