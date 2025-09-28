@@ -20,7 +20,7 @@ export default defineConfig({
       scss: {
         // 전역으로 지정해서 import 각각 안쓸 수 있게
         additionalData: `
-          @use "@/scss/_typography" as *;
+          @use "@/assets/scss/_typography" as *;
         `,
       },
     },
