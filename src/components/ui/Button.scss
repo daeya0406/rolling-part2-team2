@@ -1,0 +1,191 @@
+// 색상 변수 (공통 처리)
+$color-primary: #9935ff;
+$color-primary-hover: #861dee;
+$color-primary-active: #6e0ad1;
+
+$color-outline-hover: #f6f6f6;
+$color-outline-active: #ededed;
+$color-outline-border: #cccccc;
+
+$color-disabled: #cccccc;
+
+// 라운드 값 (공통 처리)
+$radius-lg: 12px;
+$radius-md: 6px;
+
+// 아이콘+버튼 사이 간격 (공통 처리)
+.btn__icon--left {
+  margin-right: 8px;
+}
+
+// 버튼 높이 값 (공통 처리)
+$btn-height-lg: 56px;
+$btn-height-md: 40px;
+$btn-height-sm: 36px;
+$btn-height-xs: 28px;
+
+// 버튼 기초 (공통 처리)
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: $radius-lg;
+
+  .btn__icon,
+  .btn__label {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+}
+
+// 버튼 사이즈 : Size(56, 40, 36, 28)
+.btn--lg {
+  height: $btn-height-lg;
+  padding: 0 24px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.btn--md {
+  height: $btn-height-md;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: $radius-md;
+}
+
+.btn--sm {
+  height: $btn-height-sm;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: normal;
+  border-radius: $radius-md;
+}
+
+.btn--xs {
+  height: $btn-height-xs;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: normal;
+  border-radius: $radius-md;
+}
+
+// 버튼 스타일 : Variants
+.btn--primary {
+  background: $color-primary;
+  color: white;
+  border: none;
+
+  &:hover {
+    background-color: $color-primary-hover;
+  }
+
+  &:active {
+    background-color: $color-primary-active;
+  }
+}
+
+.btn--outline {
+  background: transparent;
+  border: 1px solid $color-outline-border;
+  color: #181818;
+
+  &:hover {
+    background-color: $color-outline-hover;
+  }
+
+  &:active {
+    background-color: $color-outline-active;
+  }
+}
+
+// 아이콘-only 버튼 (정사각형)
+.btn--icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid $color-outline-border;
+  background: transparent;
+  border-radius: $radius-md;
+
+  &:hover {
+    background-color: $color-outline-hover;
+  }
+
+  &:active {
+    background-color: $color-outline-active;
+  }
+
+  &:disabled {
+    background-color: $color-disabled;
+    border: none;
+    cursor: not-allowed;
+  }
+}
+
+.btn--icon-md {
+  width: $btn-height-md;
+  height: $btn-height-md;
+  padding: 0 !important;
+}
+
+.btn--icon-sm {
+  width: $btn-height-sm;
+  height: $btn-height-sm;
+  padding: 0 !important;
+}
+
+.btn--icon-xs {
+  width: $btn-height-xs;
+  height: $btn-height-xs;
+  padding: 0 !important;
+}
+
+// 아이콘-only 버튼 (직사각형 Box)
+.btn--icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: 1px solid $color-outline-border;
+  background: transparent;
+
+  &:hover {
+    background-color: $color-outline-hover;
+  }
+
+  &:active {
+    background-color: $color-outline-active;
+  }
+
+  &:disabled {
+    background-color: $color-disabled;
+    border: none;
+    cursor: not-allowed;
+  }
+}
+
+// 아이콘 컬러 변경 처리
+.btn__icon {
+  display: inline-flex;
+  align-items: center;
+  fill: currentColor;
+}
+
+// 버튼 Disabled (공통 처리)
+.btn:disabled {
+  background-color: $color-disabled;
+  color: #fff;
+  cursor: not-allowed;
+  font-weight: normal;
+
+  .btn__icon {
+    filter: brightness(0) invert(1);
+  }
+}
