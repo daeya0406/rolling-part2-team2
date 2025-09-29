@@ -110,5 +110,15 @@ h2 {
         height: 100%;
       }
     }
+    &.image-loading {
+      position: relative;
+      background-color: var(--c-gray100);
+      .loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
   }
 }

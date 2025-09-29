@@ -18,6 +18,24 @@
   .loading-text {
     @include typo(16, 400);
   }
+
+  &.size-sm .spinner {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+
+  &.size-md .spinner {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+  }
+
+  &.size-lg .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 5px;
+  }
 }
 
 @keyframes spin {

@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getBackgroundImages } from "@/apis/backgroundImages";
+import { createRecipient } from "@/apis/createRecipient";
 import "./style.scss";
 import checkIcon from "@/assets/images/icons/check.svg";
 import InputText from "./components/InputText";
@@ -8,81 +10,125 @@ import Loading from "@/components/ui/Loading";
 const COLORS = ["beige", "purple", "blue", "green"];
 
 export default function Post() {
+  const navigate = useNavigate();
+
   // 상태
   const [name, setName] = useState("");
+  const [nameTouched, setNameTouched] = useState(false);
   const [tabBtn, setTabBtn] = useState("color"); // 'color' | 'image'
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [selectedBg, setSelectedBg] = useState({
     type: "color",
-    value: "beige",
+    value: COLORS[0],
   });
 
-  useEffect(() => {
-    async function fetchImages() {
-      try {
-        const data = await getBackgroundImages();
-        setImages(data.imageUrls);
-      } catch (error) {
-        console.error(error);
+  // bg 이미지 가져오기
+  const fetchImages = async () => {
+    setLoading(true);
+    setImages([]);
+    try {
+      const data = await getBackgroundImages();
+      const urls = data.imageUrls;
+      for (const url of urls) {
+        setImages((prev) => [...prev, url]);
+        await new Promise((r) => setTimeout(r, 50));
       }
+      // 이미지가 있으면 첫 번째 이미지 기본값으로 설정
+      if (urls.length > 0 && tabBtn === "image") {
+        setSelectedBg({ type: "image", value: urls[0] });
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
-    fetchImages();
-  }, []);
+  };
 
-  function handleSelect(type, value) {
+  // 탭 클릭
+  const handleTabClick = (tab) => {
+    setTabBtn(tab);
+    if (tab === "color") {
+      setSelectedBg({ type: "color", value: COLORS[0] });
+    } else if (tab === "image") {
+      if (images.length === 0) fetchImages();
+      else setSelectedBg({ type: "image", value: images[0] });
+    }
+  };
+
+  const handleSelect = (type, value) => {
     setSelectedBg({ type, value });
-  }
+  };
 
   const MAX_NAME_LEN = 20;
   const trimmedName = name.trim();
   const isNameValid =
     trimmedName.length > 0 && trimmedName.length <= MAX_NAME_LEN;
+  const showNameError = nameTouched && !isNameValid;
 
-  function handleSubmit(e) {
+  const handleNameBlur = () => setNameTouched(true);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setNameTouched(true);
     if (!isNameValid) return;
 
     const payload = {
-      to: trimmedName,
-      background: selectedBg,
+      team: "19-2",
+      name: trimmedName,
+      backgroundColor: selectedBg.type === "color" ? selectedBg.value : "beige",
+      backgroundImageURL: selectedBg.type === "image" ? selectedBg.value : null,
     };
-    console.log("submit payload:", payload);
-    // TODO: API 전송
-  }
+
+    try {
+      const result = await createRecipient("19-2", payload);
+      console.log("API 결과:", result);
+      alert("받는 사람이 성공적으로 생성되었습니다!");
+      // 생성 후 /post/{id}로 이동
+      navigate(`/post/${result.id}`);
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
 
   return (
-    <form className="write-wrap">
+    <form className="write-wrap" onSubmit={handleSubmit}>
       <section>
         <h2 className="title">To.</h2>
         <InputText
           id="toName"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onBlur={handleNameBlur}
           placeholder="받는 사람 이름을 입력해 주세요"
         />
+        {showNameError && <p className="error-text">값을 입력해 주세요.</p>}
       </section>
+
       <section>
         <div className="title-wrap">
           <h2>배경화면을 선택해 주세요.</h2>
           <p>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</p>
         </div>
+
         <div className="tabs">
           <button
             type="button"
             className={tabBtn === "color" ? "tab active" : "tab"}
-            onClick={() => setTabBtn("color")}
+            onClick={() => handleTabClick("color")}
           >
             컬러
           </button>
           <button
             type="button"
             className={tabBtn === "image" ? "tab active" : "tab"}
-            onClick={() => setTabBtn("image")}
+            onClick={() => handleTabClick("image")}
           >
             이미지
           </button>
         </div>
-        {/* 컬러 탭 */}
+
         {tabBtn === "color" && (
           <ul className="color-grid">
             {COLORS.map((c) => {
@@ -108,34 +154,47 @@ export default function Post() {
           </ul>
         )}
 
-        {/* 이미지 탭 */}
         {tabBtn === "image" && (
-          <ul className="image-grid">
-            {images.map((url, idx) => {
-              const active =
-                selectedBg.type === "image" && selectedBg.value === url;
-              return (
-                <li className="image-chip" key={url || idx}>
-                  <button
-                    type="button"
-                    className={`image-btn ${active ? "active" : ""}`}
-                    onClick={() => handleSelect("image", url)}
-                    aria-pressed={active}
-                  >
-                    <img src={url} alt={`배경 ${idx}`} />
-                    {active && (
-                      <span className="check">
-                        <img src={checkIcon} alt="체크" />
-                      </span>
-                    )}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+          <>
+            {loading ? (
+              <ul className="image-grid">
+                {[...Array(4)].map((_, idx) => (
+                  <li className="image-chip image-loading" key={idx}>
+                    <Loading size="lg" text="이미지를 불러오는 중..." />
+                  </li>
+                ))}
+              </ul>
+            ) : images.length > 0 ? (
+              <ul className="image-grid">
+                {images.map((url, idx) => {
+                  const active =
+                    selectedBg.type === "image" && selectedBg.value === url;
+                  return (
+                    <li className="image-chip" key={url || idx}>
+                      <button
+                        type="button"
+                        className={`image-btn ${active ? "active" : ""}`}
+                        onClick={() => handleSelect("image", url)}
+                        aria-pressed={active}
+                      >
+                        <img src={url} alt={`배경 ${idx}`} />
+                        {active && (
+                          <span className="check">
+                            <img src={checkIcon} alt="체크" />
+                          </span>
+                        )}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <p>이미지가 없습니다.</p>
+            )}
+          </>
         )}
       </section>
-      <Loading text="이미지를 불러오는 중..." />
+
       <button type="submit" disabled={!isNameValid}>
         생성하기
       </button>
