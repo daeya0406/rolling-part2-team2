@@ -5,12 +5,10 @@
   align-items: center;
   width: 41px;
   height: 20px;
-  font-size: 12px;
-  font-weight: 400;
+  @include typo(12, 400);
   border-radius: 4px;
   box-sizing: border-box;
   white-space: nowrap;
-  line-height: 1;
   overflow: hidden;
 
   // 동료
