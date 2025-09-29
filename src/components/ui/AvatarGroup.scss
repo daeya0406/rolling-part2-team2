@@ -1,0 +1,50 @@
+.avatar-group {
+  display: flex;
+  align-items: center;
+
+  // 크기별 간격 설정
+  &--small {
+    .avatar-group__avatar:not(:first-child),
+    .avatar-group__count {
+      margin-left: -12px;
+    }
+  }
+
+  &--medium {
+    .avatar-group__avatar:not(:first-child),
+    .avatar-group__count {
+      margin-left: -18px;
+    }
+  }
+
+  &--large {
+    .avatar-group__avatar:not(:first-child),
+    .avatar-group__count {
+      margin-left: -22px;
+    }
+  }
+
+  // 아바타 요소들
+  &__avatar,
+  &__count {
+    position: relative;
+    z-index: 1;
+
+    // 호버 시 앞으로 나오기
+    &:hover {
+      z-index: 10;
+      transform: scale(1.1);
+      transition: all 0.2s ease;
+    }
+  }
+
+  // 첫 번째 아바타는 마진 없음
+  &__avatar:first-child {
+    margin-left: 0 !important;
+  }
+
+  // 카운트 표시는 마지막에 위치
+  &__count {
+    z-index: 2; // 다른 아바타들보다 조금 앞에
+  }
+}

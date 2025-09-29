@@ -1,10 +1,40 @@
-/* Page Wrapper - 다른 페이지에 영향 없이 이 페이지만 배경색 적용 */
+/* 스크롤 방지 및 여백 제거 */
+body {
+  overflow: hidden; /* 가로/세로 스크롤 모두 제거 */
+  max-width: 100%;
+  max-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* 스피너 애니메이션 */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Page Wrapper - 다른 페이지에 영향 없이 이 페이지만 배경 적용 */
 .test2-page-wrapper {
-  background: #ffe2ad;
-  min-height: 100vh;
+  /* CSS 변수를 사용한 조건부 배경 설정 */
+  background-color: var(--bg-color, #ffe2ad);
+  background-image: var(--bg-image, none);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+
+  height: 100vh; /* min-height 대신 고정 height */
   width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden; /* 가로/세로 스크롤 모두 제거 */
   padding: 0;
   box-sizing: border-box;
 }
@@ -29,51 +59,11 @@
       margin: 0;
     }
 
-    .avatar-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      .avatar-images {
-        display: flex;
-        align-items: center;
-
-        img {
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          border: 1.4px solid white;
-          margin-left: -8px;
-
-          &:first-child {
-            margin-left: 0;
-          }
-        }
-
-        .avatar-count {
-          background: #fff;
-          color: #484848;
-          font-size: 12px;
-          font-weight: 500;
-          min-width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          margin-left: -8px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 0 4px;
-          box-sizing: border-box;
-          border: 1px solid #e3e3e3;
-        }
-      }
-
-      p {
-        margin: 0;
-        font-size: 18px;
-        color: #333;
-        font-weight: 400;
-      }
+    p {
+      margin-left: 10px;
+      font-size: 18px;
+      color: #333;
+      font-weight: 400;
     }
 
     .divider {
@@ -141,12 +131,14 @@
 }
 
 .test2-container {
-  min-height: 100vh;
+  height: calc(100vh - 120px); /* 헤더 높이 제외 */
+  overflow-y: auto; /* 세로 스크롤만 허용 */
   padding: 40px 20px;
 
   .contents-area {
     max-width: 1200px;
     margin: 0 auto;
+    padding-bottom: 110px; /* 카드 아래 여백 추가 */
 
     .card-grid {
       display: grid;
@@ -293,6 +285,55 @@
   }
 }
 
+/* 이모지 드롭다운 스타일 */
+.emoji-dropdown-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  width: 280px;
+  box-sizing: border-box;
+}
+
+.emoji-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  background-color: #f5f5f5;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+
+  .emoji-icon {
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .emoji-count {
+    margin-left: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+}
+
 @media (max-width: 840px) {
   .test2-container {
     .contents-area {
@@ -304,6 +345,152 @@
           min-width: 300px;
         }
       }
+    }
+  }
+
+  .emoji-dropdown-container {
+    grid-template-columns: repeat(3, 1fr);
+    width: 240px;
+    padding: 10px;
+    gap: 4px;
+  }
+
+  .emoji-item {
+    padding: 4px 6px;
+
+    .emoji-icon {
+      font-size: 12px;
+    }
+
+    .emoji-count {
+      font-size: 11px;
+    }
+  }
+}
+
+/* 이모지 추가 섹션 스타일 */
+.emoji-add-section {
+  position: relative;
+  display: inline-block;
+}
+
+/* 이모지 피커 드롭다운 스타일 */
+.emoji-picker-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0; /* 버튼의 오른쪽 끝에 정렬 */
+  z-index: 1000;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e9ecef;
+  overflow: hidden;
+  margin-top: 8px;
+
+  /* 이모지 피커 내부 스타일 커스터마이징 */
+  // :global(.epr-main) {
+  //   border: none;
+  //   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
+  //     Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+  //     "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji",
+  //     "Segoe UI Symbol", sans-serif;
+  // }
+
+  // :global(.epr-header) {
+  //   padding: 12px;
+  //   background: #f8f9fa;
+  //   border-bottom: 1px solid #e9ecef;
+  // }
+
+  // :global(.epr-search-container input) {
+  //   font-family: "Pretendard", sans-serif;
+  //   border-radius: 8px;
+  //   border: 1px solid #e9ecef;
+  //   padding: 8px 12px;
+  //   font-size: 14px;
+
+  //   &::placeholder {
+  //     color: #999;
+  //   }
+  // }
+
+  // :global(.epr-category-nav) {
+  //   background: #f8f9fa;
+  //   border-bottom: 1px solid #e9ecef;
+  //   padding: 8px;
+  // }
+
+  // :global(.epr-emoji-category-label) {
+  //   font-family: "Pretendard", sans-serif;
+  //   font-size: 14px;
+  //   font-weight: 600;
+  //   color: #666;
+  //   padding: 8px 12px;
+  // }
+
+  // :global(.epr-emoji) {
+  //   font-size: 22px;
+  //   padding: 4px;
+  //   border-radius: 6px;
+  //   transition: background-color 0.2s ease;
+
+  //   &:hover {
+  //     background-color: #f0f0f0;
+  //   }
+  // }
+}
+
+/* 공유 섹션 스타일 */
+.share-section {
+  position: relative;
+  display: inline-block;
+}
+
+/* 공유 드롭다운 스타일 */
+.share-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e9ecef;
+  overflow: hidden;
+  margin-top: 8px;
+  min-width: 140px;
+
+  .share-option {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    background: white;
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    font-family: "Pretendard", sans-serif;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f8f9fa;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    &:first-child {
+      border-radius: 8px 8px 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 8px 8px;
+    }
+
+    &:only-child {
+      border-radius: 8px;
     }
   }
 }
