@@ -6,6 +6,7 @@ import "./style.scss";
 import checkIcon from "@/assets/images/icons/check.svg";
 import InputText from "./components/InputText";
 import Loading from "@/components/ui/Loading";
+import Button from "@/components/ui/Button";
 
 const COLORS = ["beige", "purple", "blue", "green"];
 
@@ -17,42 +18,38 @@ export default function Post() {
   const [nameTouched, setNameTouched] = useState(false);
   const [tabBtn, setTabBtn] = useState("color"); // 'color' | 'image'
   const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // 초기 로딩 true
+  const [loadedImages, setLoadedImages] = useState([]); // 로드된 이미지 관리
+
   const [selectedBg, setSelectedBg] = useState({
     type: "color",
     value: COLORS[0],
   });
 
-  // bg 이미지 가져오기
-  const fetchImages = async () => {
-    setLoading(true);
-    setImages([]);
-    try {
-      const data = await getBackgroundImages();
-      const urls = data.imageUrls;
-      for (const url of urls) {
-        setImages((prev) => [...prev, url]);
-        await new Promise((r) => setTimeout(r, 50));
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const data = await getBackgroundImages();
+        setImages(data.imageUrls || []);
+        if (data.imageUrls && data.imageUrls.length > 0 && tabBtn === "image") {
+          setSelectedBg({ type: "image", value: data.imageUrls[0] });
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
-      // 이미지가 있으면 첫 번째 이미지 기본값으로 설정
-      if (urls.length > 0 && tabBtn === "image") {
-        setSelectedBg({ type: "image", value: urls[0] });
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
-  // 탭 클릭
+    if (tabBtn === "image") fetchImages();
+  }, [tabBtn]);
+
   const handleTabClick = (tab) => {
     setTabBtn(tab);
     if (tab === "color") {
       setSelectedBg({ type: "color", value: COLORS[0] });
-    } else if (tab === "image") {
-      if (images.length === 0) fetchImages();
-      else setSelectedBg({ type: "image", value: images[0] });
+    } else if (tab === "image" && images.length > 0) {
+      setSelectedBg({ type: "image", value: images[0] });
     }
   };
 
@@ -65,7 +62,6 @@ export default function Post() {
   const isNameValid =
     trimmedName.length > 0 && trimmedName.length <= MAX_NAME_LEN;
   const showNameError = nameTouched && !isNameValid;
-
   const handleNameBlur = () => setNameTouched(true);
 
   const handleSubmit = async (e) => {
@@ -76,15 +72,16 @@ export default function Post() {
     const payload = {
       team: "19-2",
       name: trimmedName,
-      backgroundColor: selectedBg.type === "color" ? selectedBg.value : "beige",
-      backgroundImageURL: selectedBg.type === "image" ? selectedBg.value : null,
+      backgroundColor:
+        selectedBg.type === "color" ? selectedBg.value : COLORS[0],
+      backgroundImageURL:
+        selectedBg.type === "image" && selectedBg.value
+          ? selectedBg.value
+          : null,
     };
 
     try {
       const result = await createRecipient("19-2", payload);
-      console.log("API 결과:", result);
-      alert("받는 사람이 성공적으로 생성되었습니다!");
-      // 생성 후 /post/{id}로 이동
       navigate(`/post/${result.id}`);
     } catch (err) {
       console.error(err);
@@ -153,22 +150,15 @@ export default function Post() {
             })}
           </ul>
         )}
-
         {tabBtn === "image" && (
           <>
-            {loading ? (
-              <ul className="image-grid">
-                {[...Array(4)].map((_, idx) => (
-                  <li className="image-chip image-loading" key={idx}>
-                    <Loading size="lg" text="이미지를 불러오는 중..." />
-                  </li>
-                ))}
-              </ul>
-            ) : images.length > 0 ? (
+            {images.length > 0 ? (
               <ul className="image-grid">
                 {images.map((url, idx) => {
                   const active =
                     selectedBg.type === "image" && selectedBg.value === url;
+                  const isLoaded = loadedImages.includes(url);
+
                   return (
                     <li className="image-chip" key={url || idx}>
                       <button
@@ -177,7 +167,18 @@ export default function Post() {
                         onClick={() => handleSelect("image", url)}
                         aria-pressed={active}
                       >
-                        <img src={url} alt={`배경 ${idx}`} />
+                        <img
+                          src={url}
+                          alt={`배경 ${idx}`}
+                          onLoad={() =>
+                            setLoadedImages((prev) => [...prev, url])
+                          }
+                        />
+                        {!isLoaded && (
+                          <div className="image-loading-overlay">
+                            <Loading size="lg" text="이미지를 불러오는 중..." />
+                          </div>
+                        )}
                         {active && (
                           <span className="check">
                             <img src={checkIcon} alt="체크" />
@@ -188,6 +189,14 @@ export default function Post() {
                   );
                 })}
               </ul>
+            ) : loading ? (
+              <ul className="image-grid">
+                {[...Array(4)].map((_, idx) => (
+                  <li className="image-chip image-loading" key={idx}>
+                    <Loading size="lg" />
+                  </li>
+                ))}
+              </ul>
             ) : (
               <p>이미지가 없습니다.</p>
             )}
@@ -195,9 +204,12 @@ export default function Post() {
         )}
       </section>
 
-      <button type="submit" disabled={!isNameValid}>
-        생성하기
-      </button>
+      <Button
+        label="생성하기"
+        size="lg"
+        variant="primary"
+        disabled={!isNameValid}
+      />
     </form>
   );
 }

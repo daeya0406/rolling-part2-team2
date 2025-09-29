@@ -5,7 +5,7 @@ import DeleteIcon from "../../assets/images/icons/delete.svg";
 import EmojiIcon from "../../assets/images/icons/emoji.svg";
 import ShareIcon from "../../assets/images/icons/share.svg";
 import AddIcon from "../../assets/images/icons/add.svg";
-import IconCheck from "../../assets/images/icons/icon-check.svg";
+import IconCheck from "../../assets/images/icons/check.svg";
 
 // 방향/네비게이션 아이콘
 import ArrowLeftIcon from "../../assets/images/icons/arrow-left.svg";

@@ -19,11 +19,6 @@ h2 {
       }
     }
   }
-}
-
-.write-wrap {
-  display: grid;
-  row-gap: 40px;
 
   .title-wrap {
     margin-bottom: 16px;
@@ -102,22 +97,28 @@ h2 {
 
   .image-chip {
     button {
+      position: relative;
       width: 100%;
       height: 100%;
 
       img {
+        position: relative;
         width: 100%;
         height: 100%;
       }
-    }
-    &.image-loading {
-      position: relative;
-      background-color: var(--c-gray100);
-      .loading {
+      .image-loading-overlay {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: var(--c-gray100);
+        .loading {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
       }
     }
   }
