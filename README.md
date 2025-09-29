@@ -83,10 +83,16 @@ cd rolling-part2-team2
 # 2. 패키지 설치
 npm install
 
-# 3. 개발 서버 실행
+# 3. 환경 변수 파일 복사
+cp .env.development .env
+
+# 4. .env 파일에서 실제 키 값으로 수정
+# VITE_KAKAO_APP_KEY=팀에서_공유받은_실제_키값
+
+# 5. 개발 서버 실행
 npm run dev
 
-# 4. 테스트 실행
+# 6. 테스트 실행
 npm run test
 ```
 

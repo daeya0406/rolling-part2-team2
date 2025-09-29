@@ -34,7 +34,7 @@ function AvatarGroup({
           src={avatar.src}
           alt={avatar.alt}
           size={size}
-          className="avatar-group__avatar"
+          className="avatar-group--avatar"
         />
       ))}
 
@@ -44,7 +44,7 @@ function AvatarGroup({
           count={remainingCount}
           size={size}
           isListMode={isListMode}
-          className="avatar-group__count"
+          className="avatar-group--count"
         />
       )}
     </div>

@@ -10,6 +10,7 @@
   box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
+  user-select: none;
 
   // 동료
   &--동료 {

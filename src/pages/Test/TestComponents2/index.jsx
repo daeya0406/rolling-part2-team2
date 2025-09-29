@@ -3,11 +3,12 @@ import "./style.scss";
 import Badge from "../../../components/ui/Badge";
 import AvatarGroup from "../../../components/ui/AvatarGroup";
 import Avatar from "../../../components/ui/Avatar";
+import Reactions from "../../../components/ui/Reactions";
 import EmojiPicker from "emoji-picker-react";
 
 function Test2() {
   // 선택된 아바타 ID 관리 (단일 선택)
-  const [selectedAvatarId, setSelectedAvatarId] = useState(null);
+  //const [selectedAvatarId, setSelectedAvatarId] = useState(null);
   // 무한 스크롤 상태 관리
   const [visibleCount, setVisibleCount] = useState(4);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,6 +23,7 @@ function Test2() {
   const emojiGroupRef = useRef(null);
   const emojiPickerRef = useRef(null);
   const shareDropdownRef = useRef(null);
+  const kakaoAppKey = import.meta.env.VITE_KAKAO_APP_KEY;
 
   // 외부 클릭 시 드롭다운 및 이모지 피커 닫기
   useEffect(() => {
@@ -236,23 +238,23 @@ function Test2() {
       {
         id: 12712,
         emoji: "😆",
-        count: 5,
+        count: 25,
       },
       {
         id: 12714,
         emoji: "😅",
-        count: 3,
+        count: 31,
       },
       {
         id: 12713,
         emoji: "😍",
-        count: 2,
+        count: 12,
       },
     ],
   };
 
   const reactionEmojis = {
-    count: 3,
+    count: 8,
     next: null,
     previous: null,
     results: [
@@ -336,7 +338,7 @@ function Test2() {
     if (window.Kakao) {
       const kakao = window.Kakao;
       if (!kakao.isInitialized()) {
-        kakao.init("5c30f812d043089f85e15542f84eb0f7");
+        kakao.init(kakaoAppKey);
       }
       window.Kakao.Share.sendCustom({
         templateId: 124671,
@@ -401,14 +403,10 @@ function Test2() {
             style={{ position: "relative" }}
             ref={emojiGroupRef}
           >
-            <div className="emoji-badges">
-              {rollingPapers.topReactions.map((reaction) => (
-                <span key={reaction.id} className="emoji-badge">
-                  {reaction.emoji} {reaction.count}
-                </span>
-              ))}
+            <div className="reactions-container">
+              <Reactions reactions={rollingPapers.topReactions} />
               <span
-                className="emoji-dropdown"
+                className="emoji-dropdown-toggle"
                 onClick={() => setIsEmojiDropdownOpen(!isEmojiDropdownOpen)}
                 style={{ cursor: "pointer" }}
               >
@@ -419,12 +417,10 @@ function Test2() {
             {/* 이모지 드롭다운 */}
             {isEmojiDropdownOpen && (
               <div className="emoji-dropdown-container">
-                {reactionEmojis.results.slice(0, 8).map((reaction) => (
-                  <div key={reaction.id} className="emoji-item">
-                    <span className="emoji-icon">{reaction.emoji}</span>
-                    <span className="emoji-count">{reaction.count}</span>
-                  </div>
-                ))}
+                <Reactions
+                  reactions={reactionEmojis.results}
+                  className="dropdown-reactions"
+                />
               </div>
             )}
           </div>
@@ -478,78 +474,6 @@ function Test2() {
       <section className="test2-container" ref={containerRef}>
         <div className="contents-area">
           <div className="card-grid">
-            {/* 선택 가능한 아바타 테스트 카드 */}
-            <div className="card" style={{ padding: "20px" }}>
-              <h3
-                style={{
-                  fontSize: "18px",
-                  fontWeight: "600",
-                  marginBottom: "16px",
-                  color: "#333",
-                }}
-              >
-                아바타 선택 테스트
-              </h3>
-              <Avatar
-                id="default"
-                src={
-                  selectedAvatarId
-                    ? `https://picsum.photos/id/${selectedAvatarId}/100/100`
-                    : `https://picsum.photos/id/100/100`
-                }
-                alt={selectedAvatarId ? `선택된 Avatar` : "Avatar 기본"}
-                size="large"
-              />
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(5, 1fr)",
-                  gap: "12px",
-                  marginBottom: "16px",
-                  justifyItems: "center",
-                }}
-              >
-                {["859", "870", "200", "320", "400"].map((id, index) => (
-                  <Avatar
-                    key={id}
-                    src={`https://picsum.photos/id/${id}/100/100`}
-                    alt={`Avatar ${index + 1}`}
-                    size="large"
-                    onClick={() => {
-                      // 같은 아바타를 다시 클릭하면 선택 해제, 다른 아바타를 클릭하면 새로 선택
-                      setSelectedAvatarId(selectedAvatarId === id ? null : id);
-                      console.log(`Avatar ${index + 1} 클릭됨`);
-                    }}
-                  />
-                ))}
-              </div>
-              <p
-                style={{
-                  fontSize: "14px",
-                  color: "#666",
-                  textAlign: "center",
-                  margin: "0",
-                  padding: "8px",
-                  background: "#f8f9fa",
-                  borderRadius: "4px",
-                }}
-              >
-                선택된 아바타:{" "}
-                {selectedAvatarId
-                  ? `Avatar ${
-                      ["859", "870", "200", "320", "400"].indexOf(
-                        selectedAvatarId
-                      ) + 1
-                    }`
-                  : "없음"}
-                <br />
-                <small>
-                  하나의 아바타만 선택할 수 있습니다. 다른 아바타를 선택하면
-                  이전 선택이 해제됩니다.
-                </small>
-              </p>
-            </div>
-
             {/* 새 메시지 추가 카드 */}
             <div className="card create-card">
               <div className="card-content">

@@ -61,14 +61,14 @@ function Avatar({
         className={avatarClasses}
         onClick={onClick ? handleClick : undefined}
       >
-        <span className="avatar__count-text">+{count}</span>
+        <span className="avatar--count-text">+{count}</span>
       </div>
     );
   }
 
   return (
     <div className={avatarClasses} onClick={onClick ? handleClick : undefined}>
-      <img src={src} alt={alt} className="avatar__image" />
+      <img src={src} alt={alt} className="avatar--image" />
     </div>
   );
 }
