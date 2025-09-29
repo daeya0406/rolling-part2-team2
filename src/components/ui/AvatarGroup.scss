@@ -4,29 +4,29 @@
 
   // 크기별 간격 설정
   &--small {
-    .avatar-group__avatar:not(:first-child),
-    .avatar-group__count {
+    .avatar-group--avatar:not(:first-child),
+    .avatar-group--count {
       margin-left: -12px;
     }
   }
 
   &--medium {
-    .avatar-group__avatar:not(:first-child),
-    .avatar-group__count {
+    .avatar-group--avatar:not(:first-child),
+    .avatar-group--count {
       margin-left: -18px;
     }
   }
 
   &--large {
-    .avatar-group__avatar:not(:first-child),
-    .avatar-group__count {
+    .avatar-group--avatar:not(:first-child),
+    .avatar-group--count {
       margin-left: -22px;
     }
   }
 
   // 아바타 요소들
-  &__avatar,
-  &__count {
+  &--avatar,
+  &--count {
     position: relative;
     z-index: 1;
 
@@ -39,12 +39,12 @@
   }
 
   // 첫 번째 아바타는 마진 없음
-  &__avatar:first-child {
+  &--avatar:first-child {
     margin-left: 0 !important;
   }
 
   // 카운트 표시는 마지막에 위치
-  &__count {
+  &--count {
     z-index: 2; // 다른 아바타들보다 조금 앞에
   }
 }

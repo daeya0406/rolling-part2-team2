@@ -73,31 +73,26 @@ body {
     }
 
     .emoji-group {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 8px;
 
-      .emoji-badges {
+      .reactions-container {
         display: flex;
         align-items: center;
         gap: 8px;
+      }
 
-        .emoji-badge {
-          background: #f8f9fa;
-          border: 1px solid #e9ecef;
-          border-radius: 32px;
-          padding: 6px 12px;
-          font-size: 16px;
-          display: flex;
-          align-items: center;
-          gap: 4px;
-        }
-
-        .emoji-dropdown {
-          color: #999;
-          font-size: 12px;
-          margin-left: 4px;
-        }
+      .emoji-dropdown-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 12px;
+        color: var(--c-gray400);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 16px;
       }
     }
 
@@ -288,7 +283,7 @@ body {
 /* 이모지 드롭다운 스타일 */
 .emoji-dropdown-container {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 10px);
   left: 0;
   background-color: white;
   border: 1px solid #ddd;
@@ -296,74 +291,14 @@ body {
   padding: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 10;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
   width: 280px;
   box-sizing: border-box;
-}
 
-.emoji-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 8px;
-  background-color: #f5f5f5;
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  width: 100%;
-  box-sizing: border-box;
-
-  &:hover {
-    background-color: #e0e0e0;
-  }
-
-  .emoji-icon {
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  .emoji-count {
-    margin-left: 2px;
-    font-size: 12px;
-    font-weight: 600;
-    flex-shrink: 0;
-  }
-}
-
-@media (max-width: 840px) {
-  .test2-container {
-    .contents-area {
-      .card-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 384px));
-
-        .card {
-          width: 100%;
-          min-width: 300px;
-        }
-      }
-    }
-  }
-
-  .emoji-dropdown-container {
-    grid-template-columns: repeat(3, 1fr);
-    width: 240px;
-    padding: 10px;
-    gap: 4px;
-  }
-
-  .emoji-item {
-    padding: 4px 6px;
-
-    .emoji-icon {
-      font-size: 12px;
-    }
-
-    .emoji-count {
-      font-size: 11px;
+  .dropdown-reactions {
+    .reactions--badges {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
     }
   }
 }

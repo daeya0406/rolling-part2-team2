@@ -29,7 +29,7 @@
   }
 
   // 이미지 스타일
-  &__image {
+  &--image {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -48,6 +48,7 @@
     min-width: 28px; // 최소 너비는 small 크기와 동일
     padding: 0 6px;
     border-radius: 50px;
+    user-select: none; // 텍스트 선택 방지
 
     // 리스트용 카운트 아바타 (흰색 border)
     &--list {
@@ -59,7 +60,7 @@
       min-width: 28px;
       height: 28px;
       padding: 0 6px;
-      .avatar__count-text {
+      .avatar--count-text {
         @include typo(12, 400);
       }
     }
@@ -68,7 +69,7 @@
       min-width: 40px;
       height: 40px;
       padding: 0 8px;
-      .avatar__count-text {
+      .avatar--count-text {
         @include typo(16, 400);
       }
     }
@@ -77,13 +78,13 @@
       min-width: 56px;
       height: 56px;
       padding: 0 10px;
-      .avatar__count-text {
+      .avatar--count-text {
         @include typo(20, 400);
       }
     }
   }
 
-  &__count-text {
+  &--count-text {
     white-space: nowrap;
     line-height: 1;
   }
@@ -100,7 +101,7 @@
 
   // 선택된 아바타
   // &--selected {
-  //   .avatar__image {
+  //   .avatar--image {
   //     border: 1px solid  var(--c-purple600);
   //   }
 
