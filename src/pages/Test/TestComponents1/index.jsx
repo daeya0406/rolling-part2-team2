@@ -62,12 +62,19 @@ function Components1() {
 
       <h2>Icon + Label</h2>
       <div style={{ display: "flex", gap: "12px", marginBottom: "20px" }}>
-        <Button icon="emoji" label="추가" size="sm" variant="outline" />
         <Button
           icon="emoji"
           label="추가"
           size="sm"
           variant="outline"
+          className="btn--with-icon"
+        />
+        <Button
+          icon="emoji"
+          label="추가"
+          size="sm"
+          variant="outline"
+          className="btn--with-icon"
           disabled
         />
       </div>

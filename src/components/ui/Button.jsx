@@ -16,23 +16,17 @@ function Button({
     <button
       className={`btn btn--${size} btn--${variant} ${
         !label && icon && className !== "btn--icon-box"
-          ? `btn--icon btn--icon-${size}` // 여기 수정됨
+          ? `btn--icon btn--icon-${size}` // 아이콘만 있을 때
+          : icon && label
+          ? "btn--with-icon" // 아이콘 + 텍스트일 때
           : ""
       } ${className}`}
       disabled={disabled}
       onClick={onClick}
       {...props}
     >
-      {icon && label && (
-        // 아이콘 + 텍스트일 때
-        <span className="btn__icon btn__icon--left">
-          <Icon name={icon} />
-        </span>
-      )}
-
-      {icon && !label && (
-        // 아이콘만 있을 때
-        <span className="btn__icon">
+      {icon && (
+        <span className={`btn__icon ${label ? "btn__icon--left" : ""}`}>
           <Icon name={icon} />
         </span>
       )}
