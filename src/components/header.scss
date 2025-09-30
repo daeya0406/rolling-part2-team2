@@ -1,8 +1,65 @@
-// test : 다 지우고 작업
-header {
-  border-bottom: 1px solid #ededed;
-  nav {
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--c-gray200);
+  background: var(--c-white);
+  height: 64px;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  &__logo {
     display: flex;
+    align-items: center;
+
+    .logo-icon {
+      width: 106px;
+      height: auto;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: center;
     gap: 16px;
+
+    a {
+      text-decoration: none;
+      @include typo(16, 400);
+    }
+  }
+
+  &__btn {
+    justify-self: end;
+  }
+
+  /* 태블릿 (768px) */
+  @media (max-width: 768px) {
+    &__inner {
+      grid-template-columns: auto auto;
+      padding: 0 24px;
+    }
+
+    &__nav {
+      display: none;
+    }
+  }
+
+  /* 모바일 (360px) */
+  @media (max-width: 360px) {
+    &__inner {
+      padding: 0 18px;
+    }
   }
 }

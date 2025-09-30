@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../../../components/ui/Button";
+import Header from "../../../components/Header";
 
 function Components1() {
   return (
