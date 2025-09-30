@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getBackgroundImages } from "@/apis/backgroundImages";
+import { getBackgroundImages } from "@/apis/getBackgroundImages";
 import { createRecipient } from "@/apis/createRecipient";
 import "./style.scss";
 import checkIcon from "@/assets/images/icons/check.svg";
@@ -43,6 +43,12 @@ export default function Post() {
 
     if (tabBtn === "image") fetchImages();
   }, [tabBtn]);
+
+  const handleNameFocus = () => {
+    if (nameTouched) {
+      setNameTouched(false);
+    }
+  };
 
   const handleTabClick = (tab) => {
     setTabBtn(tab);
@@ -97,10 +103,11 @@ export default function Post() {
           id="toName"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onFocus={handleNameFocus}
           onBlur={handleNameBlur}
           placeholder="받는 사람 이름을 입력해 주세요"
+          error={showNameError}
         />
-        {showNameError && <p className="error-text">값을 입력해 주세요.</p>}
       </section>
 
       <section>

@@ -1,0 +1,21 @@
+{
+  // 저장할 때 자동 포맷
+  "editor.formatOnSave": true,
+
+  // 기본 포맷터는 Prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // 저장 시 ESLint 자동 fix
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+
+  // ESLint 검사할 파일 확장자
+  "eslint.validate": ["javascript", "javascriptreact"],
+
+  // 코드 스타일 (팀 합의가능 )
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true
+}
