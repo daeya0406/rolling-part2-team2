@@ -14,7 +14,7 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
   }
 
-  // 추가 메세지
+  // 추가 메시지
   &--add-message {
     background: var(--c-white);
     cursor: pointer;
@@ -130,7 +130,7 @@
     height: 280px;
   }
 
-  // Tablet 스타일 (768px 이하) - 2개 컴럼
+  // Tablet 스타일 (768px 이하) - 2개 컬럼
   @media (max-width: 768px) {
     height: 284px;
 
@@ -144,7 +144,7 @@
     }
   }
 
-  // Mobile 스타일 (480px 이하) - 1개 컴럼
+  // Mobile 스타일 (480px 이하) - 1개 컬럼
   @media (max-width: 480px) {
     height: 230px;
     padding: 20px;

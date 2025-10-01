@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 /**
- * 간단한 무한 스크롤 훅
+ * 무한 스크롤 훅
  * @param {Object} options
  * @param {Array} options.items - 전체 아이템 배열
  * @param {number} [options.initialVisible=5] - 초기 표시 개수
@@ -21,7 +21,7 @@ export function useInfiniteScroll({
   const [internalLoading, setInternalLoading] = useState(false);
   const observerRef = useRef(null);
 
-  // 간단한 계산 값들
+  // 계산 값들
   const hasMore = visibleCount < items.length;
   const totalLoading = isLoading || internalLoading;
 
@@ -42,7 +42,7 @@ export function useInfiniteScroll({
             setInternalLoading(false)
           );
         } else {
-          // 내부 처리 - 간단한 타이머
+          // 내부 처리 - 타이머
           setTimeout(() => {
             setVisibleCount((prev) =>
               Math.min(prev + loadIncrement, items.length)
