@@ -14,25 +14,25 @@
 
   // 동료
   &--동료 {
-    color: var(--Purple-600, #9935ff);
-    background: var(--Purple-100, #f8f0ff);
+    color: var(--c-purple600);
+    background: var(--c-purple100);
   }
 
   // 친구
   &--친구 {
-    color: var(--Blue-500, #00a2fe);
-    background: var(--Blue-100, #e2f5ff);
+    color: var(--c-blue500);
+    background: var(--c-blue100);
   }
 
   // 가족
   &--가족 {
-    color: var(--Green-500, #2ba600);
-    background: var(--Green-100, #e4fbdc);
+    color: var(--c-green500);
+    background: var(--c-green100);
   }
 
   // 지인
   &--지인 {
-    color: var(--Beige-500, #ff8832);
-    background: var(--Beige-100, #fff0d6);
+    color: var(--c-beige500);
+    background: var(--c-beige100);
   }
 }
