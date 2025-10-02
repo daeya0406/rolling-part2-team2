@@ -5,10 +5,10 @@
     gap: 28px 24px;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
-    width: 1200px;
-    margin: 0 auto;
+    margin: auto;
     user-select: none;
     cursor: pointer;
+    max-width: 1200px;
   }
 
   &--observer {
@@ -30,9 +30,8 @@
   // 좌우 여백 24px 고정
   @media (max-width: 1248px) {
     &--grid {
-      width: 100vw;
-      padding: 0 24px;
       gap: 28px 24px; // PC와 동일한 gap 유지
+      padding: 0 24px;
       grid-template-columns: repeat(3, 1fr);
     }
   }
@@ -40,8 +39,7 @@
   // Tablet 스타일 (768px 이하) - 2개 컬럼으로 변경
   @media (max-width: 768px) {
     &--grid {
-      width: 100vw;
-      padding: 0 24px;
+      width: 100%;
       gap: 16px;
       grid-template-columns: repeat(2, 1fr);
     }
@@ -50,8 +48,8 @@
   // Mobile 스타일 (480px 이하) - 1개 컬럼
   @media (max-width: 480px) {
     &--grid {
-      width: 100vw;
-      padding: 0 24px;
+      width: 100%;
+      padding: 0 20px;
       gap: 16px 0;
       grid-template-columns: 1fr;
     }

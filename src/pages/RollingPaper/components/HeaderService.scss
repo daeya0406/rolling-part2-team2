@@ -1,0 +1,286 @@
+/* Header Service 컴포넌트 스타일 */
+.header-service {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: var(--c-white);
+  border-bottom: 1px solid var(--c-gray200);
+  height: 68px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  user-select: none;
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    h1 {
+      @include typo(28, 700);
+      color: var(--c-black);
+      margin: 0;
+    }
+
+    .header-right-section {
+      display: flex;
+      align-items: center;
+
+      .avatar-content {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+
+        p {
+          @include typo(18, 400);
+          color: var(--c-gray900);
+          margin: 0;
+
+          span {
+            font-weight: 700;
+          }
+        }
+      }
+
+      .emoji-content {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .reactions-container {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-right: 8px;
+        }
+
+        .emoji-dropdown-toggle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+
+          .arrow-icon {
+            opacity: 0.6;
+            transform: rotate(0deg);
+
+            &.rotated {
+              transform: rotate(180deg);
+            }
+          }
+
+          &:hover .arrow-icon {
+            opacity: 0.8;
+          }
+        }
+      }
+
+      .emoji-add-section {
+        position: relative;
+
+        .emoji-add-button {
+          gap: 4px;
+        }
+      }
+
+      .share-section {
+        position: relative;
+
+        .share-button {
+          padding: 6px 16px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+/* 태블릿 이하 (1248px 이하) */
+@media (max-width: 1248px) {
+  .header-service {
+    padding: 0 24px;
+  }
+}
+
+/* 태블릿 (768px 이하) */
+@media (max-width: 768px) {
+  .header-service {
+    height: auto;
+    min-height: 68px;
+
+    .header-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+
+      h1 {
+        @include typo(24, 700);
+      }
+
+      .header-right-section {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .avatar-content p {
+          @include typo(16, 400);
+        }
+
+        .emoji-content .emoji-dropdown-toggle {
+          padding: 6px 10px;
+        }
+
+        .share-section .share-button {
+          padding: 10px 14px;
+          @include typo(14, 400);
+        }
+      }
+    }
+  }
+
+  /* 드롭다운 스타일 */
+  .emoji-dropdown-container {
+    .dropdown-reactions .reactions--badges {
+      max-height: calc(2 * (40px + 6px) - 6px); /* 2줄만 보이기 (6개 아이템) */
+      overflow: hidden;
+    }
+  }
+
+  .emoji-picker-dropdown {
+    right: -50px;
+    transform: translateX(-50%);
+  }
+}
+
+/* 모바일 (480px 이하) */
+@media (max-width: 480px) {
+  .header-service {
+    padding: 0 20px;
+
+    .header-content {
+      .header-right-section {
+        gap: 12px;
+
+        .avatar-content {
+          gap: 8px;
+
+          p {
+            @include typo(14, 400);
+          }
+        }
+      }
+    }
+  }
+
+  /* 드롭다운 스타일 */
+  .emoji-dropdown-container {
+    width: 240px;
+    padding: 8px;
+
+    .dropdown-reactions .reactions--badges {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      max-height: calc(2 * (36px + 4px) - 4px); /* 2줄만 보이기 (6개 아이템) */
+      overflow: hidden;
+    }
+  }
+
+  .emoji-picker-dropdown {
+    right: -100px;
+
+    .EmojiPickerReact {
+      width: 300px !important;
+      height: 350px !important;
+    }
+  }
+
+  .share-dropdown {
+    min-width: 120px;
+
+    .share-option {
+      padding: 10px 12px;
+      @include typo(12, 400);
+    }
+  }
+}
+
+/* 공통 드롭다운 스타일 */
+%dropdown-base {
+  position: absolute;
+  top: calc(100% + 9px);
+  z-index: 1000;
+  background: var(--c-white);
+  border: 1px solid var(--c-gray300);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* 이모지 드롭다운 */
+.emoji-dropdown-container {
+  @extend %dropdown-base;
+  right: 0;
+  border-radius: 12px;
+  padding: 24px;
+  box-sizing: border-box;
+
+  .dropdown-reactions .reactions--badges {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px 8px;
+    max-height: none; /* 데스크톱: 제한 없음 */
+    overflow: visible;
+  }
+}
+
+/* 이모지 피커 드롭다운 */
+.emoji-picker-dropdown {
+  @extend %dropdown-base;
+  right: 15px;
+  border-radius: 12px;
+}
+
+/* 공유 드롭다운 */
+.share-dropdown {
+  @extend %dropdown-base;
+  right: 0;
+  border-radius: 8px;
+  min-width: 140px;
+  padding: 10px 0;
+
+  .share-option {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--c-white);
+    border: none;
+    text-align: left;
+    @include typo(16, 400);
+    color: var(--c-gray900);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--c-gray100);
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--c-gray100);
+    }
+
+    &:first-child {
+      border-radius: 8px 8px 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 8px 8px;
+    }
+
+    &:only-child {
+      border-radius: 8px;
+    }
+  }
+}
