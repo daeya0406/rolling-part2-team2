@@ -1,0 +1,6 @@
+/* Divider 컴포넌트 스타일 */
+.divider {
+  background-color: var(--c-gray200);
+  flex-shrink: 0; /* 크기 고정 */
+  align-self: center; /* 부모 flex 컨테이너에서 세로 중앙 정렬 */
+}

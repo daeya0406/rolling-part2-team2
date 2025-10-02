@@ -1,6 +1,6 @@
 import MessageItem from "./MessageItem";
-import Loading from "./Loading";
-import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
+import Loading from "@/components/ui/Loading";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import "./MessageList.scss";
 
 /**
