@@ -1,0 +1,181 @@
+.message-item {
+  background: var(--c-white);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 28px 24px 24px;
+  height: 280px;
+  width: 384px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  // 추가 메시지
+  &--add-message {
+    background: var(--c-white);
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+
+    .message-item--content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &--add-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: var(--c-gray500);
+    border-radius: 50%;
+    padding: 16px;
+    width: 56px;
+    height: 56px;
+  }
+
+  &--plus-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  &--content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    //margin-bottom: 16px;
+  }
+
+  &--avatar {
+    flex-shrink: 0;
+  }
+
+  &--sender-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0; // flex item의 overflow 방지
+  }
+
+  &--sender-name {
+    @include typo(20, 400);
+    color: var(--c-black);
+    line-height: 1.2;
+  }
+
+  &--sender-name--highlight {
+    @include typo(20, 700);
+  }
+
+  &--divider-underline {
+    height: 1px;
+    background-color: var(--c-gray200);
+    margin: 15px 0 16px;
+    width: 100%;
+  }
+
+  &--text {
+    @include typo(18, 400);
+    color: var(--c-gray600);
+    line-height: 1.5;
+
+    /* 3줄 텍스트 */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    text-overflow: ellipsis;
+
+    /* 높이 제한으로 확실한 3줄 보장 */
+    max-height: calc(1.5em * 3);
+    min-height: calc(1.5em * 1);
+    margin-bottom: 16px;
+    flex: 0 1 auto;
+  }
+
+  &--footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &--date {
+    @include typo(12, 400);
+    color: var(--c-gray400);
+    line-height: 1.5;
+    letter-spacing: -0.06px;
+  }
+
+  // 좌우 여백 24px 고정
+  @media (max-width: 1248px) {
+    width: 100%;
+    height: 280px;
+  }
+
+  // Tablet 스타일 (768px 이하) - 2개 컬럼
+  @media (max-width: 768px) {
+    height: 284px;
+
+    &--text {
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      max-height: calc(1.5em * 3);
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  // Mobile 스타일 (480px 이하) - 1개 컬럼
+  @media (max-width: 480px) {
+    height: 230px;
+    padding: 20px;
+
+    &--header {
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    &--sender-name {
+      @include typo(18, 400);
+    }
+
+    &--sender-name--highlight {
+      @include typo(16, 400);
+    }
+
+    &--text {
+      @include typo(15, 400);
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      max-height: calc(1.5em * 2);
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      //margin-bottom: 12px;
+    }
+
+    &--date {
+      @include typo(12, 400);
+    }
+  }
+}

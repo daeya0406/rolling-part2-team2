@@ -1,29 +1,45 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./style.scss";
 import Badge from "../../../components/ui/Badge";
 import AvatarGroup from "../../../components/ui/AvatarGroup";
 import Avatar from "../../../components/ui/Avatar";
 import Reactions from "../../../components/ui/Reactions";
+import MessageList from "../../../components/ui/MessageList";
 import EmojiPicker from "emoji-picker-react";
 
 function Test2() {
-  // 선택된 아바타 ID 관리 (단일 선택)
-  //const [selectedAvatarId, setSelectedAvatarId] = useState(null);
-  // 무한 스크롤 상태 관리
-  const [visibleCount, setVisibleCount] = useState(4);
-  const [isLoading, setIsLoading] = useState(false);
+  // 테스트용 로딩 상태
+  const [testLoading, setTestLoading] = useState(false);
   // 이모지 드롭다운 상태 관리
   const [isEmojiDropdownOpen, setIsEmojiDropdownOpen] = useState(false);
   // 이모지 피커 상태 관리
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
   // 공유 드롭다운 상태 관리
   const [isShareDropdownOpen, setIsShareDropdownOpen] = useState(false);
-  const containerRef = useRef(null);
-  const observerRef = useRef(null);
   const emojiGroupRef = useRef(null);
   const emojiPickerRef = useRef(null);
   const shareDropdownRef = useRef(null);
   const kakaoAppKey = import.meta.env.VITE_KAKAO_APP_KEY;
+
+  // 테스트 로딩 토글
+  const toggleTestLoading = () => {
+    setTestLoading((prev) => !prev);
+    console.log("테스트 로딩 상태:", !testLoading);
+  };
+
+  // 페이지 마운트 시 가로 스크롤 방지 (다른 페이지에 영향 없음)
+  useEffect(() => {
+    // 현재 body의 overflow-x 값 저장
+    const originalOverflowX = document.body.style.overflowX;
+
+    // 가로 스크롤 방지 적용
+    document.body.style.overflowX = "hidden";
+
+    // 컴포넌트 언마운트 시 원래 값으로 복원
+    return () => {
+      document.body.style.overflowX = originalOverflowX;
+    };
+  }, []);
 
   // 외부 클릭 시 드롭다운 및 이모지 피커 닫기
   useEffect(() => {
@@ -64,39 +80,12 @@ function Test2() {
     };
   }, []);
 
-  // 더 많은 데이터 로드 함수
-  const loadMore = useCallback(
-    (totalMessages) => {
-      if (isLoading || visibleCount >= totalMessages) return;
-
-      setIsLoading(true);
-      // 실제 API 호출 대신 시뮬레이션
-      setTimeout(() => {
-        setVisibleCount((prev) => prev + 6);
-        setIsLoading(false);
-      }, 1000);
-    },
-    [isLoading, visibleCount]
-  );
-
-  // Intersection Observer 콜백
-  const handleIntersection = useCallback(
-    (entries, totalMessages) => {
-      const [entry] = entries;
-      // 감지 요소가 화면에 나타나고, 로딩 중이 아니고, 더 불러올 데이터가 있을 때
-      if (entry.isIntersecting && !isLoading && visibleCount < totalMessages) {
-        loadMore(totalMessages);
-      }
-    },
-    [loadMore, isLoading, visibleCount]
-  );
-
   // 샘플 데이터
   const rollingPapers = {
     id: 12111,
     name: "치맨",
     backgroundColor: "beige",
-    backgroundImageURL: "https://picsum.photos/id/24/3840/2160",
+    backgroundImageURL: "",
     createdAt: "2025-06-13T14:48:54.644971Z",
     messageCount: 14, // 더 많은 메시지가 있다고 가정
     recentMessages: [
@@ -301,31 +290,6 @@ function Test2() {
     ],
   };
 
-  // Intersection Observer 설정
-  useEffect(() => {
-    const observerElement = observerRef.current;
-    const totalMessages = rollingPapers.recentMessages.length;
-
-    if (!observerElement) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => handleIntersection(entries, totalMessages),
-      {
-        root: containerRef.current,
-        rootMargin: "100px", // 100px 전에 미리 감지
-        threshold: 0.1,
-      }
-    );
-
-    observer.observe(observerElement);
-
-    return () => {
-      if (observerElement) {
-        observer.unobserve(observerElement);
-      }
-    };
-  }, [handleIntersection, rollingPapers.recentMessages.length]);
-
   // 이모지 선택 핸들러
   const handleEmojiClick = (emojiData) => {
     console.log("선택된 이모지:", emojiData.emoji);
@@ -357,28 +321,8 @@ function Test2() {
     setIsShareDropdownOpen(false);
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date
-      .toLocaleDateString("ko-KR", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      })
-      .replace(/\s/g, "")
-      .replace(/\.$/, "");
-  };
-
   return (
-    <div
-      className="test2-page-wrapper"
-      style={{
-        "--bg-image": rollingPapers.backgroundImageURL
-          ? `url(${rollingPapers.backgroundImageURL})`
-          : "none",
-        "--bg-color": rollingPapers.backgroundColor || "transparent",
-      }}
-    >
+    <div className="test2-page-wrapper">
       <div className="header-service">
         <div className="header-content">
           <h1>To.{rollingPapers.name}</h1>
@@ -466,119 +410,38 @@ function Test2() {
                 <button className="share-option" onClick={handleUrlShare}>
                   URL 공유
                 </button>
+                <button
+                  className="share-option"
+                  onClick={toggleTestLoading}
+                  style={{
+                    backgroundColor: testLoading ? "#ff4757" : "#2ed573",
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {testLoading ? "로딩 중지" : "스피너 테스트"}
+                </button>
               </div>
             )}
           </div>
         </div>
       </div>
-      <section className="test2-container" ref={containerRef}>
-        <div className="contents-area">
-          <div className="card-grid">
-            {/* 새 메시지 추가 카드 */}
-            <div className="card create-card">
-              <div className="card-content">
-                <div className="plus-icon">+</div>
-              </div>
-            </div>
-
-            {/* 메시지 카드들 */}
-            {rollingPapers.recentMessages
-              .slice(0, visibleCount)
-              .map((message, index) => (
-                <div
-                  key={`${message.id}-${index}`}
-                  className="card message-card"
-                >
-                  <div className="message-content">
-                    <div className="message-header">
-                      <Avatar
-                        src={message.profileImageURL}
-                        alt={message.sender}
-                        size="large"
-                        className="profile-image"
-                      />
-                      <div className="sender-info">
-                        <span className="sender-name">
-                          From. {message.sender}
-                        </span>
-                        <Badge relationship={message.relationship} />
-                      </div>
-                    </div>
-                    <div className="message-text">{message.content}</div>
-                    <div className="message-footer">
-                      <span className="message-date">
-                        {formatDate(message.createdAt)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
-
-          {/* Intersection Observer 감지 요소 */}
-          {visibleCount < rollingPapers.recentMessages.length && (
-            <div
-              ref={observerRef}
-              style={{
-                height: "1px",
-                width: "100%",
-              }}
-            />
-          )}
-
-          {/* 로딩 인디케이터 - 카드 그리드 외부 */}
-          {isLoading && (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "40px 0",
-                gap: "16px",
-              }}
-            >
-              {/* 회전하는 스피너 */}
-              <div
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  border: "4px solid #f3f3f3",
-                  borderTop: "4px solid #9935ff",
-                  borderRadius: "50%",
-                  animation: "spin 1s linear infinite",
-                }}
-              ></div>
-              <div
-                style={{
-                  fontSize: "16px",
-                  color: "#666",
-                  fontWeight: "500",
-                }}
-              >
-                메시지를 불러오는 중...
-              </div>
-            </div>
-          )}
-
-          {/* 더 이상 로드할 데이터가 없을 때 */}
-          {!isLoading &&
-            visibleCount >= rollingPapers.recentMessages.length && (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "40px 0",
-                  fontSize: "16px",
-                  color: "#999",
-                }}
-              >
-                {/* 모든 메시지를 확인했습니다 */}
-              </div>
-            )}
-        </div>
-      </section>
+      <div
+        className="message-list-wrapper"
+        style={{
+          "--bg-image": rollingPapers.backgroundImageURL
+            ? `url(${rollingPapers.backgroundImageURL})`
+            : "none",
+          "--bg-color": rollingPapers.backgroundColor
+            ? `var(--c-${rollingPapers.backgroundColor}200)`
+            : "transparent",
+        }}
+      >
+        <MessageList
+          messages={rollingPapers.recentMessages}
+          toId={rollingPapers.id}
+        />
+      </div>
     </div>
   );
 }

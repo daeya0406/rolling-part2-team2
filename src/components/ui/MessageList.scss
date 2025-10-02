@@ -1,0 +1,59 @@
+// MessageList 그리드 및 레이아웃 스타일
+.message-list {
+  &--grid {
+    display: grid;
+    gap: 28px 24px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    width: 1200px;
+    margin: 0 auto;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  &--observer {
+    height: 1px;
+    width: 100%;
+    grid-column: 1 / -1;
+  }
+
+  &--complete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    @include typo(16, 400);
+    color: var(--c-gray400);
+    grid-column: 1 / -1;
+  }
+
+  // 좌우 여백 24px 고정
+  @media (max-width: 1248px) {
+    &--grid {
+      width: 100vw;
+      padding: 0 24px;
+      gap: 28px 24px; // PC와 동일한 gap 유지
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  // Tablet 스타일 (768px 이하) - 2개 컬럼으로 변경
+  @media (max-width: 768px) {
+    &--grid {
+      width: 100vw;
+      padding: 0 24px;
+      gap: 16px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  // Mobile 스타일 (480px 이하) - 1개 컬럼
+  @media (max-width: 480px) {
+    &--grid {
+      width: 100vw;
+      padding: 0 24px;
+      gap: 16px 0;
+      grid-template-columns: 1fr;
+    }
+  }
+}
