@@ -33,7 +33,7 @@ function Test2() {
     id: 12111,
     name: "치맨",
     backgroundColor: "beige",
-    backgroundImageURL: "",
+    backgroundImageURL: "https://picsum.photos/id/24/3840/2160",
     createdAt: "2025-06-13T14:48:54.644971Z",
     messageCount: 14, // 더 많은 메시지가 있다고 가정
     recentMessages: [
@@ -283,6 +283,9 @@ function Test2() {
             : "none",
           "--bg-color": rollingPapers.backgroundColor
             ? `var(--c-${rollingPapers.backgroundColor}200)`
+            : "transparent",
+          "--bg-overlay": rollingPapers.backgroundImageURL
+            ? "rgba(0, 0, 0, 0.50)"
             : "transparent",
         }}
       >

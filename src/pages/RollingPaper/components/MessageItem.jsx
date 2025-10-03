@@ -1,5 +1,7 @@
+import { useState } from "react";
 import Avatar from "@/components/ui/Avatar";
 import Badge from "@/components/ui/Badge";
+import Modal from "@/components/Modal";
 import { formatDate } from "@/utils/utils";
 import "./MessageItem.scss";
 import AddIcon from "@/assets/images/icons/add.svg";
@@ -26,6 +28,9 @@ function MessageItem({
   toId,
   className = "",
 }) {
+  // 모달 상태 관리
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   // 추가 메세지 클릭 핸들러
   const handleAddMessageClick = () => {
     if (onAddClick) {
@@ -36,54 +41,78 @@ function MessageItem({
     }
   };
 
+  // 일반 메시지 클릭 핸들러 (모달 열기)
+  const handleMessageClick = () => {
+    if (!isAddMessage && message) {
+      setIsModalOpen(true);
+    }
+  };
+
+  // 모달 닫기 핸들러
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <div
-      className={`message-item ${
-        isAddMessage ? "message-item--add-message" : ""
-      } ${className}`}
-      onClick={isAddMessage ? handleAddMessageClick : undefined}
-    >
-      <div className="message-item--content">
-        {isAddMessage ? (
-          // 추가 메시지 모드
-          <div className="message-item--add-content">
-            <img
-              className="message-item--plus-icon"
-              src={AddIcon}
-              alt="새 메시지 추가"
-            />
-          </div>
-        ) : (
-          // 일반 메시지
-          <>
-            <div className="message-item--header">
-              <Avatar
-                src={message.profileImageURL}
-                alt={message.sender}
-                size="large"
-                className="message-item--avatar"
+    <>
+      <div
+        className={`message-item ${
+          isAddMessage ? "message-item--add-message" : ""
+        } ${className}`}
+        onClick={isAddMessage ? handleAddMessageClick : handleMessageClick}
+        style={{ cursor: "pointer" }}
+      >
+        <div className="message-item--content">
+          {isAddMessage ? (
+            // 추가 메시지 모드
+            <div className="message-item--add-content">
+              <img
+                className="message-item--plus-icon"
+                src={AddIcon}
+                alt="새 메시지 추가"
               />
-              <div className="message-item--sender-info">
-                <span className="message-item--sender-name">
-                  From.{" "}
-                  <span className="message-item--sender-name--highlight">
-                    {message.sender}
+            </div>
+          ) : (
+            // 일반 메시지
+            <>
+              <div className="message-item--header">
+                <Avatar
+                  src={message.profileImageURL}
+                  alt={message.sender}
+                  size="large"
+                  className="message-item--avatar"
+                />
+                <div className="message-item--sender-info">
+                  <span className="message-item--sender-name">
+                    From.{" "}
+                    <span className="message-item--sender-name--highlight">
+                      {message.sender}
+                    </span>
                   </span>
-                </span>
-                <Badge relationship={message.relationship} />
+                  <Badge relationship={message.relationship} />
+                </div>
               </div>
-            </div>
-            <div className="message-item--divider-underline"></div>
-            <div className="message-item--text">{message.content}</div>
-            <div className="message-item--footer">
-              <span className="message-item--date">
-                {formatDate(message.createdAt)}
-              </span>
-            </div>
-          </>
-        )}
+              <div className="message-item--divider-underline"></div>
+              <div className="message-item--text">{message.content}</div>
+              <div className="message-item--footer">
+                <span className="message-item--date">
+                  {formatDate(message.createdAt)}
+                </span>
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+
+      {/* 모달 - 일반 메시지일 때만 렌더링 */}
+      {!isAddMessage && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          message={message}
+        />
+      )}
+    </>
   );
 }
 
