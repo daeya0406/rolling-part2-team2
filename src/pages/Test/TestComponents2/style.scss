@@ -1,21 +1,26 @@
+/* 전역 바운스 스크롤 방지 */
+html,
+body {
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
 /* Page Wrapper - 다른 페이지에 영향 없이 이 페이지만 배경 적용 */
 .test2-page-wrapper {
   position: relative;
-  width: 100vw;
-  min-height: 100vh;
-  margin-left: calc(-50vw + 50%);
+  // width: 100vw;
+  //min-height: 100vh;
   overflow-y: auto; /* 세로 스크롤 허용 */
-  overflow-x: hidden; /* 가로 스크롤만 제거 */
-  padding: 0;
+  // overflow-x: hidden; /* 가로 스크롤만 제거 */
   box-sizing: border-box;
   padding-top: 68px; /* 메인 헤더(64px) + 서비스 헤더(68px) */
-
-  /* 추가 가로 스크롤 방지 */
-  max-width: 100vw;
 }
 
 /* Message List Wrapper - 배경 이미지와 스크롤 처리 */
 .message-list-wrapper {
+  position: relative;
   /* CSS 변수를 사용한 조건부 배경 설정 */
   background-color: var(--bg-color, var(--c-beige200));
   background-image: var(--bg-image, none);
@@ -25,6 +30,26 @@
   //background-attachment: fixed;
   padding-top: 113px;
   overflow: visible; /* 스크롤 제거 */
+  //padding: 113px 24px 0;
+
+  /* 배경 이미지 위에 오버레이 추가 */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-overlay, transparent);
+    pointer-events: none; /* 클릭 이벤트 통과 */
+    z-index: 1;
+  }
+
+  /* 컨텐츠가 오버레이 위에 오도록 설정 */
+  > * {
+    position: relative;
+    z-index: 2;
+  }
 
   // // Mobile 스타일 (768px 이하)
   // @media (max-width: 768px) {
