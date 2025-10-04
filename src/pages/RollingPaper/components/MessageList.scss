@@ -1,6 +1,11 @@
 // MessageList 그리드 및 레이아웃 스타일
 .message-list {
+  &--container {
+    position: relative;
+  }
+
   &--grid {
+    position: relative;
     display: grid;
     gap: 28px 24px;
     grid-template-columns: repeat(3, 1fr);
@@ -9,6 +14,14 @@
     user-select: none;
     cursor: pointer;
     max-width: 1200px;
+  }
+
+  &--delete-button {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    z-index: 10;
+    padding: 1.5px 19px;
   }
 
   &--observer {
@@ -33,6 +46,11 @@
       gap: 28px 24px; // PC와 동일한 gap 유지
       padding: 0 24px;
       grid-template-columns: repeat(3, 1fr);
+      max-width: inherit;
+    }
+
+    &--delete-button {
+      right: 24px;
     }
   }
 
@@ -52,6 +70,10 @@
       padding: 0 20px;
       gap: 16px 0;
       grid-template-columns: 1fr;
+    }
+
+    &--delete-button {
+      right: 20px;
     }
   }
 }
