@@ -80,6 +80,25 @@ $btn-height-xs: 28px;
   }
 }
 
+.btn--outline--purple {
+  background: transparent;
+  border: 1px solid var(--c-purple700);
+  color: var(--c-purple600);
+
+  &:hover {
+    background-color: var(--c-purple100);
+  }
+  &:active {
+    background-color: var(--c-purple200);
+  }
+  &:disabled {
+    background-color: var(--c-gray300);
+    border: none;
+    color: var(--c-white);
+    cursor: not-allowed;
+  }
+}
+
 // 아이콘-only 버튼 (정사각형)
 .btn--icon {
   display: inline-flex;
