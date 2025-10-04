@@ -5,6 +5,7 @@ import Modal from "@/components/Modal";
 import { formatDate } from "@/utils/utils";
 import "./MessageItem.scss";
 import AddIcon from "@/assets/images/icons/add.svg";
+import Button from "../../../components/ui/Button";
 
 /**
  * 메시지 카드 컴포넌트 - 일반 메시지 표시 또는 새 메시지 추가 카드
@@ -19,6 +20,7 @@ import AddIcon from "@/assets/images/icons/add.svg";
  * @param {Function} [props.onAddClick] - 커스텀 클릭 핸들러 (우선순위: onAddClick > toId 네비게이션)
  * @param {string|number} [props.toId] - 롤링페이퍼 ID (네비게이션: /post/{toId}/message)
  * @param {string} [props.className=""] - 추가 CSS 클래스명
+ * @param {boolean} [props.isPostEditPage=false] - 페이지가 롤링페이퍼 수정 페이지인지 여부
  */
 
 function MessageItem({
@@ -27,6 +29,7 @@ function MessageItem({
   onAddClick,
   toId,
   className = "",
+  isPostEditPage = false,
 }) {
   // 모달 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -90,6 +93,14 @@ function MessageItem({
                     </span>
                   </span>
                   <Badge relationship={message.relationship} />
+                  {isPostEditPage && (
+                    <Button
+                      icon="delete"
+                      size="xs"
+                      variant="outline"
+                      className="message-item--sender-delete-button"
+                    />
+                  )}
                 </div>
               </div>
               <div className="message-item--divider-underline"></div>
@@ -105,7 +116,7 @@ function MessageItem({
       </div>
 
       {/* 모달 - 일반 메시지일 때만 렌더링 */}
-      {!isAddMessage && (
+      {!isAddMessage && !isPostEditPage && (
         <Modal
           isOpen={isModalOpen}
           onClose={handleModalClose}

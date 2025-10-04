@@ -1,9 +1,14 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "./style.scss";
 import HeaderService from "@/pages/RollingPaper/components/HeaderService";
 import MessageList from "@/pages/RollingPaper/components/MessageList";
 
 function Test2() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const isPostEditPage = currentPath.includes("/edit");
+
   const kakaoAppKey = import.meta.env.VITE_KAKAO_APP_KEY;
   // 페이지 마운트 시 가로 스크롤 방지 (다른 페이지에 영향 없음)
   useEffect(() => {
@@ -292,6 +297,7 @@ function Test2() {
         <MessageList
           messages={rollingPapers.recentMessages}
           toId={rollingPapers.id}
+          isPostEditPage={isPostEditPage}
         />
       </div>
     </div>

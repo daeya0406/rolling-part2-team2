@@ -2,6 +2,7 @@ import MessageItem from "./MessageItem";
 import Loading from "@/components/ui/Loading";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import "./MessageList.scss";
+import Button from "../../../components/ui/Button";
 
 /**
  * 메시지 목록 컴포넌트 - 무한 스크롤과 새 메시지 추가 기능을 포함한 그리드 레이아웃
@@ -12,6 +13,7 @@ import "./MessageList.scss";
  * @param {number} [props.loadIncrement=6] - 무한 스크롤 시 추가 로드할 메시지 개수
  * @param {Function} [props.onLoadMore] - 추가 데이터 로드 콜백 함수
  * @param {boolean} [props.isLoading=false] - 외부 로딩 상태
+ * @param {boolean} [props.isPostEditPage=false] - 페이지가 롤링페이퍼 수정 페이지인지 여부
  */
 
 function MessageList({
@@ -21,6 +23,7 @@ function MessageList({
   loadIncrement = 6, // 6개씩 추가 로드
   onLoadMore,
   isLoading = false,
+  isPostEditPage = false,
 }) {
   // 커스텀 훅으로 무한 스크롤 로직 분리
   const {
@@ -39,12 +42,23 @@ function MessageList({
   return (
     <div className="message-list--container">
       <div className="message-list--grid">
+        {isPostEditPage && (
+          <Button
+            size="sm"
+            label="삭제하기"
+            className="message-list--delete-button"
+          />
+        )}
         {/* 새 메시지 추가 */}
         <MessageItem isAddMessage={true} toId={toId} />
 
         {/* 메시지들 */}
         {visibleItems.map((message) => (
-          <MessageItem key={message.id} message={message} />
+          <MessageItem
+            key={message.id}
+            message={message}
+            isPostEditPage={isPostEditPage}
+          />
         ))}
 
         {/* Intersection Observer 감지 요소 */}
