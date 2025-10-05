@@ -33,6 +33,33 @@ function HeaderService({
   const [isEmojiDropdownOpen, setIsEmojiDropdownOpen] = useState(false);
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
   const [isShareDropdownOpen, setIsShareDropdownOpen] = useState(false);
+  const [displayedEmojis, setDisplayedEmojis] = useState([]);
+
+  // 화면 크기에 따른 이모지 개수 조정
+  useEffect(() => {
+    const updateDisplayedEmojis = () => {
+      const screenWidth = window.innerWidth;
+      let maxEmojis;
+
+      if (screenWidth <= 1024) {
+        maxEmojis = 6; // 1024px 이하에서는 6개
+      } else {
+        maxEmojis = 8; // PC에서는 8개
+      }
+
+      setDisplayedEmojis(reactionEmojis.slice(0, maxEmojis));
+    };
+
+    // 초기 설정
+    updateDisplayedEmojis();
+
+    // 윈도우 리사이즈 이벤트 리스너
+    window.addEventListener("resize", updateDisplayedEmojis);
+
+    return () => {
+      window.removeEventListener("resize", updateDisplayedEmojis);
+    };
+  }, [reactionEmojis]);
 
   // Ref 관리
   const emojiGroupRef = useRef(null);
@@ -98,9 +125,16 @@ function HeaderService({
   return (
     <div className={`header-service ${className}`}>
       <div className="header-content">
-        <h1>To.{rollingPaper.name}</h1>
+        <h1>To. {rollingPaper.name}</h1>
+        {/* 모바일에서만 보이는 구분선 */}
+        <Divider
+          width={9999}
+          height={1}
+          marginX={0}
+          className="mobile-divider"
+        />
         <div className="header-right-section">
-          <div className="avatar-content">
+          <div className="avatar-content tablet-hide">
             <AvatarGroup
               avatars={rollingPaper.recentMessages?.map((message) => ({
                 id: message.id,
@@ -116,10 +150,8 @@ function HeaderService({
             <p>
               <span>{rollingPaper.messageCount}</span>명이 작성했어요!
             </p>
+            <Divider height={28} marginX={28} className="tablet-hide" />
           </div>
-
-          <Divider height={28} marginX={28} />
-
           <div className="emoji-content" ref={emojiGroupRef}>
             <div className="reactions-container">
               <Reactions reactions={rollingPaper.topReactions} />
@@ -143,7 +175,7 @@ function HeaderService({
             {isEmojiDropdownOpen && (
               <div className="emoji-dropdown-container">
                 <Reactions
-                  reactions={reactionEmojis}
+                  reactions={displayedEmojis}
                   className="dropdown-reactions"
                 />
               </div>
@@ -165,8 +197,8 @@ function HeaderService({
               <div className="emoji-picker-dropdown" ref={emojiPickerRef}>
                 <EmojiPicker
                   onEmojiClick={handleEmojiClick}
-                  width={350}
-                  height={400}
+                  width={300}
+                  height={390}
                   searchPlaceholder="Search"
                   previewConfig={{
                     showPreview: true,
@@ -176,7 +208,7 @@ function HeaderService({
             )}
           </div>
 
-          <Divider height={28} marginX={13} />
+          <Divider height={28} marginX={13} className="share-divider" />
 
           <div className="share-section">
             <Button

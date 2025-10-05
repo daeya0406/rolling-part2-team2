@@ -45,7 +45,7 @@ function Test2() {
       {
         id: 23399,
         recipientId: 12111,
-        sender: "김치영",
+        sender: "Areain Kim",
         profileImageURL: "https://picsum.photos/id/859/100/100",
         relationship: "가족",
         content:
@@ -56,7 +56,7 @@ function Test2() {
       {
         id: 23399,
         recipientId: 12111,
-        sender: "김치영",
+        sender: "Areain Kim",
         profileImageURL: "https://picsum.photos/id/859/100/100",
         relationship: "가족",
         content:

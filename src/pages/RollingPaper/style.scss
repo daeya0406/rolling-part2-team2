@@ -50,9 +50,25 @@ body {
     position: relative;
     z-index: 2;
   }
+}
 
-  // // Mobile 스타일 (768px 이하)
-  // @media (max-width: 768px) {
-  //   padding: 40px 0; /* 세로 패딩 유지 */
-  // }
+@media (max-width: 1024px) {
+  .message-list-wrapper {
+    padding-top: 48px; /* 모바일에서 서비스 헤더 공간만 남김 */
+  }
+
+  .top-button {
+    bottom: 70px; /* 하단 고정 버튼을 위한 여백 */
+  }
+}
+
+// Mobile 스타일 (480px 이하)
+@media (max-width: 480px) {
+  .test2-page-wrapper {
+    padding-top: 0; /* 모바일에서 헤더 공간 제거 */
+  }
+
+  .message-list-wrapper {
+    padding-top: 84px; /* 모바일에서 서비스 헤더 공간만 남김 */
+  }
 }
