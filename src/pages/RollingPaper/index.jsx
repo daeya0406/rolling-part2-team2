@@ -4,7 +4,7 @@ import "./style.scss";
 import HeaderService from "@/pages/RollingPaper/components/HeaderService";
 import MessageList from "@/pages/RollingPaper/components/MessageList";
 
-function Test2() {
+function RollingPaper() {
   const location = useLocation();
   const currentPath = location.pathname;
   const isPostEditPage = currentPath.includes("/edit");
@@ -246,7 +246,7 @@ function Test2() {
   // HeaderService 컴포넌트용 이벤트 핸들러
   const handleEmojiClick = (emojiData) => {
     console.log("선택된 이모지:", emojiData.emoji);
-    // 여기서 이모지 반응을 서버에 전송하거나 로컬 상태를 업데이트할 수 있습니다
+    // 이모지 반응을 서버에 전송하거나 로컬 상태를 업데이트
   };
 
   const handleKakaoShare = () => {
@@ -270,7 +270,7 @@ function Test2() {
   };
 
   return (
-    <div className="test2-page-wrapper">
+    <div className="RollingPaper-page-wrapper">
       {/* 서비스 헤더 부분 */}
       <HeaderService
         rollingPaper={rollingPapers}
@@ -304,4 +304,4 @@ function Test2() {
   );
 }
 
-export default Test2;
+export default RollingPaper;
