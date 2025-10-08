@@ -1,8 +1,10 @@
-import React from "react";
+// import React from "react";
+// import Header from "../../../components/Header";
+
+// Swiper 컴포넌트 import 영역
+// import RollingSlider from "../../../components/ui/RollingSlider";
 import Button from "../../../components/ui/Button";
-import Header from "../../../components/Header";
 import RollingCard from "../../../components/ui/RollingCard";
-import RollingSlider from "../../../components/ui/RollingSlider";
 
 function Components1() {
   // 샘플 아바타 데이터
@@ -31,7 +33,14 @@ function Components1() {
 
   return (
     <div>
-      {/* RollingCard 테스트 */}
+      {/* RollingSlider 테스트
+      <h1>RollingSlider 테스트</h1>
+      <RollingSlider cards={cards} />
+      <br />
+      <br />
+      <br />
+      */}
+      RollingCard 테스트
       <h1>RollingCard 테스트</h1>
       <RollingCard
         title={cards[0].title}
@@ -39,10 +48,8 @@ function Components1() {
         count={cards[0].count}
         reactions={cards[0].reactions}
       />
-
       {/* 버튼 테스트 */}
       <h1 style={{ marginTop: "40px" }}>버튼 테스트</h1>
-
       {/* Large */}
       <h2>Large (56px)</h2>
       <div style={{ display: "flex", gap: "16px", marginBottom: "20px" }}>
@@ -55,7 +62,6 @@ function Components1() {
         />
         <Button label="Disabled Large" size="lg" variant="primary" disabled />
       </div>
-
       {/* Medium 버튼 테스트 */}
       <h2>Medium (40px)</h2>
       <div style={{ display: "flex", gap: "16px", marginBottom: "20px" }}>
@@ -63,28 +69,24 @@ function Components1() {
         <Button label="Outline Medium" size="md" variant="outline" />
         <Button label="Disabled Medium" size="md" variant="outline" disabled />
       </div>
-
       {/* Small 버튼 테스트 */}
       <h2>Small (36px)</h2>
       <div style={{ display: "flex", gap: "12px", marginBottom: "20px" }}>
         <Button label="Outline Small" size="sm" variant="outline" />
         <Button label="Disabled Small" size="sm" variant="outline" disabled />
       </div>
-
       {/* Extra Small 버튼 테스트 */}
       <h2>Extra Small (28px)</h2>
       <div style={{ display: "flex", gap: "12px", marginBottom: "20px" }}>
         <Button label="Extra Small" size="xs" variant="outline" />
         <Button label="Disabled XS" size="xs" variant="outline" disabled />
       </div>
-
       {/* Icon-only (Square) */}
       <h2>Only Icon (Square)</h2>
       <div style={{ display: "flex", gap: "12px", marginBottom: "20px" }}>
         <Button icon="delete" size="md" variant="outline" />
         <Button icon="delete" size="md" variant="outline" disabled />
       </div>
-
       {/* Icon-only (Rectangle) */}
       <h2>Only Icon (Rectangle)</h2>
       <div style={{ display: "flex", gap: "12px", marginBottom: "20px" }}>
@@ -102,7 +104,6 @@ function Components1() {
           disabled
         />
       </div>
-
       {/* Icon + Label(텍스트) */}
       <h2>Icon + Label</h2>
       <div style={{ display: "flex", gap: "12px", marginBottom: "20px" }}>
