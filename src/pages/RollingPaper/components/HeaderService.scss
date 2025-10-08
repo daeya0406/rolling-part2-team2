@@ -12,6 +12,11 @@
   z-index: 1000;
   user-select: none;
 
+  /* 모바일 구분선 기본적으로 숨김 */
+  .mobile-divider {
+    display: none;
+  }
+
   .header-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -24,6 +29,14 @@
       @include typo(28, 700);
       color: var(--c-black);
       margin: 0;
+
+      /* 텍스트 오버플로우 처리 */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex-shrink: 1; /* flex 환경에서 줄어들 수 있도록 */
+      min-width: 0; /* flex item이 줄어들 수 있도록 */
+      max-width: 60%; /* 기본적으로 60% 제한 */
     }
 
     .header-right-section {
@@ -33,12 +46,12 @@
       .avatar-content {
         display: flex;
         align-items: center;
-        gap: 11px;
+        // gap: 11px;
 
         p {
           @include typo(18, 400);
           color: var(--c-gray900);
-          margin: 0;
+          margin-left: 11px;
 
           span {
             font-weight: 700;
@@ -107,64 +120,146 @@
   }
 }
 
-/* 태블릿 (768px 이하) */
-@media (max-width: 768px) {
+/* 태블릿 (1024px 이하) */
+@media (max-width: 1024px) {
   .header-service {
-    height: auto;
+    height: 68px; /* 고정 높이 유지 */
     min-height: 68px;
 
+    /* tablet-hide 클래스 숨기기 */
+    .tablet-hide {
+      display: none !important;
+    }
+
     .header-content {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
+      flex-direction: row; /* 한 줄로 유지 */
+      align-items: center;
+      justify-content: space-between;
 
       h1 {
         @include typo(24, 700);
+        flex-shrink: 1; /* 제목이 줄어들 수 있도록 변경 */
+        min-width: 0; /* flex item이 줄어들 수 있도록 */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 50%; /* 최대 50% 너비로 제한 */
       }
 
       .header-right-section {
-        width: 100%;
-        flex-wrap: wrap;
-        gap: 16px;
+        display: flex;
+        align-items: center;
+        flex-shrink: 1;
 
-        .avatar-content p {
-          @include typo(16, 400);
-        }
+        .avatar-content {
+          display: flex;
+          align-items: center;
 
-        .emoji-content .emoji-dropdown-toggle {
-          padding: 6px 10px;
-        }
-
-        .share-section .share-button {
-          padding: 10px 14px;
-          @include typo(14, 400);
+          p {
+            @include typo(16, 400);
+          }
         }
       }
     }
   }
+}
 
-  /* 드롭다운 스타일 */
-  .emoji-dropdown-container {
-    .dropdown-reactions .reactions--badges {
-      max-height: calc(2 * (40px + 6px) - 6px); /* 2줄만 보이기 (6개 아이템) */
-      overflow: hidden;
+@media (max-width: 650px) {
+  .header-service {
+    .header-content {
+      h1 {
+        /* 작은 화면에서 더 적극적인 말줄임표 */
+        max-width: 150px; /* 최대 너비 더 제한 */
+      }
+
+      .header-right-section {
+        .emoji-content {
+          .reactions-container {
+            gap: 4px;
+          }
+
+          .emoji-dropdown-toggle {
+            .arrow-icon {
+              width: 20px;
+              height: 20px;
+              max-width: 20px;
+            }
+          }
+        }
+
+        .emoji-add-section {
+          .emoji-add-button {
+            /* 라벨 텍스트만 숨기기 */
+            .btn__label {
+              display: none;
+            }
+
+            /* 버튼 크기 조정 */
+            padding: 0px 5px;
+            height: 32px;
+            min-width: auto;
+            width: auto;
+          }
+
+          .emoji-picker-dropdown {
+            right: 0;
+          }
+        }
+
+        .share-section {
+          .share-button {
+            padding: 0px 5px;
+            height: 32px;
+          }
+        }
+      }
     }
-  }
-
-  .emoji-picker-dropdown {
-    right: -50px;
-    transform: translateX(-50%);
   }
 }
 
 /* 모바일 (480px 이하) */
 @media (max-width: 480px) {
   .header-service {
+    top: 0; /* 화면 상단에 붙이기 */
     padding: 0 20px;
+    height: 105px; /* 52px + 1px + 52px */
+    min-height: 105px;
+
+    /* 모바일 구분선 보이기 */
+    .mobile-divider {
+      display: block !important;
+      width: calc(100% + 40px) !important; /* 패딩 만큼 확장 */
+      height: 1px !important; /* 높이 1px 고정 */
+      margin-left: -20px !important; /* 패딩 오프셋 */
+      margin-right: -20px !important; /* 패딩 오프셋 */
+    }
 
     .header-content {
+      flex-direction: column; /* 세로 배치 */
+      align-items: stretch; /* 전체 너비 사용 */
+      gap: 0; /* 간격 제거 */
+      padding: 0; /* 패딩 제거 */
+      height: 100%;
+
+      h1 {
+        /* 첫 번째 영역: 52px 높이, 12px 패딩 */
+        height: 52px;
+        padding: 12px 0;
+        margin: 0;
+        @include typo(24, 700);
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+      }
+
       .header-right-section {
-        gap: 12px;
+        /* 두 번째 영역: 52px 높이 */
+        height: 52px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
 
         .avatar-content {
           gap: 8px;
@@ -173,38 +268,110 @@
             @include typo(14, 400);
           }
         }
+
+        .emoji-content {
+          .reactions-container {
+            gap: 4px;
+            margin-right: 0px;
+
+            .reactions--badge {
+              padding: 4px 9px;
+            }
+
+            .reactions--emoji {
+              width: 16px;
+              height: 16px;
+            }
+
+            .reactions--count {
+              @include typo(14, 400);
+            }
+          }
+
+          .emoji-dropdown-toggle {
+            padding: 3px;
+
+            .arrow-icon {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+
+        .emoji-add-section {
+          .emoji-add-button {
+            .btn__label {
+              display: none;
+            }
+            padding: 6px 8px;
+            height: 20px;
+            width: 20px;
+            max-width: 20px;
+          }
+
+          .emoji-picker-dropdown {
+            position: absolute;
+            right: -50px;
+          }
+        }
+
+        .share-divider {
+          margin-left: 5px !important;
+          margin-right: 5px !important;
+        }
+
+        .share-section {
+          .share-button {
+            padding: 6px 8px;
+            height: 20px;
+            width: 20px;
+            max-width: 20px;
+          }
+        }
       }
     }
   }
 
   /* 드롭다운 스타일 */
   .emoji-dropdown-container {
-    width: 240px;
-    padding: 8px;
+    padding: 16px !important; /* 모바일에서 패딩 줄이기 */
+    left: 10px !important; /* 왼쪽으로 약간 이동 */
 
-    .dropdown-reactions .reactions--badges {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-      max-height: calc(2 * (36px + 4px) - 4px); /* 2줄만 보이기 (6개 아이템) */
-      overflow: hidden;
+    .reactions--badge {
+      padding: 4px 9px;
+    }
+
+    .reactions--emoji {
+      width: 16px;
+      height: 16px;
+    }
+
+    .reactions--count {
+      @include typo(14, 400);
     }
   }
 
   .emoji-picker-dropdown {
-    right: -100px;
-
-    .EmojiPickerReact {
-      width: 300px !important;
-      height: 350px !important;
-    }
+    padding: 16px; /* 이모지 피커도 패딩 줄이기 */
   }
+}
 
-  .share-dropdown {
-    min-width: 120px;
+/* 모바일 (370px 이하) */
+@media (max-width: 370px) {
+  .header-service {
+    .header-content {
+      .header-right-section {
+        .emoji-content {
+          .emoji-dropdown-toggle {
+            padding: 0px;
+          }
+        }
 
-    .share-option {
-      padding: 10px 12px;
-      @include typo(12, 400);
+        .share-divider {
+          margin-left: 2px !important;
+          margin-right: 2px !important;
+        }
+      }
     }
   }
 }
@@ -230,10 +397,22 @@
 
   .dropdown-reactions .reactions--badges {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 10px 8px;
     max-height: none; /* 데스크톱: 제한 없음 */
     overflow: visible;
+
+    /* 기본적으로 4열 (8개 이모지용) */
+    grid-template-columns: repeat(4, 1fr);
+
+    /* 6개 이하일 때 3열로 변경 */
+    &[data-emoji-count="6"],
+    &[data-emoji-count="5"],
+    &[data-emoji-count="4"],
+    &[data-emoji-count="3"],
+    &[data-emoji-count="2"],
+    &[data-emoji-count="1"] {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 }
 

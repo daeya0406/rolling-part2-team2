@@ -8,12 +8,9 @@ body {
 }
 
 /* Page Wrapper - 다른 페이지에 영향 없이 이 페이지만 배경 적용 */
-.test2-page-wrapper {
+.RollingPaper-page-wrapper {
   position: relative;
-  // width: 100vw;
-  //min-height: 100vh;
   overflow-y: auto; /* 세로 스크롤 허용 */
-  // overflow-x: hidden; /* 가로 스크롤만 제거 */
   box-sizing: border-box;
   padding-top: 68px; /* 메인 헤더(64px) + 서비스 헤더(68px) */
 }
@@ -27,7 +24,6 @@ body {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  //background-attachment: fixed;
   padding-top: 113px;
   overflow: visible; /* 스크롤 제거 */
   //padding: 113px 24px 0;
@@ -50,9 +46,25 @@ body {
     position: relative;
     z-index: 2;
   }
+}
 
-  // // Mobile 스타일 (768px 이하)
-  // @media (max-width: 768px) {
-  //   padding: 40px 0; /* 세로 패딩 유지 */
-  // }
+@media (max-width: 1024px) {
+  .message-list-wrapper {
+    padding-top: 48px;
+  }
+
+  .top-button {
+    bottom: 70px; /* 하단 고정 버튼을 위한 여백 */
+  }
+}
+
+// Mobile 스타일 (480px 이하)
+@media (max-width: 480px) {
+  .RollingPaper-page-wrapper {
+    padding-top: 0; /* 모바일에서 헤더 공간 제거 */
+  }
+
+  .message-list-wrapper {
+    padding-top: 84px;
+  }
 }

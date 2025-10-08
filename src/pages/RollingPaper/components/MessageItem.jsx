@@ -86,7 +86,12 @@ function MessageItem({
                   className="message-item--avatar"
                 />
                 <div className="message-item--sender-info">
-                  <span className="message-item--sender-name">
+                  <span
+                    className={
+                      `message-item--sender-name` +
+                      `${isPostEditPage ? "-edit" : ""}`
+                    }
+                  >
                     From.{" "}
                     <span className="message-item--sender-name--highlight">
                       {message.sender}
