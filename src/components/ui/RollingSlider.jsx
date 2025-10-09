@@ -66,7 +66,7 @@ function RollingSlider({ cards = [] }) {
             //네비게이션 기능 초기화 및 상태 업데이트
             swiper.navigation.init();
             swiper.navigation.update();
-          }, 100);
+          }, 200);
         }}
         //사용 모듈 설정
         modules={[Navigation, Pagination]}

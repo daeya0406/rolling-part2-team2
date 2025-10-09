@@ -1,12 +1,29 @@
+import { useNavigate } from "react-router-dom";
 import AvatarGroup from "./AvatarGroup";
 import Reactions from "./Reactions";
 import "./RollingCard.scss";
 
 /* 하나의 카드 UI를 보여주고 제목, 아바타 목록, 작성 인원 수, 리액션 영역으로 구성됨 */
-/* 적용되는 더미 데이터는 Components1.jsx에서 props로 받아옴 */
-function RollingCard({ title, avatars, count, reactions }) {
+function RollingCard({ id, title, avatars, count, reactions, bgUrl, bgColor }) {
+  // js 코드 안에서 페이지 이동함
+  const navigate = useNavigate();
+
+  // 카드 클릭 시 post/id 로 이동됨
+  const handleClick = () => {
+    if (!id) return;
+    navigate(`/post/${id}`);
+  };
+
   return (
-    <div className="rolling-card">
+    <div
+      className="rolling-card"
+      onClick={handleClick} // 카드 클릭 시 이동
+      style={{
+        backgroundImage: bgUrl ? `url(${bgUrl})` : undefined, // 배경 이미지 적용
+        backgroundColor: bgColor, // 배경 컬러
+        cursor: "pointer", // 마우스 커서 손모양으로
+      }}
+    >
       {/* 제목 출력 */}
       <div className="rolling-card__header">
         <div className="rolling-card__title">{title}</div>
