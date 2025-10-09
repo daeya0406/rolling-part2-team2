@@ -1,10 +1,6 @@
 // import React from "react";
-// import Header from "../../../components/Header";
-
-// Swiper 컴포넌트 import 영역
-// import RollingSlider from "../../../components/ui/RollingSlider";
+import RollingSlider from "../../../components/ui/RollingSlider";
 import Button from "../../../components/ui/Button";
-import RollingCard from "../../../components/ui/RollingCard";
 
 function Components1() {
   // 샘플 아바타 데이터
@@ -25,29 +21,22 @@ function Components1() {
   // 샘플 카드 데이터
   const cards = [
     { id: 1, title: "To. Sowon", avatars, count: 30, reactions },
-    { id: 2, title: "To. Narae", avatars, count: 15, reactions },
-    { id: 3, title: "To. Jisoo", avatars, count: 22, reactions },
-    { id: 4, title: "To. Jerry", avatars, count: 14, reactions },
-    { id: 5, title: "To. Bango", avatars, count: 22, reactions },
+    { id: 2, title: "To. Sihyun", avatars, count: 15, reactions },
+    { id: 3, title: "To. Jungdae", avatars, count: 22, reactions },
+    { id: 4, title: "To. Narae", avatars, count: 14, reactions },
+    { id: 5, title: "To. Jerry", avatars, count: 22, reactions },
   ];
 
   return (
     <div>
-      {/* RollingSlider 테스트
-      <h1>RollingSlider 테스트</h1>
+      <br />
+      <br />
+      {/* RollingSlider 테스트 */}
       <RollingSlider cards={cards} />
       <br />
       <br />
       <br />
-      */}
-      RollingCard 테스트
-      <h1>RollingCard 테스트</h1>
-      <RollingCard
-        title={cards[0].title}
-        avatars={cards[0].avatars}
-        count={cards[0].count}
-        reactions={cards[0].reactions}
-      />
+
       {/* 버튼 테스트 */}
       <h1 style={{ marginTop: "40px" }}>버튼 테스트</h1>
       {/* Large */}
