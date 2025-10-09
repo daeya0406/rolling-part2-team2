@@ -11,6 +11,7 @@ import ColorPage from "../pages/Test/TestColor";
 // 작업 페이지
 import Post from "../pages/Post";
 import RollingPaper from "../pages/RollingPaper";
+import List from "../pages/List";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
       { path: "post", element: <Post /> }, // /Post
       { path: "post/:id", element: <RollingPaper /> }, // /post/id
       { path: "post/:id/edit", element: <RollingPaper /> }, // /post/id/edit
+      { path: "list", element: <List /> }, // /list
     ],
   },
 ]);
