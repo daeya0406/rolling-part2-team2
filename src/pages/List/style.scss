@@ -32,3 +32,41 @@
     width: 280px;
   }
 }
+
+@media (max-width: 1248px) {
+  .list {
+    // &__section {
+    //   padding: 0 24px;
+    // }
+
+    &__title {
+      margin-left: 24px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .list {
+    &__button {
+      width: calc(100% - 48px);
+      margin: 0 24px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .list {
+    // &__section {
+    //   padding: 0 20px;
+    // }
+
+    &__title {
+      margin-left: 20px;
+    }
+
+    &__button {
+      width: calc(100% - 40px);
+      margin: 0 20px;
+    }
+  }
+}

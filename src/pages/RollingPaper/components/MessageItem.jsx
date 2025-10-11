@@ -123,7 +123,14 @@ function MessageItem({
                 </div>
               </div>
               <div className="message-item--divider-underline"></div>
-              <div className="message-item--text">{message.content}</div>
+              <div
+                className="message-item--text"
+                style={{
+                  fontFamily: message.font || "Pretendard",
+                }}
+              >
+                {message.content}
+              </div>
               <div className="message-item--footer">
                 <span className="message-item--date">
                   {formatDate(message.createdAt)}

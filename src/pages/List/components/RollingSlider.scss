@@ -75,6 +75,41 @@
   }
 }
 
+@media (max-width: 1248px) {
+  .rolling-slider {
+    padding: 0 24px; /* 좌우 패딩 추가 */
+  }
+}
+
+@media (max-width: 1024px) {
+  .custom-prev {
+    display: none;
+  }
+  .custom-next {
+    display: none;
+  }
+
+  /* 첫 번째 슬라이드일 때만 왼쪽 padding 적용 - 컨테이너에 직접 적용 */
+  .rolling-slider--at-beginning {
+    padding-left: 24px !important;
+  }
+
+  /* 마지막 슬라이드일 때만 오른쪽 padding 적용 - 컨테이너에 직접 적용 */
+  .rolling-slider--at-end {
+    padding-right: 24px !important;
+  }
+
+  /* 첫 번째 슬라이드가 아닐 때는 padding 제거 */
+  .rolling-slider:not(.rolling-slider--at-beginning) {
+    padding-left: 0 !important;
+  }
+
+  /* 마지막 슬라이드가 아닐 때는 오른쪽 padding 제거 */
+  .rolling-slider:not(.rolling-slider--at-end) {
+    padding-right: 0 !important;
+  }
+}
+
 /* 모바일 반응형 (버튼이 잘리지 않도록 바깥으로 배치함) */
 @media (max-width: 480px) {
   .custom-prev {
@@ -82,5 +117,24 @@
   }
   .custom-next {
     right: -4px;
+  }
+
+  /* 모바일에서는 padding을 더 작게 조정 - 컨테이너에 직접 적용 */
+  .rolling-slider--at-beginning {
+    padding-left: 20px !important;
+  }
+
+  .rolling-slider--at-end {
+    padding-right: 20px !important;
+  }
+
+  /* 모바일에서 첫 번째 슬라이드가 아닐 때는 padding 제거 */
+  .rolling-slider:not(.rolling-slider--at-beginning) {
+    padding-left: 0 !important;
+  }
+
+  /* 모바일에서 마지막 슬라이드가 아닐 때는 오른쪽 padding 제거 */
+  .rolling-slider:not(.rolling-slider--at-end) {
+    padding-right: 0 !important;
   }
 }

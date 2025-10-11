@@ -22,12 +22,12 @@ function Header() {
           </Link>
         </div>
 
-        <nav className="header__nav">
+        {/* <nav className="header__nav">
           <Link to="/">Home</Link>
           <Link to="/components1">components1</Link>
           <Link to="/typo">typo</Link>
           <Link to="/color">color</Link>
-        </nav>
+        </nav> */}
 
         <div className="header__btn">
           {showCreateButton && (

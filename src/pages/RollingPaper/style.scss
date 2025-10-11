@@ -23,6 +23,20 @@ body {
   }
 }
 
+/* 초기 로딩 스타일 */
+.rolling-paper--initial-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 9999;
+}
+
 /* Message List Wrapper - 배경 이미지와 스크롤 처리 */
 .message-list-wrapper {
   position: relative;
@@ -33,7 +47,7 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   padding-top: 113px;
-  padding-bottom: 113px;
+  //padding-bottom: 113px;
   overflow: visible; /* 스크롤 제거 */
   /* 화면을 꽉 채우도록 최소 높이 설정 */
   min-height: calc(100vh - 132px);
@@ -56,6 +70,10 @@ body {
   > * {
     position: relative;
     z-index: 2;
+  }
+
+  .warn--title {
+    color: var(--c-white);
   }
 }
 

@@ -51,8 +51,8 @@
     }
   }
 
-  /* 태블릿 (768px) */
-  @media (max-width: 768px) {
+  /* 태블릿 (1024px) */
+  @media (max-width: 1024px) {
     &__inner {
       grid-template-columns: auto auto;
       padding: 0 24px;
@@ -63,10 +63,10 @@
     }
   }
 
-  /* 모바일 (360px) */
-  @media (max-width: 360px) {
+  /* 모바일 (480px) */
+  @media (max-width: 480px) {
     &__inner {
-      padding: 0 18px;
+      padding: 0 20px;
     }
   }
 }

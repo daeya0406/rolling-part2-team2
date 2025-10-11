@@ -23,6 +23,7 @@ function RollingPaper() {
   const [rollingPapers, setRollingPapers] = useState(null); // API 데이터 상태
   const [backgroundData, setBackgroundData] = useState(null); // 배경 데이터 상태
   const [reactionEmojis, setReactionEmojis] = useState(null); // 반응 이모지 데이터
+  const [isInitialized, setIsInitialized] = useState(false); // 초기 데이터 로딩 완료 여부
   const [isLoading, error, getRollingPapersAsync] = useAsync(getRollingPapers);
   const [_isBackgroundLoading, backgroundError, getBackgroundAsync] = useAsync(
     getRollingPapersbackgroundData
@@ -53,26 +54,27 @@ function RollingPaper() {
 
     // API 호출 - useAsync를 사용하므로 try-catch 불필요
     if (id) {
-      // 메시지 데이터 호출
-      getRollingPapersAsync(id).then((data) => {
-        if (data) {
-          setRollingPapers(data);
-        }
-      });
-
-      // 롤링페이퍼 정보 및 배경 데이터 호출
-      getBackgroundAsync(id).then((rollingPaperData) => {
-        if (rollingPaperData) {
-          // 전체 롤링페이퍼 데이터를 backgroundData에 저장
-          setBackgroundData(rollingPaperData);
-        }
-      });
-
-      // 반응 이모지 데이터 호출
-      getReactionAsync(id).then((reactionData) => {
-        if (reactionData) {
-          setReactionEmojis(reactionData);
-        }
+      // 모든 API를 병렬로 호출하고 완료를 기다림
+      Promise.allSettled([
+        getRollingPapersAsync(id).then((data) => {
+          if (data) {
+            setRollingPapers(data);
+          }
+        }),
+        getBackgroundAsync(id).then((rollingPaperData) => {
+          if (rollingPaperData) {
+            // 전체 롤링페이퍼 데이터를 backgroundData에 저장
+            setBackgroundData(rollingPaperData);
+          }
+        }),
+        getReactionAsync(id).then((reactionData) => {
+          if (reactionData) {
+            setReactionEmojis(reactionData);
+          }
+        }),
+      ]).finally(() => {
+        // 모든 API 호출이 완료되면(성공/실패 무관) 초기화 완료로 설정
+        setIsInitialized(true);
       });
     }
 
@@ -166,11 +168,15 @@ function RollingPaper() {
 
   return (
     <div className="RollingPaper-page-wrapper">
-      {/* 로딩 중일 때만 로딩 표시 */}
-      {isLoading && <Loading size="lg" className="rendering-loaing" />}
+      {/* 초기 로딩 중일 때만 로딩 표시 */}
+      {!isInitialized && (
+        <div className="rolling-paper--initial-loading">
+          <Loading size="lg" className="rendering-loading" />
+        </div>
+      )}
 
       {/* 404 에러 발생 시 */}
-      {hasError && !isNotFound && (
+      {isNotFound && (
         <div className="not-found-wrapper">
           <Warn
             variant="big"
@@ -185,8 +191,27 @@ function RollingPaper() {
         </div>
       )}
 
-      {/* 에러가 없을 때만 컨텐츠 렌더링 */}
-      {!hasError && (
+      {/* 기타 에러 발생 시 (404가 아닌 경우) */}
+      {hasError && !isNotFound && (
+        <div className="error-wrapper">
+          <Warn
+            variant="big"
+            title="오류가 발생했습니다."
+            description="잠시 후 다시 시도해 주세요."
+          />
+          <div className="error-actions">
+            <Button
+              variant="primary"
+              size="lg"
+              label="새로고침"
+              onClick={() => window.location.reload()}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* 초기화 완료 후 컨텐츠 렌더링 */}
+      {isInitialized && !isNotFound && (
         <>
           {/* 서비스 헤더 부분 */}
           <HeaderService
@@ -215,6 +240,7 @@ function RollingPaper() {
               messages={rollingPapers?.results || []}
               toId={id}
               isPostEditPage={isPostEditPage}
+              isInitialized={isInitialized}
               onDeleteRollingPaper={handleDeleteRollingPaper}
               onRefreshMessages={async () => {
                 // 메시지 목록과 헤더 정보를 동시에 새로고침
