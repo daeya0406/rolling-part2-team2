@@ -10,6 +10,7 @@ import ColorPage from "../pages/Test/TestColor";
 // 작업 페이지
 import Post from "../pages/Post";
 import RollingPaper from "../pages/RollingPaper";
+import PostMessage from "../pages/Post/PostMessage";
 import List from "../pages/List";
 import MainPage from "../pages/Main";
 
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
       { path: "post", element: <Post /> }, // /Post
       { path: "post/:id", element: <RollingPaper /> }, // /post/id
       { path: "post/:id/edit", element: <RollingPaper /> }, // /post/id/edit
+      { path: "post/:id/message", element: <PostMessage /> }, // /post/id/message
       { path: "list", element: <List /> }, // /list
     ],
   },
