@@ -12,6 +12,7 @@ import InputText from "../components/InputText";
 import SelectRelation from "./components/SelectRelation";
 import Avatar from "@/components/ui/Avatar";
 import DefaultAvatar from "@/assets/images/common/default-avatar.svg";
+import Loading from "@/components/ui/Loading";
 import Button from "@/components/ui/Button";
 
 export default function SendMessage() {
@@ -19,12 +20,13 @@ export default function SendMessage() {
   const [selectedFont, setSelectedFont] = useState("Noto Sans");
   const [profileImages, setProfileImages] = useState([]);
   const [profileImage, setProfileImage] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState([]);
   const [value, setValue] = useState("");
   const [sender, setSender] = useState("");
   const [nameTouched, setNameTouched] = useState(false);
 
   const navigate = useNavigate();
-
   const team = "19-2";
   const { id: recipientId } = useParams();
 
@@ -33,12 +35,19 @@ export default function SendMessage() {
       try {
         const images = await getProfileImages();
         setProfileImages(images);
+
+        if (!profileImage && images.length > 0) {
+          setProfileImage(images[0]);
+        }
       } catch (err) {
         console.error("이미지 요청 에러:", err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchImages();
   }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -46,7 +55,7 @@ export default function SendMessage() {
         team,
         recipientId,
         sender,
-        profileImageURL: profileImage || DefaultAvatar,
+        profileImageURL: profileImage,
         relationship: relation,
         content: value,
         font: selectedFont,
@@ -54,25 +63,25 @@ export default function SendMessage() {
       alert("메시지 전송 완료!");
       navigate(`/post/${recipientId}`);
     } catch (err) {
-      console.error(err);
+      console.error("❌ postMessage 에러:", err);
       alert("메시지 전송 실패");
     }
   };
 
+  // 이름 유효성 체크
   const MAX_NAME_LEN = 20;
   const trimmedName = sender.trim();
   const isNameValid =
     trimmedName.length > 0 && trimmedName.length <= MAX_NAME_LEN;
   const showNameError = nameTouched && !isNameValid;
   const handleNameBlur = () => setNameTouched(true);
-
   const handleNameFocus = () => {
-    if (nameTouched) {
-      setNameTouched(false);
-    }
+    if (nameTouched) setNameTouched(false);
   };
 
-  const isMessageValid = value.replace(/<(.|\n)*?>/g, "").trim().length > 0;
+  // ReactQuill 내용 체크 (빈 텍스트 제거)
+  const plainText = value.replace(/<(.|\n)*?>/g, "").replace(/\s/g, ""); // 태그 제거 후 확인 필요
+  const isMessageValid = plainText.length > 0;
 
   return (
     <form className="write-wrap" onSubmit={handleSubmit}>
@@ -100,17 +109,35 @@ export default function SendMessage() {
           <div className="profile-images">
             <p>프로필 이미지를 선택해주세요!</p>
             <div className="profile-images--list">
-              {profileImages.map((url, index) => (
-                <img
-                  key={index}
-                  src={url}
-                  alt="프로필 선택"
-                  className={`profile-thumb ${
-                    profileImage === url ? "selected" : ""
-                  }`}
-                  onClick={() => setProfileImage(url)}
-                />
-              ))}
+              {loading
+                ? [...Array(4)].map((_, idx) => (
+                    <div className="profile-thumb loading" key={idx}>
+                      <Loading size="sm" />
+                    </div>
+                  ))
+                : profileImages.map((url, idx) => {
+                    const isLoaded = loadedImages.includes(url);
+                    return (
+                      <div className="profile-thumb-wrapper" key={url || idx}>
+                        <img
+                          src={url}
+                          alt={`프로필 ${idx}`}
+                          className={`profile-thumb ${
+                            profileImage === url ? "selected" : ""
+                          }`}
+                          onClick={() => setProfileImage(url)}
+                          onLoad={() =>
+                            setLoadedImages((prev) => [...prev, url])
+                          }
+                        />
+                        {!isLoaded && (
+                          <div className="image-loading-overlay">
+                            <Loading size="sm" />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
             </div>
           </div>
         </div>

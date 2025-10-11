@@ -45,6 +45,24 @@ h2 {
         cursor: pointer;
         border: 1px solid var(--c-gray200);
       }
+      .profile-thumb-wrapper {
+        position: relative;
+        .image-loading-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+      @media (max-width: 768px) {
+        flex-wrap: wrap;
+      }
+      @media (max-width: 480px) {
+        width: 208px;
+        img {
+          width: 38px;
+          height: 38px;
+        }
+      }
     }
   }
 

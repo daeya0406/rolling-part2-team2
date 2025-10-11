@@ -1,6 +1,6 @@
 .select-relation {
   position: relative;
-  width: 200px;
+  width: 320px;
 
   .select-btn {
     position: relative;
@@ -55,5 +55,9 @@
         background: var(--c-gray100);
       }
     }
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
   }
 }
