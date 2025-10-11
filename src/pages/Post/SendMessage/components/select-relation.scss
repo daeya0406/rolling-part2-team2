@@ -1,0 +1,59 @@
+.select-relation {
+  position: relative;
+  width: 200px;
+
+  .select-btn {
+    position: relative;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--c-gray300);
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+    box-sizing: border-box;
+    .arrow-down {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      transition: all 0.1s ease-in;
+    }
+    &.active {
+      border: 1px solid var(--c-gray500);
+      .arrow-down {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+
+  .dropdown {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--c-gray300);
+    background: #fff;
+    list-style: none;
+    padding: 0;
+    z-index: 10;
+
+    &:not(.block-down) {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 0;
+    }
+
+    &.block-down {
+      position: relative;
+      margin-top: 12px;
+    }
+
+    li {
+      padding: 12px 16px;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--c-gray100);
+      }
+    }
+  }
+}
