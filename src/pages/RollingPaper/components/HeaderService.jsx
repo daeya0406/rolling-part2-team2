@@ -125,7 +125,7 @@ function HeaderService({
   return (
     <div className={`header-service ${className}`}>
       <div className="header-content">
-        <h1>To. {rollingPaper.name}</h1>
+        <h1>To. {rollingPaper?.name || "..."}</h1>
         {/* 모바일에서만 보이는 구분선 */}
         <Divider
           width={9999}
@@ -136,25 +136,27 @@ function HeaderService({
         <div className="header-right-section">
           <div className="avatar-content tablet-hide">
             <AvatarGroup
-              avatars={rollingPaper.recentMessages?.map((message) => ({
-                id: message.id,
-                src: message.profileImageURL,
-                alt: message.sender,
-              }))}
+              avatars={
+                rollingPaper?.recentMessages?.map((message) => ({
+                  id: message.id,
+                  src: message.profileImageURL,
+                  alt: message.sender,
+                })) || []
+              }
               maxVisible={3}
-              totalCount={rollingPaper.messageCount}
+              totalCount={rollingPaper?.messageCount || 0}
               size="small"
               showCount={true}
               isListMode={false}
             />
             <p>
-              <span>{rollingPaper.messageCount}</span>명이 작성했어요!
+              <span>{rollingPaper?.messageCount || 0}</span>명이 작성했어요!
             </p>
             <Divider height={28} marginX={28} className="tablet-hide" />
           </div>
           <div className="emoji-content" ref={emojiGroupRef}>
             <div className="reactions-container">
-              <Reactions reactions={rollingPaper.topReactions} />
+              <Reactions reactions={rollingPaper?.topReactions || []} />
               <span
                 className="emoji-dropdown-toggle"
                 onClick={() => setIsEmojiDropdownOpen(!isEmojiDropdownOpen)}

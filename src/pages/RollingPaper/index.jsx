@@ -1,16 +1,43 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useParams, Link } from "react-router-dom";
 import "./style.scss";
 import HeaderService from "@/pages/RollingPaper/components/HeaderService";
 import MessageList from "@/pages/RollingPaper/components/MessageList";
+import Loading from "@/components/ui/Loading";
+import Warn from "@/components/ui/Warn";
+import Button from "@/components/ui/Button";
+import {
+  getRollingPapersbackgroundData,
+  getRollingPapers,
+  getReactions,
+  postReactions,
+  deleteRollingPaper,
+} from "@/apis/api";
+import useAsync from "@/hooks/useAsync";
 
 function RollingPaper() {
+  const { id: rawId } = useParams(); // URL에서 ID 추출
+  // ID 값에서 불필요한 슬래시 제거
+  const id = rawId?.replace(/\/+$/, ""); // 끝에 있는 슬래시들 제거
+
+  const [rollingPapers, setRollingPapers] = useState(null); // API 데이터 상태
+  const [backgroundData, setBackgroundData] = useState(null); // 배경 데이터 상태
+  const [reactionEmojis, setReactionEmojis] = useState(null); // 반응 이모지 데이터
+  const [isLoading, error, getRollingPapersAsync] = useAsync(getRollingPapers);
+  const [_isBackgroundLoading, backgroundError, getBackgroundAsync] = useAsync(
+    getRollingPapersbackgroundData
+  );
+  const [_isReactionLoading, reactionError, getReactionAsync] =
+    useAsync(getReactions);
+  const [_isPostReactionLoading, postReactionError, postReactionAsync] =
+    useAsync(postReactions);
   const location = useLocation();
   const currentPath = location.pathname;
   const isPostEditPage = currentPath.includes("/edit");
 
   const kakaoAppKey = import.meta.env.VITE_KAKAO_APP_KEY;
-  // 페이지 마운트 시 가로 스크롤 방지 (다른 페이지에 영향 없음)
+
+  // 페이지 마운트 시 초기화 및 API 호출
   useEffect(() => {
     // 현재 body의 overflow-x 값 저장
     const originalOverflowX = document.body.style.overflowX;
@@ -24,6 +51,31 @@ function RollingPaper() {
     script.async = true;
     document.body.appendChild(script);
 
+    // API 호출 - useAsync를 사용하므로 try-catch 불필요
+    if (id) {
+      // 메시지 데이터 호출
+      getRollingPapersAsync(id).then((data) => {
+        if (data) {
+          setRollingPapers(data);
+        }
+      });
+
+      // 롤링페이퍼 정보 및 배경 데이터 호출
+      getBackgroundAsync(id).then((rollingPaperData) => {
+        if (rollingPaperData) {
+          // 전체 롤링페이퍼 데이터를 backgroundData에 저장
+          setBackgroundData(rollingPaperData);
+        }
+      });
+
+      // 반응 이모지 데이터 호출
+      getReactionAsync(id).then((reactionData) => {
+        if (reactionData) {
+          setReactionEmojis(reactionData);
+        }
+      });
+    }
+
     // 컴포넌트 언마운트 시 원래 값으로 복원
     return () => {
       if (document.body.contains(script)) {
@@ -31,222 +83,35 @@ function RollingPaper() {
       }
       document.body.style.overflowX = originalOverflowX;
     };
-  }, []);
-
-  // 샘플 데이터
-  const rollingPapers = {
-    id: 12111,
-    name: "치맨",
-    backgroundColor: "beige",
-    backgroundImageURL: "https://picsum.photos/id/24/3840/2160",
-    createdAt: "2025-06-13T14:48:54.644971Z",
-    messageCount: 14, // 더 많은 메시지가 있다고 가정
-    recentMessages: [
-      {
-        id: 23399,
-        recipientId: 12111,
-        sender: "Areain Kim",
-        profileImageURL: "https://picsum.photos/id/859/100/100",
-        relationship: "가족",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Noto Sans",
-        createdAt: "2025-06-17T05:12:43.377063Z",
-      },
-      {
-        id: 23399,
-        recipientId: 12111,
-        sender: "Areain Kim",
-        profileImageURL: "https://picsum.photos/id/859/100/100",
-        relationship: "가족",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Noto Sans",
-        createdAt: "2025-06-17T05:12:43.377063Z",
-      },
-      {
-        id: 23399,
-        recipientId: 12111,
-        sender: "김치영",
-        profileImageURL: "https://picsum.photos/id/859/100/100",
-        relationship: "가족",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Noto Sans",
-        createdAt: "2025-06-17T05:12:43.377063Z",
-      },
-      {
-        id: 23399,
-        recipientId: 12111,
-        sender: "김치영",
-        profileImageURL: "https://picsum.photos/id/859/100/100",
-        relationship: "가족",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Noto Sans",
-        createdAt: "2025-06-17T05:12:43.377063Z",
-      },
-      {
-        id: 23319,
-        recipientId: 12111,
-        sender: "김치영",
-        profileImageURL: "https://picsum.photos/id/494/100/100",
-        relationship: "지인",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Pretendard",
-        createdAt: "2025-06-13T14:50:17.726398Z",
-      },
-      {
-        id: 23318,
-        recipientId: 12111,
-        sender: "김치영",
-        profileImageURL: "https://picsum.photos/id/547/100/100",
-        relationship: "동료",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Pretendard",
-        createdAt: "2025-06-13T14:49:29.803654Z",
-      },
-      {
-        id: 23399,
-        recipientId: 12111,
-        sender: "김치영",
-        profileImageURL: "https://picsum.photos/id/859/100/100",
-        relationship: "가족",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Noto Sans",
-        createdAt: "2025-06-17T05:12:43.377063Z",
-      },
-      {
-        id: 23399,
-        recipientId: 12111,
-        sender: "김치영",
-        profileImageURL: "https://picsum.photos/id/859/100/100",
-        relationship: "가족",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Noto Sans",
-        createdAt: "2025-06-17T05:12:43.377063Z",
-      },
-      {
-        id: 23399,
-        recipientId: 12111,
-        sender: "김치영",
-        profileImageURL: "https://picsum.photos/id/859/100/100",
-        relationship: "가족",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Noto Sans",
-        createdAt: "2025-06-17T05:12:43.377063Z",
-      },
-      {
-        id: 23399,
-        recipientId: 12111,
-        sender: "김치영",
-        profileImageURL: "https://picsum.photos/id/859/100/100",
-        relationship: "가족",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Noto Sans",
-        createdAt: "2025-06-17T05:12:43.377063Z",
-      },
-      {
-        id: 23399,
-        recipientId: 12111,
-        sender: "김치영",
-        profileImageURL: "https://picsum.photos/id/859/100/100",
-        relationship: "가족",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Noto Sans",
-        createdAt: "2025-06-17T05:12:43.377063Z",
-      },
-      {
-        id: 23399,
-        recipientId: 12111,
-        sender: "김치영",
-        profileImageURL: "https://picsum.photos/id/859/100/100",
-        relationship: "가족",
-        content:
-          "코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!코드잇가 또다시 기술을 부리는 요술이네요. 건강, 채력 모두 조심 또 하세요!",
-        font: "Noto Sans",
-        createdAt: "2025-06-17T05:12:43.377063Z",
-      },
-    ],
-    reactionCount: 10,
-    topReactions: [
-      {
-        id: 12712,
-        emoji: "😆",
-        count: 25,
-      },
-      {
-        id: 12714,
-        emoji: "😅",
-        count: 31,
-      },
-      {
-        id: 12713,
-        emoji: "😍",
-        count: 12,
-      },
-    ],
-  };
-
-  const reactionEmojis = {
-    count: 8,
-    next: null,
-    previous: null,
-    results: [
-      {
-        id: 12712,
-        emoji: "😆",
-        count: 5,
-      },
-      {
-        id: 12713,
-        emoji: "😍",
-        count: 6,
-      },
-      {
-        id: 12714,
-        emoji: "😅",
-        count: 1,
-      },
-      {
-        id: 12715,
-        emoji: "❤️",
-        count: 13,
-      },
-      {
-        id: 12716,
-        emoji: "👍",
-        count: 3,
-      },
-      {
-        id: 12717,
-        emoji: "🔥",
-        count: 8,
-      },
-      {
-        id: 12718,
-        emoji: "👏",
-        count: 11,
-      },
-      {
-        id: 12719,
-        emoji: "🎉",
-        count: 8,
-      },
-    ],
-  };
+  }, [id, getRollingPapersAsync, getBackgroundAsync, getReactionAsync]);
 
   // HeaderService 컴포넌트용 이벤트 핸들러
-  const handleEmojiClick = (emojiData) => {
-    console.log("선택된 이모지:", emojiData.emoji);
-    // 이모지 반응을 서버에 전송하거나 로컬 상태를 업데이트
+  const handleEmojiClick = async (emojiData) => {
+    //console.log("선택된 이모지:", emojiData.emoji);
+
+    // JSON 데이터 생성
+    const requestData = {
+      emoji: emojiData.emoji,
+      type: "increase",
+    };
+
+    // useAsync를 사용하여 이모지 반응을 서버에 전송
+    const result = await postReactionAsync(id, requestData);
+
+    if (result) {
+      alert("추가되었습니다!");
+      // 반응 데이터를 다시 가져와서 업데이트
+      const updatedReactions = await getReactionAsync(id);
+      if (updatedReactions) {
+        setReactionEmojis(updatedReactions);
+      }
+
+      // 롤링페이퍼 정보도 다시 가져와서 topReactions 업데이트
+      const updatedRollingPaper = await getBackgroundAsync(id);
+      if (updatedRollingPaper) {
+        setBackgroundData(updatedRollingPaper);
+      }
+    }
   };
 
   const handleKakaoShare = () => {
@@ -269,37 +134,107 @@ function RollingPaper() {
     });
   };
 
+  const handleDeleteRollingPaper = async (id) => {
+    // 삭제 확인 대화상자
+    const isConfirmed = window.confirm(
+      "롤링페이퍼를 정말 삭제하시겠습니까?\n삭제된 롤링페이퍼는 복구할 수 없습니다."
+    );
+
+    if (!isConfirmed) {
+      return; // 사용자가 취소한 경우
+    }
+
+    const result = await deleteRollingPaper(id);
+    if (result) {
+      // 삭제 성공 후 /list로 이동
+      window.location.href = "/list";
+    } else {
+      //alert("롤링페이퍼 삭제 중 오류가 발생했습니다.");
+    }
+  };
+
+  // 모든 에러를 하나로 통합
+  const hasError =
+    error || backgroundError || reactionError || postReactionError;
+
+  // 404 에러인지 확인 (존재하지 않는 롤링페이퍼)
+  const isNotFound =
+    (error && (error.status === 404 || error.message?.includes("404"))) ||
+    (backgroundError &&
+      (backgroundError.status === 404 ||
+        backgroundError.message?.includes("404")));
+
   return (
     <div className="RollingPaper-page-wrapper">
-      {/* 서비스 헤더 부분 */}
-      <HeaderService
-        rollingPaper={rollingPapers}
-        reactionEmojis={reactionEmojis.results}
-        onEmojiClick={handleEmojiClick}
-        onKakaoShare={handleKakaoShare}
-        onUrlShare={handleUrlShare}
-      />
-      {/* 메세지 리스트 부분 */}
-      <div
-        className="message-list-wrapper"
-        style={{
-          "--bg-image": rollingPapers.backgroundImageURL
-            ? `url(${rollingPapers.backgroundImageURL})`
-            : "none",
-          "--bg-color": rollingPapers.backgroundColor
-            ? `var(--c-${rollingPapers.backgroundColor}200)`
-            : "transparent",
-          "--bg-overlay": rollingPapers.backgroundImageURL
-            ? "rgba(0, 0, 0, 0.50)"
-            : "transparent",
-        }}
-      >
-        <MessageList
-          messages={rollingPapers.recentMessages}
-          toId={rollingPapers.id}
-          isPostEditPage={isPostEditPage}
-        />
-      </div>
+      {/* 로딩 중일 때만 로딩 표시 */}
+      {isLoading && <Loading size="lg" className="rendering-loaing" />}
+
+      {/* 404 에러 발생 시 */}
+      {hasError && !isNotFound && (
+        <div className="not-found-wrapper">
+          <Warn
+            variant="big"
+            title="존재하지 않는 롤링페이퍼에요."
+            description="올바른 주소가 맞는지 다시 한 번 확인해 주세요."
+          />
+          <div className="error-actions">
+            <Link to="/">
+              <Button variant="primary" size="lg" label="홈으로 가기" />
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {/* 에러가 없을 때만 컨텐츠 렌더링 */}
+      {!hasError && (
+        <>
+          {/* 서비스 헤더 부분 */}
+          <HeaderService
+            rollingPaper={backgroundData}
+            reactionEmojis={reactionEmojis?.results || []}
+            onEmojiClick={handleEmojiClick}
+            onKakaoShare={handleKakaoShare}
+            onUrlShare={handleUrlShare}
+          />
+          {/* 메세지 리스트 부분 */}
+          <div
+            className="message-list-wrapper"
+            style={{
+              "--bg-image": backgroundData?.backgroundImageURL
+                ? `url(${backgroundData.backgroundImageURL})`
+                : "none",
+              "--bg-color": backgroundData?.backgroundColor
+                ? `var(--c-${backgroundData.backgroundColor}200)`
+                : "transparent",
+              "--bg-overlay": backgroundData?.backgroundImageURL
+                ? "rgba(0, 0, 0, 0.50)"
+                : "transparent",
+            }}
+          >
+            <MessageList
+              messages={rollingPapers?.results || []}
+              toId={id}
+              isPostEditPage={isPostEditPage}
+              onDeleteRollingPaper={handleDeleteRollingPaper}
+              onRefreshMessages={async () => {
+                // 메시지 목록과 헤더 정보를 동시에 새로고침
+                const [messagesData, backgroundDataResult] = await Promise.all([
+                  getRollingPapersAsync(id),
+                  getBackgroundAsync(id),
+                ]);
+
+                if (messagesData) {
+                  setRollingPapers(messagesData);
+                }
+
+                if (backgroundDataResult) {
+                  setBackgroundData(backgroundDataResult);
+                }
+              }}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

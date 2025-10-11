@@ -1,7 +1,7 @@
-const API_BASE = "https://rolling-api.vercel.app";
+const API_BASE = "https://rolling-api.vercel.app/19-2";
 
-export async function getRecipients(team = 2) {
-  const response = await fetch(`${API_BASE}/${team}/recipients/`, {
+export async function getRecipients() {
+  const response = await fetch(`${API_BASE}/recipients/`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

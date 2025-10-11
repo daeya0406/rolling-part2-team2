@@ -13,7 +13,7 @@ import { useState, useEffect, useRef } from "react";
 export function useInfiniteScroll({
   items = [],
   initialVisible = 5,
-  loadIncrement = 6,
+  loadIncrement = 3,
   onLoadMore,
   isLoading = false,
 }) {
