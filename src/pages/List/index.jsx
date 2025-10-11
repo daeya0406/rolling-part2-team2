@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getRecipients } from "../../apis/getRecipients";
-import RollingSlider from "../../components/ui/RollingSlider";
-import Button from "../../components/ui/Button";
+import { getRecipients } from "@/apis/getRecipients";
+import RollingSlider from "@/pages/List/components/RollingSlider";
+import Button from "@/components/ui/Button";
 import "./style.scss";
 
 function List() {

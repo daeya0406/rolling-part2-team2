@@ -2,6 +2,23 @@
 .message-list {
   &--container {
     position: relative;
+    min-height: 400px; // 최소 높이 설정으로 레이아웃 안정성 확보
+  }
+
+  &--initial-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    width: 100%;
+  }
+
+  &--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    width: 100%;
   }
 
   &--grid {

@@ -47,7 +47,12 @@ function HeaderService({
         maxEmojis = 8; // PC에서는 8개
       }
 
-      setDisplayedEmojis(reactionEmojis.slice(0, maxEmojis));
+      setDisplayedEmojis(
+        reactionEmojis.slice(0, maxEmojis).map((emoji, index) => ({
+          ...emoji,
+          id: emoji.id || `emoji-${index}`,
+        }))
+      );
     };
 
     // 초기 설정
@@ -157,20 +162,23 @@ function HeaderService({
           <div className="emoji-content" ref={emojiGroupRef}>
             <div className="reactions-container">
               <Reactions reactions={rollingPaper?.topReactions || []} />
-              <span
-                className="emoji-dropdown-toggle"
-                onClick={() => setIsEmojiDropdownOpen(!isEmojiDropdownOpen)}
-              >
-                <img
-                  src={ArrowDownIcon}
-                  alt={isEmojiDropdownOpen ? "접기" : "펼치기"}
-                  width={24}
-                  height={24}
-                  className={`arrow-icon ${
-                    isEmojiDropdownOpen ? "rotated" : ""
-                  }`}
-                />
-              </span>
+              {rollingPaper?.topReactions &&
+                rollingPaper.topReactions.length > 0 && (
+                  <span
+                    className="emoji-dropdown-toggle"
+                    onClick={() => setIsEmojiDropdownOpen(!isEmojiDropdownOpen)}
+                  >
+                    <img
+                      src={ArrowDownIcon}
+                      alt={isEmojiDropdownOpen ? "접기" : "펼치기"}
+                      width={24}
+                      height={24}
+                      className={`arrow-icon ${
+                        isEmojiDropdownOpen ? "rotated" : ""
+                      }`}
+                    />
+                  </span>
+                )}
             </div>
 
             {/* 이모지 드롭다운 */}

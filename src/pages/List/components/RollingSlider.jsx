@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 // 프로젝트 내부 컴포넌트 및 스타일
-import Icon from "./Icon";
+import Icon from "@/components/ui/Icon";
 import RollingCard from "./RollingCard";
 import "./RollingSlider.scss";
 
@@ -23,6 +23,28 @@ function RollingSlider({ cards = [] }) {
   // 첫 번째와 마지막 슬라이드 상태 추적
   const [isAtBeginning, setIsAtBeginning] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
+
+  // 더 정확한 상태 업데이트 함수
+  const updateSliderState = (swiper) => {
+    if (!swiper) return;
+
+    const beginning = swiper.isBeginning;
+    let end = swiper.isEnd;
+
+    // slidesPerView: 'auto'일 때 isEnd가 제대로 감지되지 않는 경우를 위한 추가 체크
+    if (!end && swiper.wrapperEl) {
+      const swiperWrapper = swiper.wrapperEl;
+      const swiperWidth = swiper.width;
+      const wrapperWidth = swiperWrapper.scrollWidth;
+      const currentTranslate = Math.abs(swiper.translate);
+
+      // 현재 번역된 거리가 전체 너비에서 뷰포트 너비를 뺀 값과 거의 같으면 마지막
+      end = currentTranslate >= wrapperWidth - swiperWidth - 10; // 10px 여유값
+    }
+
+    setIsAtBeginning(beginning);
+    setIsAtEnd(end);
+  };
 
   // PC 기준 한 화면에 4개까지 보이므로, 카드가 4개 초과일 때만 버튼 표시
   const showNav = cards.length > 4;
@@ -44,6 +66,11 @@ function RollingSlider({ cards = [] }) {
       if (swiper.pagination && swiper.pagination.update) {
         swiper.pagination.update();
       }
+
+      // 리사이즈 후 상태 업데이트
+      setTimeout(() => {
+        updateSliderState(swiper);
+      }, 100);
     };
 
     // 컴포넌트가 처음 실행할 때 resize 이벤트를 등록하고 사라질 때 자동으로 해제함
@@ -64,26 +91,57 @@ function RollingSlider({ cards = [] }) {
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
 
+          // 초기 상태 설정
+          updateSliderState(swiper);
+
           //DOM이 랜더링 된 후 연결된 버튼 ref가 유효할 수 있도록 setTimeout 사용
           //랜더 직후에는 ref.current가 아직 null일 가능성 있음
           setTimeout(() => {
-            //swiper 네비게이션 버튼 DOM 연결
-            swiper.params.navigation.prevEl = prevBtnRef.current;
-            swiper.params.navigation.nextEl = nextBtnRef.current;
+            // swiper 인스턴스와 필요한 속성들이 모두 존재하는지 확인
+            if (
+              swiper &&
+              swiper.navigation &&
+              swiper.params &&
+              swiper.params.navigation &&
+              prevBtnRef.current &&
+              nextBtnRef.current
+            ) {
+              try {
+                //swiper 네비게이션 버튼 DOM 연결
+                swiper.params.navigation.prevEl = prevBtnRef.current;
+                swiper.params.navigation.nextEl = nextBtnRef.current;
 
-            //네비게이션 기능 초기화 및 상태 업데이트
-            swiper.navigation.init();
-            swiper.navigation.update();
+                //네비게이션 기능 초기화 및 상태 업데이트
+                swiper.navigation.init();
+                swiper.navigation.update();
+              } catch (error) {
+                console.warn("Navigation initialization failed:", error);
+              }
+            }
+
+            // 상태 재확인
+            updateSliderState(swiper);
           }, 200);
         }}
         //사용 모듈 설정
         modules={[Navigation, Pagination]}
         // 슬라이드 변경 시 상태 업데이트
         onSlideChange={(swiper) => {
-          setIsAtBeginning(swiper.isBeginning);
-          setIsAtEnd(swiper.isEnd);
+          updateSliderState(swiper);
+        }}
+        onTransitionEnd={(swiper) => {
+          // 트랜지션 완료 후에도 상태 재확인
+          updateSliderState(swiper);
+        }}
+        onTouchEnd={(swiper) => {
+          // 터치 종료 후 상태 재확인
+          updateSliderState(swiper);
         }}
         // 기본 동작 및 옵션 설정
+        navigation={{
+          prevEl: null,
+          nextEl: null,
+        }}
         centerInsufficientSlides={false}
         observer={true}
         observeParents={true}
@@ -93,14 +151,13 @@ function RollingSlider({ cards = [] }) {
         spaceBetween={12}
         speed={700}
         loop={false}
-        loopFillGroupWithBlank={true}
         slidesPerGroup={1}
         watchOverflow={true}
         watchSlidesProgress={true}
-        watchSlidesVisibility={true}
         resistanceRatio={0}
         edgeSwipeDetection={true}
         allowTouchMove={true}
+        slidesPerView={"auto"} // 기본값으로 auto 설정
         // 반응형 구간별 한 화면 카드 수 설정
         breakpoints={{
           // 360: { slidesPerView: "auto", spaceBetween: 8 },

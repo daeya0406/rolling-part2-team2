@@ -1,6 +1,6 @@
 // import React from "react";
-import RollingSlider from "../../../components/ui/RollingSlider";
-import Button from "../../../components/ui/Button";
+import RollingSlider from "@/pages/List/components/RollingSlider";
+import Button from "@/components/ui/Button";
 
 function Components1() {
   // 샘플 아바타 데이터

@@ -12,8 +12,11 @@ function Reactions({ reactions = [], className = "", ...otherProps }) {
   return (
     <div className={`reactions ${className}`} {...otherProps}>
       <div className="reactions--badges" data-emoji-count={reactions.length}>
-        {reactions.map((reaction) => (
-          <div key={reaction.id} className="reactions--badge">
+        {reactions.map((reaction, index) => (
+          <div
+            key={reaction.id || `reaction-${index}`}
+            className="reactions--badge"
+          >
             <span className="reactions--emoji">{reaction.emoji}</span>
             <span className="reactions--count">{reaction.count}</span>
           </div>
