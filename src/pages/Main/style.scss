@@ -1,0 +1,256 @@
+/* 기본 레이아웃 */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 30px 30px;
+
+  /* 메인 공통 버튼 */
+  .btn {
+    width: 280px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* 공통 섹션 정의 */
+  .content__section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    padding: 60px;
+    border-radius: 24px;
+    background-color: #f6f8ff; // 지정된 컬러 가이드가 없어서 헥사코드로 설정함
+    transition: all 0.3s ease;
+
+    /* 텍스트 영역 */
+    .content__wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 뱃지 */
+    .content__badge {
+      @include typo(16, 700);
+      padding: 6px 12px;
+      background-color: var(--c-purple700);
+      color: var(--c-white);
+      border-radius: 20px;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+
+    /* 타이틀과 디스크립션 */
+    .content__title {
+      @include typo(24, 700);
+      color: var(--c-gray800);
+      margin-bottom: 8px;
+    }
+
+    .content__description {
+      @include typo(16, 400);
+      color: var(--c-gray500);
+      margin-bottom: 16px;
+    }
+
+    /* 이미지 영역 */
+    .content__image {
+      flex: 1;
+      text-align: right;
+
+      img {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+      }
+    }
+  }
+
+  /* 반전 섹션으로 이미지 왼쪽 배치 구성 */
+  .content__section--reverse {
+    .content__image {
+      flex: 2;
+      text-align: left;
+
+      img {
+        max-width: 470px;
+      }
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .content__section:first-of-type .content__wrapper {
+      flex: 0.5;
+      padding-right: 0;
+    }
+  }
+
+  /* 태블릿 (1024px 이하) */
+  @media (max-width: 1024px) {
+    .btn {
+      width: 100%;
+      padding: 14px 30px;
+      display: block;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .visible__br {
+      display: none;
+    }
+
+    .content__section,
+    .content__section--reverse {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+      padding: 40px;
+
+      .content__image {
+        order: 1;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        img {
+          max-width: 700px;
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .content__wrapper {
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        margin-left: 40px;
+      }
+
+      .content__title,
+      .content__description {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 90vw;
+      }
+    }
+
+    .content__section--reverse {
+      .content__image {
+        order: 2;
+
+        img {
+          max-width: 550px;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  /* 모바일 (768px 이하) */
+  @media (max-width: 768px) {
+    padding: 50px 24px 30px;
+
+    .btn {
+      width: 100%;
+      max-width: 100%;
+      display: block;
+    }
+
+    .content__section,
+    .content__section--reverse {
+      border-radius: 16px;
+
+      .content__title {
+        @include typo(24, 700);
+      }
+
+      .content__description {
+        @include typo(16, 400);
+      }
+
+      .content__image {
+        order: 2;
+        display: flex;
+        justify-content: center;
+
+        img {
+          max-width: 720px;
+          margin: 0 auto;
+          transform: none;
+        }
+      }
+
+      .content__wrapper {
+        order: 1;
+        text-align: left;
+        align-items: flex-start;
+        margin-left: 0;
+      }
+    }
+
+    .content__section--reverse {
+      .content__image img {
+        max-width: 400px;
+      }
+    }
+  }
+
+  /* 모바일 (580px 이하) */
+
+  @media (max-width: 580px) {
+    .main {
+      padding: 40px;
+    }
+
+    .visible__br {
+      display: inline;
+    }
+
+    .btn {
+      width: 100%;
+      max-width: 100%;
+      display: block;
+    }
+
+    .content__section,
+    .content__section--reverse {
+      .content__title {
+        @include typo(24, 700);
+      }
+
+      .content__description {
+        @include typo(16, 400);
+      }
+
+      .content__image {
+        order: 2;
+        display: flex;
+        justify-content: center;
+
+        img {
+          max-width: 720px;
+          margin: 0 auto;
+        }
+      }
+
+      .content__wrapper {
+        order: 1;
+        text-align: left;
+        align-items: flex-start;
+      }
+    }
+
+    .content__section--reverse {
+      .content__image img {
+        max-width: 400px;
+      }
+    }
+  }
+}
