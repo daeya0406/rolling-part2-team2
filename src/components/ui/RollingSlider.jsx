@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 // Swiper 컴포넌트 및 네비게이션/페이지네이션 모듈
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,6 +19,10 @@ function RollingSlider({ cards = [] }) {
   const swiperRef = useRef(null); // Swiper 인스턴스 저장
   const prevBtnRef = useRef(null); // 커스텀 왼쪽 버튼
   const nextBtnRef = useRef(null); // 커스텀 오른쪽 버튼
+
+  // 첫 번째와 마지막 슬라이드 상태 추적
+  const [isAtBeginning, setIsAtBeginning] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
 
   // PC 기준 한 화면에 4개까지 보이므로, 카드가 4개 초과일 때만 버튼 표시
   const showNav = cards.length > 4;
@@ -48,7 +52,11 @@ function RollingSlider({ cards = [] }) {
   }, []);
 
   return (
-    <div className="rolling-slider">
+    <div
+      className={`rolling-slider ${
+        isAtBeginning ? "rolling-slider--at-beginning" : ""
+      } ${isAtEnd ? "rolling-slider--at-end" : ""}`}
+    >
       {/* Swiper : 카드들을 슬라이드 형태로 보여주는 영역 */}
       <Swiper
         // onSwiper 콜백 : swiper 초기화 직 후 한번 실행됨
@@ -70,38 +78,46 @@ function RollingSlider({ cards = [] }) {
         }}
         //사용 모듈 설정
         modules={[Navigation, Pagination]}
+        // 슬라이드 변경 시 상태 업데이트
+        onSlideChange={(swiper) => {
+          setIsAtBeginning(swiper.isBeginning);
+          setIsAtEnd(swiper.isEnd);
+        }}
         // 기본 동작 및 옵션 설정
         centerInsufficientSlides={false}
         observer={true}
         observeParents={true}
         slidesPerGroupSkip={0}
-        pagination={{ clickable: true }}
-        spaceBetween={16}
+        //pagination={{ clickable: true }}
+        pagination={false}
+        spaceBetween={12}
         speed={700}
         loop={false}
         loopFillGroupWithBlank={true}
         slidesPerGroup={1}
         watchOverflow={true}
+        watchSlidesProgress={true}
+        watchSlidesVisibility={true}
         resistanceRatio={0}
         edgeSwipeDetection={true}
         allowTouchMove={true}
         // 반응형 구간별 한 화면 카드 수 설정
         breakpoints={{
-          360: { slidesPerView: 1.1, spaceBetween: 10 },
-          390: { slidesPerView: 1.3, spaceBetween: 12 },
-          414: { slidesPerView: 1.5, spaceBetween: 14 },
-          480: { slidesPerView: 1.6, spaceBetween: 16 },
-          540: { slidesPerView: 1.8, spaceBetween: 16 },
-          640: { slidesPerView: 2.0, spaceBetween: 18 },
-          768: { slidesPerView: 2.3, spaceBetween: 18 },
-          820: { slidesPerView: 2.5, spaceBetween: 18 },
-          900: { slidesPerView: 2.7, spaceBetween: 20 },
-          960: { slidesPerView: 2.9, spaceBetween: 20 },
-          1024: { slidesPerView: 3.1, spaceBetween: 20 },
-          1100: { slidesPerView: 3.3, spaceBetween: 20 },
-          1180: { slidesPerView: 3.5, spaceBetween: 20 },
-          1260: { slidesPerView: 3.7, spaceBetween: 20 },
-          1320: { slidesPerView: 4.0, spaceBetween: 20 },
+          // 360: { slidesPerView: "auto", spaceBetween: 8 },
+          // 390: { slidesPerView: "auto", spaceBetween: 8 },
+          // 414: { slidesPerView: "auto", spaceBetween: 10 },
+          480: { slidesPerView: "auto", spaceBetween: 20 },
+          // 540: { slidesPerView: "auto", spaceBetween: 12 },
+          // 640: { slidesPerView: "auto", spaceBetween: 14 },
+          // 768: { slidesPerView: "auto", spaceBetween: 16 },
+          // 820: { slidesPerView: "auto", spaceBetween: 16 },
+          // 900: { slidesPerView: "auto", spaceBetween: 18 },
+          // 960: { slidesPerView: "auto", spaceBetween: 18 },
+          // 1024: { slidesPerView: "auto", spaceBetween: 20 },
+          // 1100: { slidesPerView: "auto", spaceBetween: 20 },
+          // 1180: { slidesPerView: "auto", spaceBetween: 20 },
+          // 1260: { slidesPerView: "auto", spaceBetween: 20 },
+          // 1248: { slidesPerView: "auto", spaceBetween: 20 },
         }}
       >
         {/* 카드 리스트 렌더링 */}

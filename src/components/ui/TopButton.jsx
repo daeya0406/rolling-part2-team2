@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import topIcon from "@/assets/images/icons/top.svg";
-import "./top-button.scss";
+import "./TopButton.scss";
 
 export default function TopButton() {
   const [visible, setVisible] = useState(false);
