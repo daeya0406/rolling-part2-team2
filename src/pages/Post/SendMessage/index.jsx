@@ -85,7 +85,6 @@ export default function SendMessage() {
           onChange={(e) => setSender(e.target.value)}
           onFocus={handleNameFocus}
           onBlur={handleNameBlur}
-          placeholder="받는 사람 이름을 입력해 주세요"
           error={showNameError}
         />
       </section>
