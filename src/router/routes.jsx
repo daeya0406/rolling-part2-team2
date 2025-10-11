@@ -21,6 +21,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <DefaultLayout />,
+    errorElement: <NotFoundPage />, // 에러 발생 시 NotFound 페이지 표시
     children: [
       { index: true, element: <MainPage /> }, // /
 
@@ -34,8 +35,10 @@ export const router = createBrowserRouter([
       { path: "post/:id", element: <RollingPaper /> }, // /post/id
       { path: "post/:id/edit", element: <RollingPaper /> }, // /post/id/edit
       { path: "post/:id/message", element: <SendMessage /> }, // /post/id/message
-
       { path: "list", element: <List /> }, // /list
+
+      // 모든 잘못된 경로 처리
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);
