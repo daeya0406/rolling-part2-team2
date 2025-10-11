@@ -34,10 +34,8 @@ export const router = createBrowserRouter([
       { path: "post/:id", element: <RollingPaper /> }, // /post/id
       { path: "post/:id/edit", element: <RollingPaper /> }, // /post/id/edit
       { path: "post/:id/message", element: <SendMessage /> }, // /post/id/message
-      { path: "list", element: <List /> }, // /list
 
-      // not found
-      { path: "*", element: <NotFoundPage /> }, // /not-found
+      { path: "list", element: <List /> }, // /list
     ],
   },
 ]);
