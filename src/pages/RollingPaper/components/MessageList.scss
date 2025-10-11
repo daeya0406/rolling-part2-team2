@@ -105,7 +105,7 @@
       width: 100%;
       gap: 16px;
       grid-template-columns: repeat(2, 1fr);
-      padding-bottom: 80px; /* 하단 고정 버튼을 위한 여백 */
+      //padding-bottom: 80px; /* 하단 고정 버튼을 위한 여백 */
     }
 
     &--delete-button {
@@ -134,7 +134,7 @@
       padding: 0 20px;
       gap: 16px 0;
       grid-template-columns: 1fr;
-      padding-bottom: 80px; /* 하단 고정 버튼을 위한 여백 */
+      //padding-bottom: 80px; /* 하단 고정 버튼을 위한 여백 */
     }
 
     &--delete-button {
