@@ -18,7 +18,7 @@
 
   &--delete-button {
     position: absolute;
-    top: -50px;
+    top: -55px;
     right: 0;
     z-index: 10;
     padding: 1.5px 19px;
@@ -38,6 +38,34 @@
     @include typo(16, 400);
     color: var(--c-gray400);
     grid-column: 1 / -1;
+  }
+
+  &--loading-delete-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 20;
+
+    p {
+      @include typo(18, 500);
+      color: var(--c-gray700);
+    }
+  }
+
+  // 빈 메시지 상태 스타일
+  &--empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    padding: 40px 24px;
   }
 
   // 좌우 여백 24px 고정
@@ -75,6 +103,11 @@
       max-width: 100%;
       z-index: 1000;
     }
+
+    &--empty {
+      min-height: 600px;
+      padding: 40px 24px;
+    }
   }
 
   // Mobile 스타일 (480px 이하) - 1개 컬럼
@@ -90,6 +123,11 @@
     &--delete-button {
       /* 1024px 이하 스타일이 상속됨 */
       width: calc(100% - 40px); /* 모바일에서는 좌우 20px 여백 */
+    }
+
+    &--empty {
+      min-height: 684px; /* 헤더 높이 제외 */
+      padding: 20px 16px;
     }
   }
 }

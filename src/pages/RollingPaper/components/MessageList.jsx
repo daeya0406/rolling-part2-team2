@@ -1,9 +1,11 @@
 import MessageItem from "./MessageItem";
 import Loading from "@/components/ui/Loading";
+import Warn from "@/components/ui/Warn";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import "./MessageList.scss";
 import Button from "../../../components/ui/Button";
-
+import { deleteMessage } from "@/apis/api";
+import useAsync from "@/hooks/useAsync";
 /**
  * 메시지 목록 컴포넌트 - 무한 스크롤과 새 메시지 추가 기능을 포함한 그리드 레이아웃
  * @param {Object} props
@@ -14,6 +16,8 @@ import Button from "../../../components/ui/Button";
  * @param {Function} [props.onLoadMore] - 추가 데이터 로드 콜백 함수
  * @param {boolean} [props.isLoading=false] - 외부 로딩 상태
  * @param {boolean} [props.isPostEditPage=false] - 페이지가 롤링페이퍼 수정 페이지인지 여부
+ * @param {Function} [props.onRefreshMessages] - 메시지 목록 새로고침 콜백 함수
+ * @param {Function} [props.onDeleteRollingPaper] - 롤링페이퍼 삭제 콜백 함수
  */
 
 function MessageList({
@@ -24,7 +28,12 @@ function MessageList({
   onLoadMore,
   isLoading = false,
   isPostEditPage = false,
+  onRefreshMessages,
+  onDeleteRollingPaper,
 }) {
+  // useAsync 훅을 사용하여 삭제 기능 관리
+  const [isDeleting, deleteError, deleteMessageAsync] = useAsync(deleteMessage);
+
   // 커스텀 훅으로 무한 스크롤 로직 분리
   const {
     visibleItems,
@@ -39,45 +48,105 @@ function MessageList({
     isLoading,
   });
 
+  const handleDeleteMessage = async (messageId) => {
+    // 삭제 확인 대화상자
+    const isConfirmed = window.confirm("메시지를 정말 삭제하시겠습니까?");
+
+    if (!isConfirmed) {
+      return; // 사용자가 취소한 경우
+    }
+
+    // useAsync를 사용하여 삭제 처리
+    const result = await deleteMessageAsync(messageId);
+
+    if (result && onRefreshMessages) {
+      // 삭제 성공 시 메시지 목록 새로고침
+      onRefreshMessages();
+    }
+
+    // 오류가 있다면 사용자에게 알림
+    // if (deleteError) {
+    //   console.error("메시지 삭제 중 오류 발생:", deleteError);
+    //   alert("메시지 삭제 중 오류가 발생했습니다.");
+    // }
+  };
+
   return (
     <div className="message-list--container">
-      <div className="message-list--grid">
-        {isPostEditPage && (
-          <Button
-            size="sm"
-            label="삭제하기"
-            className="message-list--delete-button"
+      {/* 관리자모드에서 메시지가 없을 때 안내 메시지 표시 */}
+      {isPostEditPage && visibleItems.length === 0 && (
+        <div className="message-list--empty">
+          <Warn
+            variant="small"
+            title="메시지가 존재하지 않습니다."
+            description="아직 작성된 메시지가 없어요."
           />
-        )}
-        {/* 새 메시지 추가 */}
-        <MessageItem isAddMessage={true} toId={toId} />
+        </div>
+      )}
 
-        {/* 메시지들 */}
-        {visibleItems.map((message) => (
+      {/* 일반적인 메시지 목록 표시 */}
+      {!(isPostEditPage && visibleItems.length === 0) && (
+        <div className="message-list--grid">
+          {/* 관리자모드에서 메시지가 있을 때만 삭제하기 버튼 표시 */}
+          {isPostEditPage && visibleItems.length > 0 && (
+            <Button
+              size="sm"
+              label="삭제하기"
+              className="message-list--delete-button"
+              onClick={() => {
+                // 롤링페이퍼 전체 삭제
+                if (onDeleteRollingPaper && toId) {
+                  onDeleteRollingPaper(toId);
+                }
+              }}
+            />
+          )}
+          {/* 새 메시지 추가 */}
           <MessageItem
-            key={message.id}
-            message={message}
+            isAddMessage={true}
+            toId={toId}
             isPostEditPage={isPostEditPage}
+            onDeleteMessage={handleDeleteMessage}
+            disabled={isDeleting} // 삭제 중일 때 비활성화
           />
-        ))}
 
-        {/* Intersection Observer 감지 요소 */}
-        {hasMore && (
-          <div ref={observerRef} className="message-list--observer" />
-        )}
+          {/* 메시지들 */}
+          {visibleItems.map((message) => (
+            <MessageItem
+              key={message.id}
+              message={message}
+              isPostEditPage={isPostEditPage}
+              onDeleteMessage={handleDeleteMessage}
+              disabled={isDeleting} // 삭제 중일 때 비활성화
+            />
+          ))}
 
-        {/* 모든 메시지 로드 완료 */}
-        {!infiniteLoading && !hasMore && messages.length > 0 && (
-          <div className="message-list--complete">
-            {/* 모든 메시지를 확인했습니다 */}
-          </div>
-        )}
-      </div>
+          {/* Intersection Observer 감지 요소 */}
+          {hasMore && (
+            <div ref={observerRef} className="message-list--observer" />
+          )}
+
+          {/* 모든 메시지 로드 완료 */}
+          {!infiniteLoading && !hasMore && messages.length > 0 && (
+            <div className="message-list--complete">
+              {/* 모든 메시지를 확인했습니다 */}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* 로딩 인디케이터 */}
       {infiniteLoading && (
         <div className="message-list--loading-overlay">
           <Loading size="lg" />
+        </div>
+      )}
+
+      {/* 삭제 중 로딩 오버레이 */}
+      {isDeleting && (
+        <div className="message-list--loading-delete-overlay">
+          <Loading size="lg" />
+          <p>메시지 삭제 중...</p>
         </div>
       )}
     </div>

@@ -36,7 +36,7 @@ function Header() {
             </Link>
           )}
           {isPostDetailPage && (
-            <Link to={`${currentPath}/edit`}>
+            <Link to={`${currentPath.replace(/\/+$/, "")}/edit`}>
               <Button label="관리자모드" size="md" variant="outline" />
             </Link>
           )}

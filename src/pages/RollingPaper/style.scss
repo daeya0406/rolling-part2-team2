@@ -13,6 +13,14 @@ body {
   overflow-y: auto; /* 세로 스크롤 허용 */
   box-sizing: border-box;
   padding-top: 68px; /* 메인 헤더(64px) + 서비스 헤더(68px) */
+
+  .loading .rendering-loaing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
 }
 
 /* Message List Wrapper - 배경 이미지와 스크롤 처리 */
@@ -25,7 +33,10 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   padding-top: 113px;
+  padding-bottom: 113px;
   overflow: visible; /* 스크롤 제거 */
+  /* 화면을 꽉 채우도록 최소 높이 설정 */
+  min-height: calc(100vh - 132px);
   //padding: 113px 24px 0;
 
   /* 배경 이미지 위에 오버레이 추가 */
@@ -51,6 +62,7 @@ body {
 @media (max-width: 1024px) {
   .message-list-wrapper {
     padding-top: 48px;
+    min-height: calc(100vh - 132px);
   }
 
   .top-button {
@@ -66,5 +78,30 @@ body {
 
   .message-list-wrapper {
     padding-top: 84px;
+    min-height: calc(100vh - 64px); /* 모바일에서는 전체 화면 높이 */
+  }
+}
+
+/* Error Page Styles */
+.not-found-wrapper,
+.error-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 253px); /* 헤더 높이 제외 */
+  padding: 40px 24px;
+
+  @media (max-width: 480px) {
+    min-height: calc(100vh - 153px); /* 헤더 높이 제외 */
+    padding: 20px 16px;
+  }
+}
+
+.error-actions {
+  margin-top: 40px;
+
+  @media (max-width: 480px) {
+    margin-top: 32px;
   }
 }

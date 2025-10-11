@@ -16,7 +16,7 @@
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding: 0 24px;
+    // padding: 0 24px;
   }
 
   &__logo {
@@ -42,6 +42,13 @@
 
   &__btn {
     justify-self: end;
+  }
+
+  @media (max-width: 1248px) {
+    &__inner {
+      max-width: 100%;
+      padding: 0 24px;
+    }
   }
 
   /* 태블릿 (768px) */

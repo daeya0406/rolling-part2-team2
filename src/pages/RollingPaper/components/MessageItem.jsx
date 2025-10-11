@@ -30,6 +30,7 @@ function MessageItem({
   toId,
   className = "",
   isPostEditPage = false,
+  onDeleteMessage,
 }) {
   // 모달 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,8 +40,10 @@ function MessageItem({
     if (onAddClick) {
       onAddClick();
     } else if (toId) {
+      // toId에서 불필요한 슬래시 제거
+      const cleanId = String(toId).replace(/\/+$/, "");
       // /post/{id}/message로 이동
-      window.location.href = `/post/${toId}/message`;
+      window.location.href = `/post/${cleanId}/message`;
     }
   };
 
@@ -55,6 +58,11 @@ function MessageItem({
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
+  // 편집 페이지에서는 추가 메시지 카드를 숨김
+  if (isAddMessage && isPostEditPage) {
+    return null;
+  }
 
   return (
     <>
@@ -104,6 +112,12 @@ function MessageItem({
                       size="xs"
                       variant="outline"
                       className="message-item--sender-delete-button"
+                      onClick={(e) => {
+                        e.stopPropagation(); /* 클릭 이벤트 전파 방지 */
+                        if (onDeleteMessage && message?.id) {
+                          onDeleteMessage(message.id);
+                        }
+                      }}
                     />
                   )}
                 </div>
