@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  @media (max-width: 1248px) {
+    max-width: 1248px;
+    padding: 0 24px;
+  }
+}

@@ -5,17 +5,18 @@ h2 {
 }
 
 .write-wrap {
-  display: grid;
-  row-gap: 50px;
-  section {
-    .title-wrap {
-      margin-bottom: 24px;
-      h2 {
-        margin-bottom: 4px;
-      }
-      p {
-        @include typo(16, 400);
-        color: var(--c-gray500);
+  margin: 47px auto 60px;
+  .inner {
+    section {
+      .title-wrap {
+        margin-bottom: 24px;
+        h2 {
+          margin-bottom: 4px;
+        }
+        p {
+          @include typo(16, 400);
+          color: var(--c-gray500);
+        }
       }
     }
   }
@@ -124,5 +125,10 @@ h2 {
         }
       }
     }
+  }
+
+  .button-submit {
+    width: 100%;
+    box-sizing: border-box;
   }
 }
