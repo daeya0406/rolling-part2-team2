@@ -178,8 +178,8 @@ function RollingSlider({ cards = [] }) {
         }}
       >
         {/* 카드 리스트 렌더링 */}
-        {cards.map((card) => (
-          <SwiperSlide key={card.id}>
+        {cards.map((card, index) => (
+          <SwiperSlide key={`${card.id}-${card.bgColor}-${index}`}>
             <RollingCard {...card} />
           </SwiperSlide>
         ))}

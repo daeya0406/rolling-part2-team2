@@ -33,13 +33,28 @@ function RollingCard({ id, title, avatars, count, reactions, bgUrl, bgColor }) {
     navigate(`/post/${id}`);
   };
 
+  // 배경색 계산 (CSS 변수 우선, 동적 fallback)
+  const getBackgroundColor = () => {
+    if (!bgColor) return undefined;
+
+    // CSS 변수가 로드되지 않았을 때만 직접 색상 사용
+    const colorMap = {
+      beige: "#F5F1EB",
+      blue: "#E2F3FF",
+      green: "#E4FBDC",
+      purple: "#F2E9FF",
+    };
+
+    return colorMap[bgColor] || "#F8F9FA";
+  };
+
   return (
     <div
       className={`rolling-card ${bgUrl ? "rolling-card--with-bg-image" : ""}`}
       onClick={handleClick} // 카드 클릭 시 이동
       style={{
         backgroundImage: bgUrl ? `url(${bgUrl})` : undefined, // 배경 이미지 적용
-        backgroundColor: bgColor ? `var(--c-${bgColor}200)` : undefined, // 배경 컬러
+        backgroundColor: getBackgroundColor(), // 배경 컬러 (fallback 포함)
         cursor: "pointer", // 마우스 커서 손모양으로
       }}
     >
