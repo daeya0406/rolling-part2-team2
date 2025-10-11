@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout";
-import MainPage from "../pages/Main";
 
 // 테스트용 페이지
 import Components1 from "../pages/Test/TestComponents1";
@@ -12,6 +11,7 @@ import ColorPage from "../pages/Test/TestColor";
 import Post from "../pages/Post";
 import RollingPaper from "../pages/RollingPaper";
 import List from "../pages/List";
+import MainPage from "../pages/Main";
 
 export const router = createBrowserRouter([
   {
