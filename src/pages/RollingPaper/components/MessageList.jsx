@@ -84,6 +84,17 @@ function MessageList({
               title="메시지가 존재하지 않습니다."
               description="아직 작성된 메시지가 없어요."
             />
+            <Button
+              size="sm"
+              label="메세지 삭제하기"
+              className="message-list--empty-delete-button"
+              onClick={() => {
+                // 롤링페이퍼 전체 삭제
+                if (onDeleteRollingPaper && toId) {
+                  onDeleteRollingPaper(toId);
+                }
+              }}
+            />
           </div>
         )}
 
