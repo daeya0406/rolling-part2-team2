@@ -7,9 +7,8 @@ h2 {
 .write-wrap {
   display: grid;
   row-gap: 50px;
-  .inner {
-    max-width: 720px;
-  }
+  max-width: 768px;
+  padding: 0 24px;
   section {
     .title-wrap {
       margin-bottom: 24px;
