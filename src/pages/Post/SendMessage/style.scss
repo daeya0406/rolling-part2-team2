@@ -1,0 +1,56 @@
+h2 {
+  @include typo(24, 700);
+  color: var(--c-gray900);
+  margin-bottom: 12px;
+}
+
+.write-wrap {
+  display: grid;
+  row-gap: 50px;
+  .inner {
+    max-width: 720px;
+  }
+  section {
+    .title-wrap {
+      margin-bottom: 24px;
+      h2 {
+        margin-bottom: 4px;
+      }
+      p {
+        @include typo(16, 400);
+        color: var(--c-gray500);
+      }
+    }
+  }
+
+  .profile-images-wrap {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .profile-images {
+    p {
+      @include typo(16, 400);
+      color: var(--c-gray500);
+      margin-bottom: 12px;
+    }
+    &--list {
+      display: flex;
+      gap: 4px;
+      img {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+        border: 1px solid var(--c-gray200);
+      }
+    }
+  }
+
+  .quill-editor {
+    height: 216px;
+    padding-bottom: 44px;
+  }
+}
