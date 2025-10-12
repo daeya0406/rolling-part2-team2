@@ -14,7 +14,7 @@
     margin: 0 auto;
   }
 
-  /* 공통 섹션 정의 */
+  /* 공통 섹션 영역 */
   .content__section {
     display: flex;
     justify-content: space-between;
@@ -23,8 +23,10 @@
     width: 100%;
     padding: 60px;
     border-radius: 24px;
-    background-color: #f6f8ff; // 지정된 컬러 가이드가 없어서 헥사코드로 설정함
-    transition: all 0.3s ease;
+    background-color: #f6f8ff;
+    transition: all 0.4s ease;
+    min-height: 420px;
+    overflow: hidden;
 
     /* 텍스트 영역 */
     .content__wrapper {
@@ -44,7 +46,7 @@
       width: fit-content;
     }
 
-    /* 타이틀과 디스크립션 */
+    /* 타이틀 & 디스크립션 */
     .content__title {
       @include typo(24, 700);
       color: var(--c-gray800);
@@ -57,7 +59,7 @@
       margin-bottom: 16px;
     }
 
-    /* 이미지 영역 */
+    /* 이미지 */
     .content__image {
       flex: 1;
       text-align: right;
@@ -66,22 +68,31 @@
         width: 100%;
         max-width: 800px;
         height: auto;
+        transform: translateX(40px);
+        transition: all 0.4s ease;
       }
     }
   }
 
-  /* 반전 섹션으로 이미지 왼쪽 배치 구성 */
+  /* 두 번째 섹션 */
   .content__section--reverse {
     .content__image {
       flex: 2;
       text-align: left;
 
       img {
-        max-width: 470px;
+        width: 100%;
+        max-width: 480px;
+        height: auto;
+        transform: translateX(50px);
+        transition: all 0.4s ease;
       }
     }
   }
 
+  /* ---------- ✅ 반응형 ---------- */
+
+  /* PC (1025px 이상) */
   @media (min-width: 1025px) {
     .content__section:first-of-type .content__wrapper {
       flex: 0.5;
@@ -94,13 +105,11 @@
     .btn {
       width: 100%;
       padding: 14px 30px;
-      display: block;
-      margin: 0 auto;
       box-sizing: border-box;
     }
 
     .visible__br {
-      display: none;
+      display: none !important;
     }
 
     .content__section,
@@ -111,78 +120,13 @@
       padding: 40px;
 
       .content__image {
-        order: 1;
+        order: 2;
         display: flex;
         justify-content: center;
         width: 100%;
 
         img {
-          max-width: 700px;
-          width: 100%;
-          height: auto;
-        }
-      }
-
-      .content__wrapper {
-        order: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-        margin-left: 40px;
-      }
-
-      .content__title,
-      .content__description {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 90vw;
-      }
-    }
-
-    .content__section--reverse {
-      .content__image {
-        order: 2;
-
-        img {
-          max-width: 550px;
-          margin: 0 auto;
-        }
-      }
-    }
-  }
-
-  /* 모바일 (768px 이하) */
-  @media (max-width: 768px) {
-    padding: 50px 24px 30px;
-
-    .btn {
-      width: 100%;
-      max-width: 100%;
-      display: block;
-    }
-
-    .content__section,
-    .content__section--reverse {
-      border-radius: 16px;
-
-      .content__title {
-        @include typo(24, 700);
-      }
-
-      .content__description {
-        @include typo(16, 400);
-      }
-
-      .content__image {
-        order: 2;
-        display: flex;
-        justify-content: center;
-
-        img {
           max-width: 720px;
-          margin: 0 auto;
           transform: none;
         }
       }
@@ -195,66 +139,94 @@
       }
     }
 
-    .content__section--reverse {
-      .content__image img {
-        max-width: 400px;
-      }
+    .content__section--reverse .content__image img {
+      max-width: 550px;
     }
   }
 
-  /* 모바일 (580px 이하) */
-
-  @media (max-width: 580px) {
-    .main {
-      padding: 40px;
-    }
+  /* 모바일 (768px 이하) */
+  @media (max-width: 768px) {
+    padding: 50px 20px 30px;
 
     .visible__br {
-      display: inline;
-    }
-
-    .btn {
-      width: 100%;
-      max-width: 100%;
-      display: block;
+      display: none !important;
     }
 
     .content__section,
     .content__section--reverse {
+      border-radius: 16px;
+
       .content__title {
-        @include typo(24, 700);
+        @include typo(20, 700);
       }
 
       .content__description {
-        @include typo(16, 400);
+        @include typo(14, 400);
       }
 
-      .content__image {
-        order: 2;
-        display: flex;
-        justify-content: center;
-
-        img {
-          max-width: 720px;
-          margin: 0 auto;
-        }
-      }
-
-      .content__wrapper {
-        order: 1;
-        text-align: left;
-        align-items: flex-start;
-      }
-    }
-
-    .content__section--reverse {
       .content__image img {
-        max-width: 400px;
+        width: 110%;
+        text-align: center;
       }
     }
   }
 
+  /* 작은 모바일 (480px 이하) */
   @media (max-width: 480px) {
-    padding: 40px 20px 30px;
+    .content__section {
+      padding: 30px;
+
+      .content__image {
+        width: 140%;
+        text-align: center;
+
+        img {
+          width: 130%;
+          max-width: none;
+          height: auto;
+          object-fit: cover;
+          transform: translateX(-15%);
+        }
+      }
+
+      .content__title,
+      .content__description {
+        white-space: normal !important;
+        overflow: visible;
+        display: block;
+        line-height: 1.4;
+      }
+
+      .visible__br {
+        display: inline !important;
+      }
+    }
+
+    /* 반전 섹션 전용 */
+    .content__section--reverse {
+      padding: 30px;
+
+      .content__image {
+        width: 100%;
+        text-align: center;
+
+        img {
+          width: 100%;
+          max-width: none;
+          height: auto;
+          object-fit: contain;
+          transform: none;
+          margin: 0 auto;
+          transition: all 0.3s ease;
+        }
+      }
+    }
+  }
+
+  /* 초소형 (360px 이하) */
+  @media (max-width: 360px) {
+    .visible__br {
+      display: inline !important;
+    }
   }
 }
