@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import AvatarGroup from "@/components/ui/AvatarGroup";
 import Reactions from "@/components/ui/Reactions";
 import Button from "@/components/ui/Button";
@@ -19,6 +20,8 @@ import "./HeaderService.scss";
  * @param {Function} [props.onEmojiClick] - 이모지 선택 핸들러
  * @param {Function} [props.onKakaoShare] - 카카오톡 공유 핸들러
  * @param {Function} [props.onUrlShare] - URL 공유 핸들러
+ * @param {string|number} [props.toId] - 롤링페이퍼 ID (관리자모드 버튼용)
+ * @param {boolean} [props.isPostEditPage] - 현재 관리자모드 페이지인지 여부
  * @param {string} [props.className] - 추가 CSS 클래스
  */
 function HeaderService({
@@ -27,6 +30,8 @@ function HeaderService({
   onEmojiClick,
   onKakaoShare,
   onUrlShare,
+  toId,
+  isPostEditPage = false,
   className = "",
 }) {
   // 상태 관리
@@ -130,7 +135,20 @@ function HeaderService({
   return (
     <div className={`header-service ${className}`}>
       <div className="header-content">
-        <h1>To. {rollingPaper?.name || "..."}</h1>
+        <div className="header-title-section">
+          <h1>To. {rollingPaper?.name || "..."}</h1>
+          {/* 480px 이하에서만 보이는 관리자모드 버튼 */}
+          {toId && !isPostEditPage && (
+            <Link to={`/post/${toId}/edit`} className="mobile-admin-link">
+              <Button
+                label="관리자모드"
+                size="xs"
+                variant="outline"
+                className="mobile-admin-button"
+              />
+            </Link>
+          )}
+        </div>
         {/* 모바일에서만 보이는 구분선 */}
         <Divider
           width={9999}

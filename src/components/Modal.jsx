@@ -78,9 +78,8 @@ function Modal({ isOpen, onClose, message }) {
             style={{
               fontFamily: message.font || "Pretendard",
             }}
-          >
-            {message.content}
-          </p>
+            dangerouslySetInnerHTML={{ __html: message.content }}
+          />
         </div>
 
         {/* 푸터 영역 - 버튼만 센터 배치 */}

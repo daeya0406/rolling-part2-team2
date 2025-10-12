@@ -25,6 +25,15 @@
     justify-content: space-between;
     width: 100%;
 
+    .header-title-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-shrink: 1;
+      min-width: 0;
+    }
+
     h1 {
       @include typo(28, 700);
       color: var(--c-black);
@@ -36,7 +45,7 @@
       white-space: nowrap;
       flex-shrink: 1; /* flex 환경에서 줄어들 수 있도록 */
       min-width: 0; /* flex item이 줄어들 수 있도록 */
-      max-width: 60%; /* 기본적으로 60% 제한 */
+      max-width: 100%; /* 기본적으로 60% 제한 */
     }
 
     .header-right-section {
@@ -143,7 +152,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        max-width: 50%; /* 최대 50% 너비로 제한 */
+        max-width: 180px; /* 최대 50% 너비로 제한 */
       }
 
       .header-right-section {
@@ -169,7 +178,7 @@
     .header-content {
       h1 {
         /* 작은 화면에서 더 적극적인 말줄임표 */
-        max-width: 150px; /* 최대 너비 더 제한 */
+        max-width: 140px; /* 최대 너비 더 제한 */
       }
 
       .header-right-section {
@@ -212,6 +221,17 @@
             height: 32px;
           }
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .header-service {
+    .header-content {
+      h1 {
+        /* 작은 화면에서 더 적극적인 말줄임표 */
+        max-width: 105px; /* 최대 너비 더 제한 */
       }
     }
   }
@@ -456,6 +476,38 @@
 
     &:only-child {
       border-radius: 8px;
+    }
+  }
+}
+
+/* 모바일 관리자모드 버튼 스타일 */
+.mobile-admin-link {
+  text-decoration: none;
+
+  .mobile-admin-button {
+    display: none; /* 기본적으로 숨김 */
+    white-space: nowrap;
+  }
+}
+
+/* 480px 이하에서만 모바일 관리자모드 버튼 표시 */
+.mobile-admin-link {
+  display: none; /* 기본적으로 숨김 */
+}
+
+@media (max-width: 480px) {
+  .header-service {
+    .header-content {
+      .header-title-section {
+        .mobile-admin-link {
+          display: inline-flex; /* 480px 이하에서만 표시 */
+
+          .mobile-admin-button {
+            display: inline-flex;
+            padding: 3px 12px;
+          }
+        }
+      }
     }
   }
 }

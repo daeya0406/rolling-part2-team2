@@ -229,6 +229,8 @@ function RollingPaper() {
           <HeaderService
             rollingPaper={backgroundData}
             reactionEmojis={reactionEmojis?.results || []}
+            toId={id}
+            isPostEditPage={isPostEditPage}
             onEmojiClick={handleEmojiClick}
             onKakaoShare={handleKakaoShare}
             onUrlShare={handleUrlShare}
