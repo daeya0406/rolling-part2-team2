@@ -130,9 +130,8 @@ function MessageItem({
                 style={{
                   fontFamily: message.font || "Pretendard",
                 }}
-              >
-                {message.content}
-              </div>
+                dangerouslySetInnerHTML={{ __html: message.content }}
+              />
               <div className="message-item--footer">
                 <span className="message-item--date">
                   {formatDate(message.createdAt)}

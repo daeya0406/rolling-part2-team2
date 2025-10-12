@@ -10,7 +10,9 @@ export async function getRollingPapersbackgroundData(id) {
 }
 
 export async function getRollingPapers(id) {
-  const response = await fetch(`${API_BASE}/recipients/${id}/messages/`);
+  const response = await fetch(
+    `${API_BASE}/recipients/${id}/messages/?limit=999`
+  );
   if (!response.ok) {
     throw new Error("데이터를 불러오는데 실패했습니다");
   }
