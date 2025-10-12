@@ -177,13 +177,15 @@ export default function Post() {
                           onLoad={() =>
                             setLoadedImages((prev) => [...prev, url])
                           }
+                          className={isLoaded ? "fade-in-img" : "fade-out-img"}
                         />
                         {!isLoaded && (
                           <div className="image-loading-overlay">
-                            <Loading size="lg" text="이미지를 불러오는 중..." />
+                            <Loading size="lg" />
                           </div>
                         )}
-                        {active && (
+                        {/* isLoaded 추가해서, 로딩 끝났을 때 체크 */}
+                        {active && isLoaded && (
                           <span className="check">
                             <img src={checkIcon} alt="체크" />
                           </span>
