@@ -1,6 +1,6 @@
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./toast.scss";
+import "./Toast.scss";
 import successIcon from "@/assets/images/toast/success.svg";
 import closeIcon from "@/assets/images/toast/close.svg";
 import errorIcon from "@/assets/images/toast/error.svg";
