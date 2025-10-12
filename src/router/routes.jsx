@@ -4,7 +4,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 // 작업 페이지
 import Post from "../pages/Post";
 import RollingPaper from "../pages/RollingPaper";
-import SendMessage from "../pages/Post/SendMessage";
+import SendMessage from "../pages/SendMessage";
 import List from "../pages/List";
 import MainPage from "../pages/Main";
 

@@ -4,7 +4,7 @@ import { getBackgroundImages } from "@/apis/getBackgroundImages";
 import { postRecipient } from "@/apis/postRecipient";
 import "./style.scss";
 import checkIcon from "@/assets/images/icons/check.svg";
-import InputText from "./components/InputText";
+import InputText from "../../components/ui/InputText";
 import Loading from "@/components/ui/Loading";
 import Button from "@/components/ui/Button";
 
