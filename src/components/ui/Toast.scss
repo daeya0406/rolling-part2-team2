@@ -53,8 +53,9 @@
 
 @media (max-width: 1024px) {
   .Toastify__toast-container {
+    margin-bottom: 76px;
     .Toastify__toast {
-      margin-bottom: 76px;
+      margin-bottom: 10px;
     }
   }
 }
@@ -65,7 +66,7 @@
 
     .Toastify__toast {
       width: calc(100% - 48px); // 화면 크기에 맞게 조정
-      margin: 0 24px 76px;
+      margin: 0 24px 10px;
     }
   }
 }
@@ -74,7 +75,7 @@
   .Toastify__toast-container {
     .Toastify__toast {
       width: calc(100% - 40px); // 화면 크기에 맞게 조정
-      margin: 0 24px 96px;
+      margin: 0 20px 5px;
     }
   }
 }

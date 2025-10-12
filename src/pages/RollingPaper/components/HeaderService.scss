@@ -306,14 +306,34 @@
             .reactions--count {
               @include typo(14, 400);
             }
+
+            .emoji-dropdown-toggle {
+              padding: 3px;
+
+              .arrow-icon {
+                width: 20px;
+                height: 20px;
+              }
+            }
           }
 
-          .emoji-dropdown-toggle {
-            padding: 3px;
+          /* 드롭다운 스타일 */
+          .emoji-dropdown-container {
+            width: 100%;
+            padding: 16px 26px 16px 16px !important; /* 모바일에서 패딩 줄이기 */
+            left: 10px !important; /* 왼쪽으로 약간 이동 */
 
-            .arrow-icon {
-              width: 20px;
-              height: 20px;
+            .reactions--badge {
+              padding: 4px 9px;
+            }
+
+            .reactions--emoji {
+              width: 16px;
+              height: 16px;
+            }
+
+            .reactions--count {
+              @include typo(14, 400);
             }
           }
         }
@@ -330,8 +350,13 @@
           }
 
           .emoji-picker-dropdown {
-            position: absolute;
-            right: -60px;
+            position: fixed; /* absolute에서 fixed로 변경 */
+            top: 105px; /* 모바일 헤더 바로 아래 (모바일 헤더 높이: 105px) */
+            left: 50%; /* 화면 중앙 */
+            transform: translateX(-50%); /* 정확한 중앙 정렬 */
+            width: 300px; /* 고정 너비 */
+            z-index: 1001; /* 헤더보다 위에 */
+            overflow: inherit;
           }
         }
 
@@ -349,25 +374,6 @@
           }
         }
       }
-    }
-  }
-
-  /* 드롭다운 스타일 */
-  .emoji-dropdown-container {
-    padding: 16px !important; /* 모바일에서 패딩 줄이기 */
-    left: 10px !important; /* 왼쪽으로 약간 이동 */
-
-    .reactions--badge {
-      padding: 4px 9px;
-    }
-
-    .reactions--emoji {
-      width: 16px;
-      height: 16px;
-    }
-
-    .reactions--count {
-      @include typo(14, 400);
     }
   }
 }
