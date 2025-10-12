@@ -9,7 +9,7 @@
 - **프레임워크**: React 19 + Vite + ES6
 - **라우팅**: React Router 7
 - **스타일링**: SCSS
-- **라이브러리**: React-Quill, Swiper, react-toastify
+- **라이브러리**: React-Quill, Swiper
 
 ---
 
@@ -22,9 +22,9 @@
 
 ## Team (파트2-2팀)
 
-- **김정대**: 팀장, 프로젝트 세팅, 배포, 페이지 작업(롤링페이지 만들기[/post], 메세지보내기[/post/:id/message]), 로딩 컴포넌트
-- **윤시현**: 리팩토링, 프로젝트 정리 및 개선, 헤더, 팝업, 페이지 작업(롤링페이지 메세지 보기[/post/:id], 롤링페이지 삭제하기[/post/:id/edit]), 커스텀 훅(무한스크롤,Async)
-- **이나래**: 프로토타입 정리 및 공유, 공통 컴포넌트 작업, 접근성, QA, 페이지 작업(메인페이지[/main], 롤링페이지 리스트[/list]), Toast 구현
+- **김정대**: 팀장, 프로젝트 세팅, 배포, 페이지 작업(롤링페이지 만들기, 메세지보내기), 로딩 컴포넌트
+- **윤시현**: 리팩토링, 프로젝트 정리 및 개선, 헤더, 팝업, 페이지 작업(롤링페이지), 무한스크롤 구현
+- **이나래**: 프로토타입 정리 및 공유, 공통 컴포넌트 작업, 접근성, QA, 페이지 작업(메인페이지, 롤링페이지 리스트), Toast 구현
 
 ---
 
@@ -107,5 +107,6 @@ npm run test
 - [Notion 기획 문서](https://www.notion.so/27e1306908cc806a9c62c0c330d8a2de?v=27e1306908cc800fa717000c2b1b76d9)
 - [Figma 디자인](https://www.figma.com/design/cbZ9PNKSFg4mS7Lf1roZlp/-AAA-%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC?node-id=0-1&t=9ro8YozglWSgW6hw-1)
 - [GitHub Projects](https://github.com/daeya0406/rolling-part2-team2)
+- [배포 URL](https://rolling-19-2.vercel.app/)
 
 ---
