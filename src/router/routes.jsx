@@ -1,9 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout";
 
-// 테스트용 페이지
-import Components1 from "../pages/Test/TestComponents1";
-//import Components2 from "../pages/Test/TestComponents2";
+// 공통 활용 페이지
 import TypoPage from "../pages/Test/TestTypo";
 import ColorPage from "../pages/Test/TestColor";
 
@@ -25,8 +23,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <MainPage /> }, // /
 
-      // test 페이지
-      { path: "components1", element: <Components1 /> }, // /test1
+      // 공통 활용 페이지
       { path: "typo", element: <TypoPage /> }, // /typo
       { path: "color", element: <ColorPage /> }, // /color
 
