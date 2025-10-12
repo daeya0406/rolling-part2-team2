@@ -123,6 +123,7 @@
         order: 2;
         display: flex;
         justify-content: center;
+        align-items: center;
         width: 100%;
 
         img {
@@ -152,6 +153,19 @@
       display: none !important;
     }
 
+    /* 반응형 모션 추가 */
+    > .content__section:first-child {
+      .content__image {
+        height: 100px;
+        overflow: hidden;
+        img {
+          height: 100%;
+          width: auto;
+          animation: slow-pan 6s ease-in-out infinite;
+        }
+      }
+    }
+
     .content__section,
     .content__section--reverse {
       border-radius: 16px;
@@ -165,7 +179,7 @@
       }
 
       .content__image img {
-        width: 110%;
+        width: 100%;
         text-align: center;
       }
     }
@@ -174,18 +188,17 @@
   /* 작은 모바일 (480px 이하) */
   @media (max-width: 480px) {
     .content__section {
+      min-height: 352px;
       padding: 30px;
 
       .content__image {
-        width: 140%;
+        width: 100%;
         text-align: center;
 
         img {
-          width: 130%;
-          max-width: none;
+          width: 100%;
           height: auto;
           object-fit: cover;
-          transform: translateX(-15%);
         }
       }
 
@@ -217,7 +230,15 @@
           object-fit: contain;
           transform: none;
           margin: 0 auto;
-          transition: all 0.3s ease;
+        }
+      }
+    }
+
+    /* 반응형 모션 추가 */
+    > .content__section:first-child {
+      .content__image {
+        img {
+          animation: slow-pan 10s ease-in-out infinite;
         }
       }
     }
@@ -227,6 +248,19 @@
   @media (max-width: 360px) {
     .visible__br {
       display: inline !important;
+    }
+  }
+
+  /* 반응형 슬라이딩 모션 */
+  @keyframes slow-pan {
+    0% {
+      transform: translateX(calc(50vw - 360px - 60px + 40px));
+    }
+    50% {
+      transform: translateX(calc(360px - 50vw + 60px - 40px));
+    }
+    100% {
+      transform: translateX(calc(50vw - 360px - 60px + 40px));
     }
   }
 }
