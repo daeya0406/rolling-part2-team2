@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams, Link } from "react-router-dom";
+import { useLocation, useParams, useNavigate, Link } from "react-router-dom";
 import "./style.scss";
 import HeaderService from "@/pages/RollingPaper/components/HeaderService";
 import MessageList from "@/pages/RollingPaper/components/MessageList";
 import Loading from "@/components/ui/Loading";
 import Warn from "@/components/ui/Warn";
 import Button from "@/components/ui/Button";
+import { showToast } from "@/components/ui/Toast";
 import {
   getRollingPapersbackgroundData,
   getRollingPapers,
@@ -19,12 +20,13 @@ function RollingPaper() {
   const { id: rawId } = useParams(); // URL에서 ID 추출
   // ID 값에서 불필요한 슬래시 제거
   const id = rawId?.replace(/\/+$/, ""); // 끝에 있는 슬래시들 제거
+  const navigate = useNavigate(); // 페이지 이동용
 
   const [rollingPapers, setRollingPapers] = useState(null); // API 데이터 상태
   const [backgroundData, setBackgroundData] = useState(null); // 배경 데이터 상태
   const [reactionEmojis, setReactionEmojis] = useState(null); // 반응 이모지 데이터
   const [isInitialized, setIsInitialized] = useState(false); // 초기 데이터 로딩 완료 여부
-  const [isLoading, error, getRollingPapersAsync] = useAsync(getRollingPapers);
+  const [_isLoading, error, getRollingPapersAsync] = useAsync(getRollingPapers);
   const [_isBackgroundLoading, backgroundError, getBackgroundAsync] = useAsync(
     getRollingPapersbackgroundData
   );
@@ -101,7 +103,7 @@ function RollingPaper() {
     const result = await postReactionAsync(id, requestData);
 
     if (result) {
-      alert("추가되었습니다!");
+      showToast("추가되었습니다!", { type: "success" });
       // 반응 데이터를 다시 가져와서 업데이트
       const updatedReactions = await getReactionAsync(id);
       if (updatedReactions) {
@@ -129,10 +131,10 @@ function RollingPaper() {
   };
 
   const handleUrlShare = () => {
-    console.log("URL 공유");
+    // console.log("URL 공유");
     const currentUrl = "https://github.com/daeya0406/rolling-part2-team2";
     navigator.clipboard.writeText(currentUrl).then(() => {
-      alert("URL이 클립보드에 복사되었습니다!");
+      showToast("URL이 복사 되었습니다!", { type: "success" });
     });
   };
 
@@ -148,10 +150,20 @@ function RollingPaper() {
 
     const result = await deleteRollingPaper(id);
     if (result) {
-      // 삭제 성공 후 /list로 이동
-      window.location.href = "/list";
+      // 삭제 성공 정보를 sessionStorage에 저장
+      sessionStorage.setItem(
+        "toastInfo",
+        JSON.stringify({
+          show: true,
+          message: "롤링페이퍼가 삭제되었습니다.",
+          type: "success",
+        })
+      );
+
+      // 즉시 페이지 이동
+      navigate("/list");
     } else {
-      //alert("롤링페이퍼 삭제 중 오류가 발생했습니다.");
+      showToast("롤링페이퍼 삭제 중 오류가 발생했습니다.", { type: "error" });
     }
   };
 

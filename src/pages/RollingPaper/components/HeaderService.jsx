@@ -106,7 +106,7 @@ function HeaderService({
 
   // 이벤트 핸들러
   const handleEmojiClick = (emojiData) => {
-    console.log("선택된 이모지:", emojiData.emoji);
+    // console.log("선택된 이모지:", emojiData.emoji);
     if (onEmojiClick) {
       onEmojiClick(emojiData);
     }

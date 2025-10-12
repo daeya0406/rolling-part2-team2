@@ -311,7 +311,7 @@
 
           .emoji-picker-dropdown {
             position: absolute;
-            right: -50px;
+            right: -60px;
           }
         }
 
@@ -349,10 +349,6 @@
     .reactions--count {
       @include typo(14, 400);
     }
-  }
-
-  .emoji-picker-dropdown {
-    padding: 16px; /* 이모지 피커도 패딩 줄이기 */
   }
 }
 

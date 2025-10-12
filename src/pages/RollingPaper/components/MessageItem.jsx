@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@/components/ui/Avatar";
 import Badge from "@/components/ui/Badge";
 import Modal from "@/components/Modal";
@@ -34,6 +35,7 @@ function MessageItem({
 }) {
   // 모달 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate(); // React Router 네비게이션
 
   // 추가 메세지 클릭 핸들러
   const handleAddMessageClick = () => {
@@ -43,7 +45,7 @@ function MessageItem({
       // toId에서 불필요한 슬래시 제거
       const cleanId = String(toId).replace(/\/+$/, "");
       // /post/{id}/message로 이동
-      window.location.href = `/post/${cleanId}/message`;
+      navigate(`/post/${cleanId}/message`);
     }
   };
 
