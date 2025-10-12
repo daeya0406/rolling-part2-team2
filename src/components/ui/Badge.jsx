@@ -1,4 +1,4 @@
-import "./Badge.scss";
+import "./badge.scss";
 
 /**
  * 관계 표시 배지 컴포넌트

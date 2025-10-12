@@ -1,6 +1,6 @@
 import warnIcon from "@/assets/images/icons/warn.svg";
 import warnBlackIcon from "@/assets/images/icons/warn-black.svg";
-import "./Warn.scss";
+import "./warn.scss";
 
 /**
  * 경고 메시지 컴포넌트

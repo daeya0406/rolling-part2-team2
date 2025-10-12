@@ -1,4 +1,4 @@
-import "./Loading.scss";
+import "./loading.scss";
 
 export default function Loading({ size = "md", text }) {
   return (

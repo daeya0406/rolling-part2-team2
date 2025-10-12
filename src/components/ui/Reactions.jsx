@@ -1,4 +1,4 @@
-import "./Reactions.scss";
+import "./reactions.scss";
 
 /**
  * 반응(이모지) 컴포넌트

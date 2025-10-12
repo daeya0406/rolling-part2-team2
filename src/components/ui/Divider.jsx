@@ -1,5 +1,5 @@
 import React from "react";
-import "./Divider.scss";
+import "./divider.scss";
 
 /**
  * Divider 컴포넌트
