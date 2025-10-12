@@ -254,13 +254,13 @@
   /* 반응형 슬라이딩 모션 */
   @keyframes slow-pan {
     0% {
-      transform: translateX(calc(50vw - 360px - 60px + 40px));
+      transform: translateX(calc(50dvw - 360px - 60px + 40px));
     }
     50% {
-      transform: translateX(calc(360px - 50vw + 60px - 40px));
+      transform: translateX(calc(360px - 50dvw + 60px - 40px));
     }
     100% {
-      transform: translateX(calc(50vw - 360px - 60px + 40px));
+      transform: translateX(calc(50dvw - 360px - 60px + 40px));
     }
   }
 }
