@@ -255,6 +255,7 @@ function RollingPaper() {
               toId={id}
               isPostEditPage={isPostEditPage}
               isInitialized={isInitialized}
+              backgroundData={backgroundData}
               onDeleteRollingPaper={handleDeleteRollingPaper}
               onRefreshMessages={async () => {
                 // 메시지 목록과 헤더 정보를 동시에 새로고침

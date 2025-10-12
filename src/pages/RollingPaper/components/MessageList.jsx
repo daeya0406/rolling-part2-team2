@@ -20,6 +20,7 @@ import { showToast } from "@/components/ui/Toast";
  * @param {boolean} [props.isPostEditPage=false] - 페이지가 롤링페이퍼 수정 페이지인지 여부
  * @param {Function} [props.onRefreshMessages] - 메시지 목록 새로고침 콜백 함수
  * @param {Function} [props.onDeleteRollingPaper] - 롤링페이퍼 삭제 콜백 함수
+ * @param {Object} [props.backgroundData] - 배경 데이터 (Warn 컴포넌트 variant 결정용)
  */
 
 function MessageList({
@@ -32,6 +33,7 @@ function MessageList({
   isPostEditPage = false,
   onRefreshMessages,
   onDeleteRollingPaper,
+  backgroundData,
 }) {
   // useAsync 훅을 사용하여 삭제 기능 관리
   const [isDeleting, deleteError, deleteMessageAsync] = useAsync(deleteMessage);
@@ -84,7 +86,13 @@ function MessageList({
         isInitialized && (
           <div className="message-list--empty">
             <Warn
-              variant="small"
+              variant={
+                backgroundData &&
+                !backgroundData.backgroundImageURL &&
+                backgroundData.backgroundColor
+                  ? "black"
+                  : "small"
+              }
               title="메시지가 존재하지 않습니다."
               description="아직 작성된 메시지가 없어요."
             />
