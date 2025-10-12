@@ -9,7 +9,7 @@
 - **프레임워크**: React 19 + Vite + ES6
 - **라우팅**: React Router 7
 - **스타일링**: SCSS
-- **라이브러리**: React-Quill, Swiper
+- **라이브러리**: React-Quill, Swiper, react-toastify
 
 ---
 
