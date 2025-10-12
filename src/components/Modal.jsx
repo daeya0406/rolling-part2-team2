@@ -4,7 +4,7 @@ import Avatar from "./ui/Avatar";
 import Badge from "./ui/Badge";
 import Button from "./ui/Button";
 import { formatDate } from "../utils/utils";
-import "./modal.scss";
+import "./Modal.scss";
 
 /**
  * 메시지 상세 모달 컴포넌트

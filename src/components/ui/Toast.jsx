@@ -1,11 +1,11 @@
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./toast.scss";
-import successIcon from "../../assets/images/toast/success.svg";
-import closeIcon from "../../assets/images/toast/close.svg";
-import errorIcon from "../../assets/images/toast/error.svg";
-import warningIcon from "../../assets/images/toast/warning.svg";
-import infoIcon from "../../assets/images/toast/info.svg";
+import successIcon from "@/assets/images/toast/success.svg";
+import closeIcon from "@/assets/images/toast/close.svg";
+import errorIcon from "@/assets/images/toast/error.svg";
+import warningIcon from "@/assets/images/toast/warning.svg";
+import infoIcon from "@/assets/images/toast/info.svg";
 
 // showToast 함수를 호출할 때 메시지와 type 매개변수를 전달함
 // eslint-disable-next-line

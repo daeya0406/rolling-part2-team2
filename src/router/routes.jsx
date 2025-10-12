@@ -1,10 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout";
 
-// 공통 활용 페이지
-import TypoPage from "../pages/Test/TestTypo";
-import ColorPage from "../pages/Test/TestColor";
-
 // 작업 페이지
 import Post from "../pages/Post";
 import RollingPaper from "../pages/RollingPaper";
@@ -22,10 +18,6 @@ export const router = createBrowserRouter([
     errorElement: <NotFoundPage />, // 에러 발생 시 NotFound 페이지 표시
     children: [
       { index: true, element: <MainPage /> }, // /
-
-      // 공통 활용 페이지
-      { path: "typo", element: <TypoPage /> }, // /typo
-      { path: "color", element: <ColorPage /> }, // /color
 
       // 페이지 작업
       { path: "post", element: <Post /> }, // /Post

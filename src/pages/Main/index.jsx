@@ -1,8 +1,8 @@
 //import React from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/ui/Button";
-import point01Image from "../../assets/images/main/main-point01.png";
-import point02Image from "../../assets/images/main/main-point02.png";
+import Button from "@/components/ui/Button";
+import point01Image from "@/assets/images/main/main-point01.png";
+import point02Image from "@/assets/images/main/main-point02.png";
 import "./style.scss";
 
 function MainPage() {
