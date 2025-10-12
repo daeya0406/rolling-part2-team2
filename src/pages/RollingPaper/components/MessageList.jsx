@@ -3,9 +3,11 @@ import Loading from "@/components/ui/Loading";
 import Warn from "@/components/ui/Warn";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import "./MessageList.scss";
-import Button from "../../../components/ui/Button";
+import Button from "@/components/ui/Button";
 import { deleteMessage } from "@/apis/api";
 import useAsync from "@/hooks/useAsync";
+import { showToast } from "@/components/ui/Toast";
+
 /**
  * 메시지 목록 컴포넌트 - 무한 스크롤과 새 메시지 추가 기능을 포함한 그리드 레이아웃
  * @param {Object} props
@@ -32,8 +34,7 @@ function MessageList({
   onDeleteRollingPaper,
 }) {
   // useAsync 훅을 사용하여 삭제 기능 관리
-  const [isDeleting, _deleteError, deleteMessageAsync] =
-    useAsync(deleteMessage);
+  const [isDeleting, deleteError, deleteMessageAsync] = useAsync(deleteMessage);
 
   // 커스텀 훅으로 무한 스크롤 로직 분리
   const {
@@ -61,14 +62,17 @@ function MessageList({
 
     if (result && onRefreshMessages) {
       // 삭제 성공 시 메시지 목록 새로고침
+      showToast("메시지를 삭제하였습니다.", { type: "success" });
       onRefreshMessages();
     }
 
     // 오류가 있다면 사용자에게 알림
-    // if (deleteError) {
-    //   console.error("메시지 삭제 중 오류 발생:", deleteError);
-    //   alert("메시지 삭제 중 오류가 발생했습니다.");
-    // }
+    if (deleteError) {
+      showToast("메시지 삭제 중 오류 발생했습니다. 다시시도해 주세요", {
+        type: "error",
+      });
+      console.error("메시지 삭제 중 오류 발생:", deleteError);
+    }
   };
 
   return (

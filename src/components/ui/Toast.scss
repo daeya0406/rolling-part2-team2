@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: space-between;
   width: 524px;
-  padding: 20px 30px;
+  padding: 10px 30px;
   border-radius: 8px;
   background: var(--c-gray800);
   color: var(--c-white);
@@ -49,4 +49,32 @@
 .Toastify__progress-bar {
   height: 4px;
   border-radius: 0 0 8px 8px;
+}
+
+@media (max-width: 1024px) {
+  .Toastify__toast-container {
+    .Toastify__toast {
+      margin-bottom: 76px;
+    }
+  }
+}
+
+@media (max-width: 585px) {
+  .Toastify__toast-container {
+    width: 100%;
+
+    .Toastify__toast {
+      width: calc(100% - 48px); // 화면 크기에 맞게 조정
+      margin: 0 24px 76px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .Toastify__toast-container {
+    .Toastify__toast {
+      width: calc(100% - 40px); // 화면 크기에 맞게 조정
+      margin: 0 24px 96px;
+    }
+  }
 }

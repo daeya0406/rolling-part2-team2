@@ -37,7 +37,15 @@ export const showToast = (message, { type = "success", ...options } = {}) => {
 
     // 커스텀 아이콘 & 닫기 버튼
     icon: <img src={iconSrc} alt={type} className="toast__icon" />,
-    closeButton: <img src={closeIcon} alt="닫기" className="toast__close" />,
+    closeButton: ({ closeToast }) => (
+      <img
+        src={closeIcon}
+        alt="닫기"
+        className="toast__close"
+        onClick={closeToast}
+        style={{ cursor: "pointer" }}
+      />
+    ),
   };
 
   // 타입별 토스트 실행 (switch문 사용) 해서 타입별로 실행함
