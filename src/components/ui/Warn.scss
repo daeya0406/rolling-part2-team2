@@ -30,4 +30,11 @@
       line-height: 1.61;
     }
   }
+
+  // black variant 스타일
+  &--black {
+    .warn--title {
+      color: var(--c-black);
+    }
+  }
 }
