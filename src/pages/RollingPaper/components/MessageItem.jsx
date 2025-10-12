@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Avatar from "@/components/ui/Avatar";
 import Badge from "@/components/ui/Badge";
 import Modal from "@/components/Modal";
+import ConfirmModal from "@/components/ui/ConfirmModal";
 import { formatDate } from "@/utils/utils";
 import "./MessageItem.scss";
 import AddIcon from "@/assets/images/icons/add.svg";
@@ -35,6 +36,7 @@ function MessageItem({
 }) {
   // 모달 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const navigate = useNavigate(); // React Router 네비게이션
 
   // 추가 메세지 클릭 핸들러
@@ -59,6 +61,25 @@ function MessageItem({
   // 모달 닫기 핸들러
   const handleModalClose = () => {
     setIsModalOpen(false);
+  };
+
+  // 삭제 모달 열기 핸들러
+  const handleDeleteClick = (e) => {
+    e.stopPropagation(); // 클릭 이벤트 전파 방지
+    setIsDeleteModalOpen(true);
+  };
+
+  // 삭제 확인 핸들러
+  const handleDeleteConfirm = () => {
+    if (onDeleteMessage && message?.id) {
+      onDeleteMessage(message.id);
+    }
+    setIsDeleteModalOpen(false);
+  };
+
+  // 삭제 모달 닫기 핸들러
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
   };
 
   // 편집 페이지에서는 추가 메시지 카드를 숨김
@@ -114,12 +135,7 @@ function MessageItem({
                       size="xs"
                       variant="outline"
                       className="message-item--sender-delete-button"
-                      onClick={(e) => {
-                        e.stopPropagation(); /* 클릭 이벤트 전파 방지 */
-                        if (onDeleteMessage && message?.id) {
-                          onDeleteMessage(message.id);
-                        }
-                      }}
+                      onClick={handleDeleteClick}
                     />
                   )}
                 </div>
@@ -148,6 +164,19 @@ function MessageItem({
           isOpen={isModalOpen}
           onClose={handleModalClose}
           message={message}
+        />
+      )}
+
+      {/* 삭제 확인 모달 - 편집 페이지에서만 렌더링 */}
+      {!isAddMessage && isPostEditPage && (
+        <ConfirmModal
+          isOpen={isDeleteModalOpen}
+          onClose={handleDeleteModalClose}
+          onConfirm={handleDeleteConfirm}
+          title="메시지를 삭제하시겠습니까?"
+          message="삭제된 메시지는 복구할 수 없습니다."
+          confirmText="삭제"
+          cancelText="취소"
         />
       )}
     </>
