@@ -8,7 +8,7 @@ import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 
 import "./style.scss";
-import InputText from "../components/InputText";
+import InputText from "../../components/ui/InputText";
 import SelectRelation from "./components/SelectRelation";
 import Avatar from "@/components/ui/Avatar";
 import DefaultAvatar from "@/assets/images/common/default-avatar.svg";

@@ -6,10 +6,10 @@
 
 ## 기술 스택
 
-- **프레임워크**: React + Vite + ES6
-- **라우팅**: React Router
-- **상태 관리**:
+- **프레임워크**: React 19 + Vite + ES6
+- **라우팅**: React Router 7
 - **스타일링**: SCSS
+- **라이브러리**: React-Quill, Swiper
 
 ---
 
@@ -22,9 +22,9 @@
 
 ## Team (파트2-2팀)
 
-- **김정대**: 팀장, FE 아키텍처, 상태관리, 배포/CI
-- **윤시현**: 기능 구현, 메시지 CRUD, 저장
-- **이나래**: UI 리드, 컴포넌트, 반응형, 접근성, 테스트
+- **김정대**: 팀장, 프로젝트 세팅, 배포, 페이지 작업(롤링페이지 만들기, 메세지보내기), 로딩 컴포넌트
+- **윤시현**: 리팩토링, 프로젝트 정리 및 개선, 헤더, 팝업, 페이지 작업(롤링페이지), 무한스크롤 구현
+- **이나래**: 프로토타입 정리 및 공유, 공통 컴포넌트 작업, 접근성, QA, 페이지 작업(메인페이지, 롤링페이지 리스트), Toast 구현
 
 ---
 
@@ -32,43 +32,16 @@
 
 ```
 src/
-  components/          # 재사용 UI (버튼, 모달 등)
-    header.jsx
-    header.scss
-    ui/
-      Button.jsx       # 컴포넌트는 파스칼 표기법 (맨앞에 대문자, 띄우지말고 대문자 예시 UserCard.jsx)
-      button.scss      # scss는 케밥 케이스 표기법( 예시 type-name.scss )
-      Modal.jsx
-      modal.scss
-      Badge.jsx
-      badge.scss
-  scss/
-    _color.scss
-    _variables.scss
-    _mixins.scss
-    reset.scss
-  layouts/             # 공통 레이아웃
-    DefaultLayout.jsx
-    default-layout.scss
-    MainLayout.jsx
-    main-layout.scss
-  pages/               # 라우트 엔트리
-    Main/
-      index.jsx
-      style.scss
-      components/      # 필요하면 추가
-    List/
-      index.jsx
-      style.scss
-  router/
-    routes.jsx
-  modules/             # 개발하면서 필요한 디렉토리 추가
-  features/
-  hooks/
-  lib/
-  mocks/
-  main.jsx
-  App.jsx
+  src/
+  apis/            # API
+  assets/          # 이미지, 아이콘, 폰트, 스타일 등 정적 자원
+  components/      # 재사용 UI 컴포넌트 (버튼, 모달 등)
+  hooks/           # 커스텀 훅
+  layouts/         # 공통 레이아웃
+  pages/           # 라우트 단위 페이지
+  router/          # 라우터 설정
+  utils/           # 유틸리티 함수
+  main.jsx         # 앱 진입점
 ```
 
 ---
@@ -121,38 +94,18 @@ npm run test
 
 - 09/25 - 09/26 : 요구사항 체크, 환경셋업, 컴포넌트 분리 및 가이드
 - 09/27 - 09/28 : 각 페이지 구조 세팅
-- 09/29 - 10/04 : 핵심 기능 개발 및 1차 피드백
-- 10/05 - 10/08 : 핵심 기능 개발
-- 10/09 - 10/10 : 리팩토링 및 2차 피드백
-- 10/11 - 10/12 : 배포 & QA
-- 10/13 : QA & 발표 준비
-- 10/14 : 제출 자료 준비 & 발표 준비
+- 09/29 - 10/06 : 핵심 기능 개발 및 1차 피드백
+- 10/07 - 10/11 : 핵심 기능 개발 및 2차 피드백 및 리팩토링
+- 10/12 - 10/13 : 리팩토링 및 배포
+- 10/13 - 10/14 : 배포 & QA & 제출 자료 준비 & 발표 준비
 - 10/15 : 발표
 
 ---
 
 ## 🔗 링크
 
-- Notion 기획 문서()
+- [Notion 기획 문서](https://www.notion.so/27e1306908cc806a9c62c0c330d8a2de?v=27e1306908cc800fa717000c2b1b76d9)
 - [Figma 디자인](https://www.figma.com/design/cbZ9PNKSFg4mS7Lf1roZlp/-AAA-%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC?node-id=0-1&t=9ro8YozglWSgW6hw-1)
-- GitHub Projects()
-- 배포 URL ()
+- [GitHub Projects](https://github.com/daeya0406/rolling-part2-team2)
 
 ---
-
-## 🛠️ 포매팅 환경 설정
-
-이 프로젝트에는 VS Code 팀 공용 설정이 포함되어 있습니다.
-
-- `.gitignore` : 설정 변경
-
-```
-    .vscode/*
-    !.vscode/settings.json
-    !.vscode/extensions.json
-```
-
-- `.vscode/settings.json`: 저장 시 ESLint / Prettier 자동 적용
-- `.vscode/extensions.json`: 권장 확장 자동 안내 (ESLint, Prettier, Tailwind CSS 등)
-
-👉 별도 세팅할 필요 없이 VS Code에서 프로젝트를 열면 동일한 개발 환경이 적용됩니다.
