@@ -1,4 +1,4 @@
-import "./inputText.scss";
+import "./input-text.scss";
 
 export default function InputText({
   id,

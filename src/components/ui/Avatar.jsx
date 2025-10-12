@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Avatar.scss";
+import "./avatar.scss";
 
 /**
  * 아바타 컴포넌트

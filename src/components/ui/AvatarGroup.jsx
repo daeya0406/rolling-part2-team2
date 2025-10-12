@@ -1,5 +1,5 @@
 import Avatar from "./Avatar";
-import "./AvatarGroup.scss";
+import "./avatar-group.scss";
 
 /**
  * 아바타 그룹 컴포넌트
