@@ -372,6 +372,10 @@
             width: 20px;
             max-width: 20px;
           }
+
+          .share-dropdown {
+            right: -15px;
+          }
         }
       }
     }
@@ -392,6 +396,10 @@
         .share-divider {
           margin-left: 2px !important;
           margin-right: 2px !important;
+        }
+
+        .share-dropdown {
+          right: -20px !important;
         }
       }
     }
@@ -496,7 +504,7 @@
   }
 }
 
-/* 480px 이하에서만 모바일 관리자모드 버튼 표시 */
+/*480px 이하에서만 모바일 관리자모드 버튼 표시 */
 .mobile-admin-link {
   display: none; /* 기본적으로 숨김 */
 }

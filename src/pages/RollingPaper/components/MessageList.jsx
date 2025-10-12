@@ -1,6 +1,8 @@
+import { useState } from "react";
 import MessageItem from "./MessageItem";
 import Loading from "@/components/ui/Loading";
 import Warn from "@/components/ui/Warn";
+import ConfirmModal from "@/components/ui/ConfirmModal";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import "./MessageList.scss";
 import Button from "@/components/ui/Button";
@@ -35,6 +37,9 @@ function MessageList({
   onDeleteRollingPaper,
   backgroundData,
 }) {
+  // 삭제 확인 모달 상태
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   // useAsync 훅을 사용하여 삭제 기능 관리
   const [isDeleting, deleteError, deleteMessageAsync] = useAsync(deleteMessage);
 
@@ -52,13 +57,6 @@ function MessageList({
   });
 
   const handleDeleteMessage = async (messageId) => {
-    // 삭제 확인 대화상자
-    const isConfirmed = window.confirm("메시지를 정말 삭제하시겠습니까?");
-
-    if (!isConfirmed) {
-      return; // 사용자가 취소한 경우
-    }
-
     // useAsync를 사용하여 삭제 처리
     const result = await deleteMessageAsync(messageId);
 
@@ -75,6 +73,24 @@ function MessageList({
       });
       console.error("메시지 삭제 중 오류 발생:", deleteError);
     }
+  };
+
+  // 롤링페이퍼 삭제 확인 모달 열기 핸들러
+  const handleDeleteRollingPaperClick = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  // 롤링페이퍼 삭제 확인 핸들러
+  const handleDeleteRollingPaperConfirm = () => {
+    if (onDeleteRollingPaper && toId) {
+      onDeleteRollingPaper(toId);
+    }
+    setIsDeleteModalOpen(false);
+  };
+
+  // 삭제 모달 닫기 핸들러
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
   };
 
   return (
@@ -100,12 +116,7 @@ function MessageList({
               size="sm"
               label="메세지 삭제하기"
               className="message-list--empty-delete-button"
-              onClick={() => {
-                // 롤링페이퍼 전체 삭제
-                if (onDeleteRollingPaper && toId) {
-                  onDeleteRollingPaper(toId);
-                }
-              }}
+              onClick={handleDeleteRollingPaperClick}
             />
           </div>
         )}
@@ -118,12 +129,7 @@ function MessageList({
             size="sm"
             label="삭제하기"
             className="message-list--delete-button"
-            onClick={() => {
-              // 롤링페이퍼 전체 삭제
-              if (onDeleteRollingPaper && toId) {
-                onDeleteRollingPaper(toId);
-              }
-            }}
+            onClick={handleDeleteRollingPaperClick}
           />
         )}
         {/* 새 메시지 추가 */}
@@ -173,6 +179,17 @@ function MessageList({
           <p>메시지 삭제 중...</p>
         </div>
       )}
+
+      {/* 롤링페이퍼 삭제 확인 모달 */}
+      <ConfirmModal
+        isOpen={isDeleteModalOpen}
+        onClose={handleDeleteModalClose}
+        onConfirm={handleDeleteRollingPaperConfirm}
+        title="롤링페이퍼를 삭제하시겠습니까?"
+        message="삭제된 롤링페이퍼와 모든 메시지는 복구할 수 없습니다."
+        confirmText="삭제"
+        cancelText="취소"
+      />
     </div>
   );
 }

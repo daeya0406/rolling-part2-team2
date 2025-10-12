@@ -140,14 +140,6 @@ function RollingPaper() {
 
   const handleDeleteRollingPaper = async (id) => {
     // 삭제 확인 대화상자
-    const isConfirmed = window.confirm(
-      "롤링페이퍼를 정말 삭제하시겠습니까?\n삭제된 롤링페이퍼는 복구할 수 없습니다."
-    );
-
-    if (!isConfirmed) {
-      return; // 사용자가 취소한 경우
-    }
-
     const result = await deleteRollingPaper(id);
     if (result) {
       // 삭제 성공 정보를 sessionStorage에 저장
