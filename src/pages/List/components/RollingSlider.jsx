@@ -146,7 +146,6 @@ function RollingSlider({ cards = [] }) {
         observer={true}
         observeParents={true}
         slidesPerGroupSkip={0}
-        //pagination={{ clickable: true }}
         pagination={false}
         spaceBetween={12}
         speed={700}
@@ -160,21 +159,7 @@ function RollingSlider({ cards = [] }) {
         slidesPerView={"auto"} // 기본값으로 auto 설정
         // 반응형 구간별 한 화면 카드 수 설정
         breakpoints={{
-          // 360: { slidesPerView: "auto", spaceBetween: 8 },
-          // 390: { slidesPerView: "auto", spaceBetween: 8 },
-          // 414: { slidesPerView: "auto", spaceBetween: 10 },
           480: { slidesPerView: "auto", spaceBetween: 20 },
-          // 540: { slidesPerView: "auto", spaceBetween: 12 },
-          // 640: { slidesPerView: "auto", spaceBetween: 14 },
-          // 768: { slidesPerView: "auto", spaceBetween: 16 },
-          // 820: { slidesPerView: "auto", spaceBetween: 16 },
-          // 900: { slidesPerView: "auto", spaceBetween: 18 },
-          // 960: { slidesPerView: "auto", spaceBetween: 18 },
-          // 1024: { slidesPerView: "auto", spaceBetween: 20 },
-          // 1100: { slidesPerView: "auto", spaceBetween: 20 },
-          // 1180: { slidesPerView: "auto", spaceBetween: 20 },
-          // 1260: { slidesPerView: "auto", spaceBetween: 20 },
-          // 1248: { slidesPerView: "auto", spaceBetween: 20 },
         }}
       >
         {/* 카드 리스트 렌더링 */}

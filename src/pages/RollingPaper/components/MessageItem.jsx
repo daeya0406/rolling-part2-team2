@@ -6,7 +6,7 @@ import Modal from "@/components/Modal";
 import { formatDate } from "@/utils/utils";
 import "./MessageItem.scss";
 import AddIcon from "@/assets/images/icons/add.svg";
-import Button from "../../../components/ui/Button";
+import Button from "@/components/ui/Button";
 
 /**
  * 메시지 카드 컴포넌트 - 일반 메시지 표시 또는 새 메시지 추가 카드

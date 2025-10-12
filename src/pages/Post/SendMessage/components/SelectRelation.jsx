@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import "./select-relation.scss";
+import "./SelectRelation.scss";
 import arrowDown from "@/assets/images/icons/arrow-down.svg";
 
 export default function SelectRelation({
