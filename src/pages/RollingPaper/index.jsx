@@ -132,7 +132,7 @@ function RollingPaper() {
 
   const handleUrlShare = () => {
     // console.log("URL 공유");
-    const currentUrl = "https://github.com/daeya0406/rolling-part2-team2";
+    const currentUrl = "https://rolling-19-2.vercel.app/";
     navigator.clipboard.writeText(currentUrl).then(() => {
       showToast("URL이 복사 되었습니다!", { type: "success" });
     });
