@@ -55,14 +55,15 @@
   opacity: 0.1;
   cursor: not-allowed;
   pointer-events: none;
+  transition: opacity 0.3s;
 }
 
 /* 버튼 위치 : clamp()로 반응형 거리 지정 */
 .custom-prev {
-  left: clamp(-20px, -2vw, -56px);
+  left: clamp(-24px, -2vw, -56px);
 }
 .custom-next {
-  right: clamp(-20px, -2vw, -56px);
+  right: clamp(-24px, -2vw, -56px);
 }
 
 /* PC 및 태블릿 반응형 (버튼 위치를 프레임 안쪽으로 끌어옴) */
@@ -75,28 +76,12 @@
   }
 }
 
-@media (max-width: 1248px) {
-  .rolling-slider {
-    padding: 0 24px; /* 좌우 패딩 추가 */
-  }
-}
-
 @media (max-width: 1024px) {
   .custom-prev {
     display: none;
   }
   .custom-next {
     display: none;
-  }
-
-  /* 첫 번째 슬라이드일 때만 왼쪽 padding 적용 - 컨테이너에 직접 적용 */
-  .rolling-slider--at-beginning {
-    padding-left: 24px !important;
-  }
-
-  /* 마지막 슬라이드일 때만 오른쪽 padding 적용 - 컨테이너에 직접 적용 */
-  .rolling-slider--at-end {
-    padding-right: 24px !important;
   }
 
   /* 첫 번째 슬라이드가 아닐 때는 padding 제거 */
