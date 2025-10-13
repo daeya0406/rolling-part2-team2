@@ -1,12 +1,9 @@
-/* 모달 배경 레이어 */
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  // width: 100vw;
-  // height: 100vh;
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
@@ -17,7 +14,6 @@
   overflow: hidden;
 }
 
-/* 모달 컨텐츠 */
 .modal-content {
   position: relative;
   width: 100%;
@@ -43,7 +39,6 @@
   z-index: 1;
 }
 
-/* 모달 헤더 */
 .modal-header {
   padding-bottom: 20px;
   border-bottom: 1px solid var(--c-gray200);
@@ -71,7 +66,6 @@
   }
 }
 
-/* 모달 바디 */
 .modal-body {
   flex: 1;
   padding-top: 16px;
@@ -89,13 +83,11 @@
   }
 }
 
-/* 모달 푸터 */
 .modal-footer {
   padding-top: 24px;
   display: flex;
   align-items: center;
-  justify-content: center; /* 버튼 센터 배치 */
-
+  justify-content: center;
   .modal-footer-button {
     width: 120px;
     padding: 0;

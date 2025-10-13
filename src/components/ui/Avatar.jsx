@@ -32,7 +32,6 @@ function Avatar({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // selected prop이 명시적으로 전달되었으면 그것을 사용하고, 없으면 내부 상태 사용
   const isSelected = selected !== undefined ? selected : internalSelected;
 
   const handleClick = () => {
@@ -40,18 +39,16 @@ function Avatar({
     if (selected === undefined && onClick) {
       setInternalSelected((prev) => !prev);
     }
-    // 외부 onClick 콜백 호출
+
     if (onClick) {
       onClick();
     }
   };
 
-  // 이미지 로드 핸들러
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
 
-  // 이미지 에러 핸들러
   const handleImageError = () => {
     setImageError(true);
   };

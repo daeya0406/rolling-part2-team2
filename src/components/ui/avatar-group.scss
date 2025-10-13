@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
 
-  // 크기별 간격 설정
   &--small {
     .avatar-group--avatar:not(:first-child),
     .avatar-group--count {
@@ -24,7 +23,6 @@
     }
   }
 
-  // 아바타 요소들
   &--avatar,
   &--count {
     position: relative;
@@ -45,6 +43,6 @@
 
   // 카운트 표시는 마지막에 위치
   &--count {
-    z-index: 2; // 다른 아바타들보다 조금 앞에
+    z-index: 2;
   }
 }

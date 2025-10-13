@@ -47,20 +47,18 @@
   &--count {
     background: var(--c-white);
     color: var(--c-gray600);
-    border: 1px solid var(--c-gray200); // 기본 border 색상
+    border: 1px solid var(--c-gray200);
     box-sizing: border-box;
-    width: auto; // 자동 너비
-    min-width: 28px; // 최소 너비는 small 크기와 동일
+    width: auto;
+    min-width: 28px;
     padding: 0 6px;
     border-radius: 50px;
-    user-select: none; // 텍스트 선택 방지
 
-    // 리스트용 카운트 아바타 (흰색 border)
     &--list {
       border: 1px solid var(--c-white);
     }
 
-    // 크기별 최소 너비와 패딩 조정
+    // 크기별 최소 너비와 패딩
     &.avatar--small {
       min-width: 28px;
       height: 28px;
@@ -103,18 +101,6 @@
       transform: scale(1.05);
     }
   }
-
-  // 선택된 아바타
-  // &--selected {
-  //   .avatar--image {
-  //     border: 1px solid  var(--c-purple600);
-  //   }
-
-  //   // 카운트 표시용 아바타가 선택된 경우
-  //   &.avatar--count {
-  //     border: 1px solid  var(--c-purple600);
-  //   }
-  // }
 
   // 스켈레톤 로딩 효과
   &--skeleton {

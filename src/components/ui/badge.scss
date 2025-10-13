@@ -12,25 +12,21 @@
   overflow: hidden;
   user-select: none;
 
-  // 동료
   &--동료 {
     color: var(--c-purple600);
     background: var(--c-purple100);
   }
 
-  // 친구
   &--친구 {
     color: var(--c-blue500);
     background: var(--c-blue100);
   }
 
-  // 가족
   &--가족 {
     color: var(--c-green500);
     background: var(--c-green100);
   }
 
-  // 지인
   &--지인 {
     color: var(--c-beige500);
     background: var(--c-beige100);

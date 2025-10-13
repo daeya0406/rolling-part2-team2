@@ -16,6 +16,7 @@ import "./confirm-modal.scss";
  * @param {string} [props.confirmVariant="primary"] - 확인 버튼 변형
  * @param {string} [props.cancelVariant="secondary"] - 취소 버튼 변형
  */
+
 function ConfirmModal({
   isOpen,
   onClose,
