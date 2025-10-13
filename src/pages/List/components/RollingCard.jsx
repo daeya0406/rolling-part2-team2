@@ -3,6 +3,18 @@ import AvatarGroup from "@/components/ui/AvatarGroup";
 import Reactions from "@/components/ui/Reactions";
 import "./RollingCard.scss";
 
+/**
+ * RollingCard 컴포넌트
+ * @param {Object} props
+ * @param {number|string} props.id - 카드의 고유 ID
+ * @param {string} props.title - 카드 제목 (예: "To. jerry")
+ * @param {Array} props.avatars - 작성자 아바타 이미지 배열
+ * @param {number} props.count - 작성자 수
+ * @param {Array} props.reactions - 리액션(이모지) 데이터 배열
+ * @param {string} [props.bgUrl] - 배경 이미지 URL (선택)
+ * @param {'beige'|'blue'|'green'|'purple'} [props.bgColor] - 배경 색상 키워드
+ */
+
 // 패턴 이미지들을 static import
 import patternBeige from "@/assets/images/pattern/pattern-beige.svg";
 import patternBlue from "@/assets/images/pattern/pattern-blue.svg";
@@ -24,10 +36,8 @@ const getPatternImage = (color) => {
 
 /* 하나의 카드 UI를 보여주고 제목, 아바타 목록, 작성 인원 수, 리액션 영역으로 구성됨 */
 function RollingCard({ id, title, avatars, count, reactions, bgUrl, bgColor }) {
-  // js 코드 안에서 페이지 이동함
   const navigate = useNavigate();
 
-  // 카드 클릭 시 post/id 로 이동됨
   const handleClick = () => {
     if (!id) return;
     navigate(`/post/${id}`);
@@ -88,18 +98,22 @@ function RollingCard({ id, title, avatars, count, reactions, bgUrl, bgColor }) {
           showCount={true}
           isListMode={true}
         />
+      </div>
 
+      {/* 섬네일을 제외한 고정 영역 */}
+      <div className="rolling-card__bottom">
         <p className="rolling-card__info">
           <span className="rolling-card__count">{count}명</span>이 작성했어요.
         </p>
-      </div>
 
-      {/* 카드 구분 선 */}
-      <div className="rolling-card__line"></div>
+        <div className="rolling-card__line"></div>
 
-      {/* reaction 영역 */}
-      <div className="rolling-card__footer">
-        <Reactions className="rolling-card__reactions" reactions={reactions} />
+        <div className="rolling-card__footer">
+          <Reactions
+            className="rolling-card__reactions"
+            reactions={reactions}
+          />
+        </div>
       </div>
     </div>
   );
