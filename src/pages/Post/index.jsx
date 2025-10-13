@@ -7,6 +7,7 @@ import checkIcon from "@/assets/images/icons/check.svg";
 import InputText from "../../components/ui/InputText";
 import Loading from "@/components/ui/Loading";
 import Button from "@/components/ui/Button";
+import { showToast } from "@/components/ui/Toast";
 
 const COLORS = ["beige", "purple", "blue", "green"];
 
@@ -89,9 +90,10 @@ export default function Post() {
     try {
       const result = await postRecipient("19-2", payload);
       navigate(`/post/${result.id}`);
+      showToast("롤링페이퍼 생성 완료!", { type: "success" });
     } catch (err) {
-      console.error(err);
-      alert(err.message);
+      console.error("post 에러:", err);
+      showToast("롤링페이퍼 생성 실패", { type: "error" });
     }
   };
 
