@@ -20,10 +20,6 @@ function RollingSlider({ cards = [] }) {
   const prevBtnRef = useRef(null); // 커스텀 왼쪽 버튼
   const nextBtnRef = useRef(null); // 커스텀 오른쪽 버튼
 
-  // 첫 번째와 마지막 슬라이드 상태 추적
-  const [isAtBeginning, setIsAtBeginning] = useState(true);
-  const [isAtEnd, setIsAtEnd] = useState(false);
-
   // 더 정확한 상태 업데이트 함수
   const updateSliderState = (swiper) => {
     if (!swiper) return;
@@ -41,9 +37,6 @@ function RollingSlider({ cards = [] }) {
       // 현재 번역된 거리가 전체 너비에서 뷰포트 너비를 뺀 값과 거의 같으면 마지막
       end = currentTranslate >= wrapperWidth - swiperWidth - 10; // 10px 여유값
     }
-
-    setIsAtBeginning(beginning);
-    setIsAtEnd(end);
   };
 
   // PC 기준 한 화면에 4개까지 보이므로, 카드가 4개 초과일 때만 버튼 표시
@@ -79,11 +72,7 @@ function RollingSlider({ cards = [] }) {
   }, []);
 
   return (
-    <div
-      className={`rolling-slider ${
-        isAtBeginning ? "rolling-slider--at-beginning" : ""
-      } ${isAtEnd ? "rolling-slider--at-end" : ""}`}
-    >
+    <div className="rolling-slider">
       {/* Swiper : 카드들을 슬라이드 형태로 보여주는 영역 */}
       <Swiper
         // onSwiper 콜백 : swiper 초기화 직 후 한번 실행됨
@@ -121,7 +110,7 @@ function RollingSlider({ cards = [] }) {
 
             // 상태 재확인
             updateSliderState(swiper);
-          }, 200);
+          }, 0);
         }}
         //사용 모듈 설정
         modules={[Navigation, Pagination]}
@@ -137,10 +126,13 @@ function RollingSlider({ cards = [] }) {
           // 터치 종료 후 상태 재확인
           updateSliderState(swiper);
         }}
+        // 시작 끝 여백 적용
+        slidesOffsetBefore={20}
+        slidesOffsetAfter={20}
         // 기본 동작 및 옵션 설정
         navigation={{
-          prevEl: null,
-          nextEl: null,
+          prevEl: prevBtnRef.current,
+          nextEl: nextBtnRef.current,
         }}
         centerInsufficientSlides={false}
         observer={true}
@@ -156,10 +148,23 @@ function RollingSlider({ cards = [] }) {
         resistanceRatio={0}
         edgeSwipeDetection={true}
         allowTouchMove={true}
-        slidesPerView={"auto"} // 기본값으로 auto 설정
+        slidesPerView="auto" // 기본값으로 auto 설정
         // 반응형 구간별 한 화면 카드 수 설정
         breakpoints={{
-          480: { slidesPerView: "auto", spaceBetween: 20 },
+          479: {
+            slidesOffsetBefore: 20,
+            slidesOffsetAfter: 20,
+          },
+          480: {
+            slidesOffsetBefore: 24,
+            slidesOffsetAfter: 24,
+            slidesPerView: "auto",
+            spaceBetween: 20,
+          },
+          1249: {
+            slidesOffsetBefore: 0,
+            slidesOffsetAfter: 0,
+          },
         }}
       >
         {/* 카드 리스트 렌더링 */}

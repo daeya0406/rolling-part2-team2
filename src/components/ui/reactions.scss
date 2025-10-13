@@ -5,21 +5,20 @@
   &--badges {
     display: flex;
     align-items: center;
-    gap: 8px; // 각 컴포넌트 사이 가로 간격
+    gap: 8px;
   }
 
   &--badge {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px; // 이모지와 숫자 사이 간격
+    gap: 4px;
     padding: 8px 12px;
     background: rgba(0, 0, 0, 0.54);
     border-radius: 32px;
     color: var(--c-white);
     cursor: pointer;
     transition: all 0.2s ease;
-    user-select: none; // 텍스트 선택 방지
 
     &:hover {
       background: rgba(0, 0, 0, 0.7);

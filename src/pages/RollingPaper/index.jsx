@@ -18,13 +18,12 @@ import useAsync from "@/hooks/useAsync";
 
 function RollingPaper() {
   const { id: rawId } = useParams(); // URL에서 ID 추출
-  // ID 값에서 불필요한 슬래시 제거
-  const id = rawId?.replace(/\/+$/, ""); // 끝에 있는 슬래시들 제거
-  const navigate = useNavigate(); // 페이지 이동용
+  const id = rawId?.replace(/\/+$/, "");
+  const navigate = useNavigate();
 
-  const [rollingPapers, setRollingPapers] = useState(null); // API 데이터 상태
-  const [backgroundData, setBackgroundData] = useState(null); // 배경 데이터 상태
-  const [reactionEmojis, setReactionEmojis] = useState(null); // 반응 이모지 데이터
+  const [rollingPapers, setRollingPapers] = useState(null);
+  const [backgroundData, setBackgroundData] = useState(null);
+  const [reactionEmojis, setReactionEmojis] = useState(null);
   const [isInitialized, setIsInitialized] = useState(false); // 초기 데이터 로딩 완료 여부
   const [_isLoading, error, getRollingPapersAsync] = useAsync(getRollingPapers);
   const [_isBackgroundLoading, backgroundError, getBackgroundAsync] = useAsync(
@@ -54,7 +53,7 @@ function RollingPaper() {
     script.async = true;
     document.body.appendChild(script);
 
-    // API 호출 - useAsync를 사용하므로 try-catch 불필요
+    // API 호출 - useAsync를 사용
     if (id) {
       // 모든 API를 병렬로 호출하고 완료를 기다림
       Promise.allSettled([
@@ -89,11 +88,7 @@ function RollingPaper() {
     };
   }, [id, getRollingPapersAsync, getBackgroundAsync, getReactionAsync]);
 
-  // HeaderService 컴포넌트용 이벤트 핸들러
   const handleEmojiClick = async (emojiData) => {
-    //console.log("선택된 이모지:", emojiData.emoji);
-
-    // JSON 데이터 생성
     const requestData = {
       emoji: emojiData.emoji,
       type: "increase",
@@ -102,64 +97,65 @@ function RollingPaper() {
     // useAsync를 사용하여 이모지 반응을 서버에 전송
     const result = await postReactionAsync(id, requestData);
 
-    if (result) {
-      showToast("추가되었습니다!", { type: "success" });
-      // 반응 데이터를 다시 가져와서 업데이트
-      const updatedReactions = await getReactionAsync(id);
-      if (updatedReactions) {
-        setReactionEmojis(updatedReactions);
-      }
+    if (!result) return;
 
-      // 롤링페이퍼 정보도 다시 가져와서 topReactions 업데이트
-      const updatedRollingPaper = await getBackgroundAsync(id);
-      if (updatedRollingPaper) {
-        setBackgroundData(updatedRollingPaper);
-      }
+    showToast("추가되었습니다!", { type: "success" });
+
+    // 반응 데이터를 다시 가져와서 업데이트
+    const updatedReactions = await getReactionAsync(id);
+    if (updatedReactions) {
+      setReactionEmojis(updatedReactions);
+    }
+
+    // 롤링페이퍼 정보도 다시 가져와서 topReactions 업데이트
+    const updatedRollingPaper = await getBackgroundAsync(id);
+    if (updatedRollingPaper) {
+      setBackgroundData(updatedRollingPaper);
     }
   };
 
   const handleKakaoShare = () => {
-    if (window.Kakao) {
-      const kakao = window.Kakao;
-      if (!kakao.isInitialized()) {
-        kakao.init(kakaoAppKey);
-      }
-      window.Kakao.Share.sendCustom({
-        templateId: 124671,
-      });
+    if (!window.Kakao) return;
+
+    const kakao = window.Kakao;
+    if (!kakao.isInitialized()) {
+      kakao.init(kakaoAppKey);
     }
+    window.Kakao.Share.sendCustom({
+      templateId: 124671,
+    });
   };
 
   const handleUrlShare = () => {
-    // console.log("URL 공유");
-    const currentUrl = "https://rolling-19-2.vercel.app/";
+    const currentUrl = `https://rolling-19-2.vercel.app/post/${id}`;
     navigator.clipboard.writeText(currentUrl).then(() => {
       showToast("URL이 복사 되었습니다!", { type: "success" });
     });
   };
 
   const handleDeleteRollingPaper = async (id) => {
-    // 삭제 확인 대화상자
     const result = await deleteRollingPaper(id);
-    if (result) {
-      // 삭제 성공 정보를 sessionStorage에 저장
-      sessionStorage.setItem(
-        "toastInfo",
-        JSON.stringify({
-          show: true,
-          message: "롤링페이퍼가 삭제되었습니다.",
-          type: "success",
-        })
-      );
 
-      // 즉시 페이지 이동
-      navigate("/list");
-    } else {
+    if (!result) {
       showToast("롤링페이퍼 삭제 중 오류가 발생했습니다.", { type: "error" });
+      return;
     }
+
+    // 삭제 성공 정보를 sessionStorage에 저장
+    sessionStorage.setItem(
+      "toastInfo",
+      JSON.stringify({
+        show: true,
+        message: "롤링페이퍼가 삭제되었습니다.",
+        type: "success",
+      })
+    );
+
+    // 즉시 페이지 이동
+    navigate("/list");
   };
 
-  // 모든 에러를 하나로 통합
+  // 모든 에러를 통합
   const hasError =
     error || backgroundError || reactionError || postReactionError;
 

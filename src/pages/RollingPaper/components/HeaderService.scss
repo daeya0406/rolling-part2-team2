@@ -1,4 +1,3 @@
-/* Header Service 컴포넌트 스타일 */
 .header-service {
   position: fixed;
   top: 64px;
@@ -12,7 +11,7 @@
   z-index: 1000;
   user-select: none;
 
-  /* 모바일 구분선 기본적으로 숨김 */
+  /* 모바일 구분선 - 숨김 */
   .mobile-divider {
     display: none;
   }
@@ -43,9 +42,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      flex-shrink: 1; /* flex 환경에서 줄어들 수 있도록 */
-      min-width: 0; /* flex item이 줄어들 수 있도록 */
-      max-width: 100%; /* 기본적으로 60% 제한 */
+      flex-shrink: 1;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .header-right-section {
@@ -55,7 +54,6 @@
       .avatar-content {
         display: flex;
         align-items: center;
-        // gap: 11px;
 
         p {
           @include typo(18, 400);
@@ -132,27 +130,26 @@
 /* 태블릿 (1024px 이하) */
 @media (max-width: 1024px) {
   .header-service {
-    height: 68px; /* 고정 높이 유지 */
+    height: 68px;
     min-height: 68px;
 
-    /* tablet-hide 클래스 숨기기 */
     .tablet-hide {
       display: none !important;
     }
 
     .header-content {
-      flex-direction: row; /* 한 줄로 유지 */
+      flex-direction: row;
       align-items: center;
       justify-content: space-between;
 
       h1 {
         @include typo(24, 700);
-        flex-shrink: 1; /* 제목이 줄어들 수 있도록 변경 */
-        min-width: 0; /* flex item이 줄어들 수 있도록 */
+        flex-shrink: 1;
+        min-width: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        max-width: 180px; /* 최대 50% 너비로 제한 */
+        max-width: 180px;
       }
 
       .header-right-section {
@@ -177,8 +174,7 @@
   .header-service {
     .header-content {
       h1 {
-        /* 작은 화면에서 더 적극적인 말줄임표 */
-        max-width: 140px; /* 최대 너비 더 제한 */
+        max-width: 140px;
       }
 
       .header-right-section {
@@ -230,8 +226,7 @@
   .header-service {
     .header-content {
       h1 {
-        /* 작은 화면에서 더 적극적인 말줄임표 */
-        max-width: 105px; /* 최대 너비 더 제한 */
+        max-width: 105px;
       }
     }
   }
@@ -240,9 +235,9 @@
 /* 모바일 (480px 이하) */
 @media (max-width: 480px) {
   .header-service {
-    top: 0; /* 화면 상단에 붙이기 */
+    top: 0;
     padding: 0 20px;
-    height: 105px; /* 52px + 1px + 52px */
+    height: 105px;
     min-height: 105px;
 
     /* 모바일 구분선 보이기 */
@@ -255,14 +250,13 @@
     }
 
     .header-content {
-      flex-direction: column; /* 세로 배치 */
-      align-items: stretch; /* 전체 너비 사용 */
-      gap: 0; /* 간격 제거 */
-      padding: 0; /* 패딩 제거 */
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0;
       height: 100%;
 
       h1 {
-        /* 첫 번째 영역: 52px 높이, 12px 패딩 */
         height: 52px;
         padding: 12px 0;
         margin: 0;
@@ -273,7 +267,6 @@
       }
 
       .header-right-section {
-        /* 두 번째 영역: 52px 높이 */
         height: 52px;
         width: 100%;
         display: flex;
@@ -320,8 +313,8 @@
           /* 드롭다운 스타일 */
           .emoji-dropdown-container {
             width: 100%;
-            padding: 16px 26px 16px 16px !important; /* 모바일에서 패딩 줄이기 */
-            left: 10px !important; /* 왼쪽으로 약간 이동 */
+            padding: 16px 26px 16px 16px !important;
+            left: 10px !important;
 
             .reactions--badge {
               padding: 4px 9px;
@@ -350,12 +343,12 @@
           }
 
           .emoji-picker-dropdown {
-            position: fixed; /* absolute에서 fixed로 변경 */
-            top: 105px; /* 모바일 헤더 바로 아래 (모바일 헤더 높이: 105px) */
-            left: 50%; /* 화면 중앙 */
-            transform: translateX(-50%); /* 정확한 중앙 정렬 */
-            width: 300px; /* 고정 너비 */
-            z-index: 1001; /* 헤더보다 위에 */
+            position: fixed;
+            top: 105px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            z-index: 1001;
             overflow: inherit;
           }
         }
@@ -428,7 +421,7 @@
   .dropdown-reactions .reactions--badges {
     display: grid;
     gap: 10px 8px;
-    max-height: none; /* 데스크톱: 제한 없음 */
+    max-height: none;
     overflow: visible;
 
     /* 기본적으로 4열 (8개 이모지용) */
@@ -499,14 +492,14 @@
   text-decoration: none;
 
   .mobile-admin-button {
-    display: none; /* 기본적으로 숨김 */
+    display: none;
     white-space: nowrap;
   }
 }
 
-/*480px 이하에서만 모바일 관리자모드 버튼 표시 */
+/*480px 이하에서 모바일 관리자모드 버튼 표시 */
 .mobile-admin-link {
-  display: none; /* 기본적으로 숨김 */
+  display: none;
 }
 
 @media (max-width: 480px) {
@@ -514,7 +507,7 @@
     .header-content {
       .header-title-section {
         .mobile-admin-link {
-          display: inline-flex; /* 480px 이하에서만 표시 */
+          display: inline-flex;
 
           .mobile-admin-button {
             display: inline-flex;
