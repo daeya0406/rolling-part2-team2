@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import TopButton from "../components/ui/TopButton";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../default-layout.scss";
+import "./default-layout.scss";
 
 export default function DefaultLayout() {
   return (
