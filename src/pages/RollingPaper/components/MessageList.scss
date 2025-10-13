@@ -1,8 +1,7 @@
-// MessageList 그리드 및 레이아웃 스타일
 .message-list {
   &--container {
     position: relative;
-    min-height: 400px; // 최소 높이 설정으로 레이아웃 안정성 확보
+    min-height: 400px;
   }
 
   &--initial-loading {
@@ -89,10 +88,9 @@
     padding: 40px 24px;
   }
 
-  // 좌우 여백 24px 고정
   @media (max-width: 1248px) {
     &--grid {
-      gap: 28px 24px; // PC와 동일한 gap 유지
+      gap: 28px 24px;
       padding: 0 24px;
       grid-template-columns: repeat(3, 1fr);
       max-width: inherit;
@@ -103,13 +101,12 @@
     }
   }
 
-  // Tablet 스타일 (768px 이하) - 2개 컬럼으로 변경
+  // Tablet 스타일 (768px 이하)
   @media (max-width: 1024px) {
     &--grid {
       width: 100%;
       gap: 16px;
       grid-template-columns: repeat(2, 1fr);
-      //padding-bottom: 80px; /* 하단 고정 버튼을 위한 여백 */
     }
 
     &--delete-button {
@@ -132,23 +129,21 @@
     }
   }
 
-  // Mobile 스타일 (480px 이하) - 1개 컬럼
+  // Mobile 스타일 (480px 이하)
   @media (max-width: 480px) {
     &--grid {
       width: 100%;
       padding: 0 20px;
       gap: 16px 0;
       grid-template-columns: 1fr;
-      //padding-bottom: 80px; /* 하단 고정 버튼을 위한 여백 */
     }
 
     &--delete-button {
-      /* 1024px 이하 스타일이 상속됨 */
-      width: calc(100% - 40px); /* 모바일에서는 좌우 20px 여백 */
+      width: calc(100% - 40px);
     }
 
     &--empty {
-      min-height: 684px; /* 헤더 높이 제외 */
+      min-height: 684px;
       padding: 20px 16px;
     }
   }

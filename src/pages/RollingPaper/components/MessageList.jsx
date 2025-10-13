@@ -11,7 +11,6 @@ import useAsync from "@/hooks/useAsync";
 import { showToast } from "@/components/ui/Toast";
 
 /**
- * 메시지 목록 컴포넌트 - 무한 스크롤과 새 메시지 추가 기능을 포함한 그리드 레이아웃
  * @param {Object} props
  * @param {Array<Object>} props.messages - 메시지 배열 (각 메시지는 id, sender, content 등 포함)
  * @param {string|number} props.toId - 롤링페이퍼 ID (새 메시지 추가 네비게이션용)
@@ -39,8 +38,7 @@ function MessageList({
 }) {
   // 삭제 확인 모달 상태
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  // useAsync 훅을 사용하여 삭제 기능 관리
+  // 메시지 삭제 API 훅
   const [isDeleting, deleteError, deleteMessageAsync] = useAsync(deleteMessage);
 
   // 커스텀 훅으로 무한 스크롤 로직 분리
@@ -57,16 +55,14 @@ function MessageList({
   });
 
   const handleDeleteMessage = async (messageId) => {
-    // useAsync를 사용하여 삭제 처리
     const result = await deleteMessageAsync(messageId);
 
     if (result && onRefreshMessages) {
-      // 삭제 성공 시 메시지 목록 새로고침
       showToast("메시지를 삭제하였습니다.", { type: "success" });
       onRefreshMessages();
     }
 
-    // 오류가 있다면 사용자에게 알림
+    // 오류 처리
     if (deleteError) {
       showToast("메시지 삭제 중 오류 발생했습니다. 다시시도해 주세요", {
         type: "error",

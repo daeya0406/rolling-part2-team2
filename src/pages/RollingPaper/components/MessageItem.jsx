@@ -10,7 +10,6 @@ import AddIcon from "@/assets/images/icons/add.svg";
 import Button from "@/components/ui/Button";
 
 /**
- * 메시지 카드 컴포넌트 - 일반 메시지 표시 또는 새 메시지 추가 카드
  * @param {Object} props
  * @param {Object} [props.message] - 메시지 데이터 (일반 메시지 모드일 때 필수)
  * @param {string} props.message.sender - 발신자 이름
@@ -42,7 +41,7 @@ function MessageItem({
   // 모달이 열릴 때 외부 스크롤 방지
   useEffect(() => {
     if (isModalOpen || isDeleteModalOpen) {
-      // 현재 스크롤 위치 저장
+      // 현재 스크롤 위치
       const scrollY = window.scrollY;
 
       // 스크롤 방지
@@ -69,9 +68,7 @@ function MessageItem({
     if (onAddClick) {
       onAddClick();
     } else if (toId) {
-      // toId에서 불필요한 슬래시 제거
       const cleanId = String(toId).replace(/\/+$/, "");
-      // /post/{id}/message로 이동
       navigate(`/post/${cleanId}/message`);
     }
   };
@@ -90,7 +87,7 @@ function MessageItem({
 
   // 삭제 모달 열기 핸들러
   const handleDeleteClick = (e) => {
-    e.stopPropagation(); // 클릭 이벤트 전파 방지
+    e.stopPropagation();
     setIsDeleteModalOpen(true);
   };
 

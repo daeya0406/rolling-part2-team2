@@ -6,7 +6,7 @@ import { API_BASE_URL, DEFAULT_HEADERS, ENDPOINTS } from "./config.js";
 
 /**
  * 배경 이미지 목록 조회
- * @returns {Promise<Object>} 배경 이미지 데이터
+ * @returns {Promise<Object>}
  */
 export async function getBackgroundImages() {
   try {
@@ -29,7 +29,7 @@ export async function getBackgroundImages() {
 
 /**
  * 프로필 이미지 목록 조회
- * @returns {Promise<Array>} 프로필 이미지 URL 배열
+ * @returns {Promise<Array>}
  */
 export async function getProfileImages() {
   const response = await fetch(`${API_BASE_URL}${ENDPOINTS.PROFILE_IMAGES}/`, {

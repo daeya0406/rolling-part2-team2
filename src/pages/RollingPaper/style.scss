@@ -1,4 +1,3 @@
-/* 전역 바운스 스크롤 방지 */
 html,
 body {
   overscroll-behavior: none !important;
@@ -7,12 +6,12 @@ body {
   touch-action: pan-y;
 }
 
-/* Page Wrapper - 다른 페이지에 영향 없이 이 페이지만 배경 적용 */
+/* 다른 페이지에 영향 없이 이 페이지만 배경 적용 */
 .RollingPaper-page-wrapper {
   position: relative;
-  overflow-y: auto; /* 세로 스크롤 허용 */
+  overflow-y: auto;
   box-sizing: border-box;
-  padding-top: 68px; /* 메인 헤더(64px) + 서비스 헤더(68px) */
+  padding-top: 68px;
 
   .loading .rendering-loaing {
     position: absolute;
@@ -37,21 +36,16 @@ body {
   z-index: 9999;
 }
 
-/* Message List Wrapper - 배경 이미지와 스크롤 처리 */
 .message-list-wrapper {
   position: relative;
-  /* CSS 변수를 사용한 조건부 배경 설정 */
   background-color: var(--bg-color, var(--c-beige200));
   background-image: var(--bg-image, none);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   padding-top: 113px;
-  //padding-bottom: 113px;
-  overflow: visible; /* 스크롤 제거 */
-  /* 화면을 꽉 채우도록 최소 높이 설정 */
+  overflow: visible;
   min-height: calc(100vh - 132px);
-  //padding: 113px 24px 0;
 
   /* 배경 이미지 위에 오버레이 추가 */
   &::before {
@@ -62,7 +56,7 @@ body {
     right: 0;
     bottom: 0;
     background: var(--bg-overlay, transparent);
-    pointer-events: none; /* 클릭 이벤트 통과 */
+    pointer-events: none;
     z-index: 1;
   }
 
@@ -84,19 +78,19 @@ body {
   }
 
   .top-button {
-    bottom: 90px; /* 하단 고정 버튼을 위한 여백 */
+    bottom: 90px;
   }
 }
 
 // Mobile 스타일 (480px 이하)
 @media (max-width: 480px) {
   .RollingPaper-page-wrapper {
-    padding-top: 0; /* 모바일에서 헤더 공간 제거 */
+    padding-top: 0;
   }
 
   .message-list-wrapper {
     padding-top: 84px;
-    min-height: calc(100vh - 64px); /* 모바일에서는 전체 화면 높이 */
+    min-height: calc(100vh - 64px);
   }
 }
 
@@ -107,11 +101,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 253px); /* 헤더 높이 제외 */
+  min-height: calc(100vh - 253px);
   padding: 40px 24px;
 
   @media (max-width: 480px) {
-    min-height: calc(100vh - 153px); /* 헤더 높이 제외 */
+    min-height: calc(100vh - 153px);
     padding: 20px 16px;
   }
 }
