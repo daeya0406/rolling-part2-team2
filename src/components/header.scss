@@ -11,7 +11,7 @@
 
   &.mobile-hide-header {
     @media (max-width: 480px) {
-      z-index: -0;
+      z-index: -1;
     }
   }
 
