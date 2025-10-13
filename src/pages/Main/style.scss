@@ -1,4 +1,4 @@
-/* 기본 레이아웃 */
+/* 기본 메인 레이아웃 설정 */
 .main {
   display: flex;
   flex-direction: column;
@@ -8,10 +8,10 @@
 
   /* 메인 공통 버튼 */
   .btn {
+    position: fixed;
+    margin: 0;
     width: 280px;
-    text-align: center;
-    display: block;
-    margin: 0 auto;
+    bottom: 20px;
   }
 
   /* 공통 섹션 영역 */
@@ -90,8 +90,6 @@
     }
   }
 
-  /* ---------- ✅ 반응형 ---------- */
-
   /* PC (1025px 이상) */
   @media (min-width: 1025px) {
     .content__section:first-of-type .content__wrapper {
@@ -102,12 +100,6 @@
 
   /* 태블릿 (1024px 이하) */
   @media (max-width: 1024px) {
-    .btn {
-      width: 100%;
-      padding: 14px 30px;
-      box-sizing: border-box;
-    }
-
     .visible__br {
       display: none !important;
     }
@@ -147,7 +139,13 @@
 
   /* 모바일 (768px 이하) */
   @media (max-width: 768px) {
-    padding: 50px 20px 30px;
+    .btn {
+      position: fixed;
+      left: 24px;
+      right: 24px;
+      bottom: 20px;
+      width: auto;
+    }
 
     .visible__br {
       display: none !important;
@@ -187,6 +185,12 @@
 
   /* 작은 모바일 (480px 이하) */
   @media (max-width: 480px) {
+    .btn {
+      position: fixed;
+      bottom: 20px;
+      width: auto;
+    }
+
     .content__section {
       min-height: 352px;
       padding: 30px;
