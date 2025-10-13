@@ -40,44 +40,47 @@ function MessageItem({
 
   // 모달이 열릴 때 외부 스크롤 방지
   useEffect(() => {
-    if (isModalOpen || isDeleteModalOpen) {
-      // 현재 스크롤 위치
-      const scrollY = window.scrollY;
+    if (!isModalOpen && !isDeleteModalOpen) return;
 
-      // 스크롤 방지
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
+    // 현재 스크롤 위치
+    const scrollY = window.scrollY;
 
-      return () => {
-        // 스크롤 복원
-        document.body.style.overflow = "";
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.width = "";
+    // 스크롤 방지
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
 
-        // 원래 스크롤 위치로 복원
-        window.scrollTo(0, scrollY);
-      };
-    }
+    return () => {
+      // 스크롤 복원
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+
+      // 원래 스크롤 위치로 복원
+      window.scrollTo(0, scrollY);
+    };
   }, [isModalOpen, isDeleteModalOpen]);
 
   // 추가 메세지 클릭 핸들러
   const handleAddMessageClick = () => {
     if (onAddClick) {
       onAddClick();
-    } else if (toId) {
-      const cleanId = String(toId).replace(/\/+$/, "");
-      navigate(`/post/${cleanId}/message`);
+      return;
     }
+
+    if (!toId) return;
+
+    const cleanId = String(toId).replace(/\/+$/, "");
+    navigate(`/post/${cleanId}/message`);
   };
 
   // 일반 메시지 클릭 핸들러 (모달 열기)
   const handleMessageClick = () => {
-    if (!isAddMessage && message) {
-      setIsModalOpen(true);
-    }
+    if (isAddMessage || !message) return;
+
+    setIsModalOpen(true);
   };
 
   // 모달 닫기 핸들러
@@ -93,9 +96,9 @@ function MessageItem({
 
   // 삭제 확인 핸들러
   const handleDeleteConfirm = () => {
-    if (onDeleteMessage && message?.id) {
-      onDeleteMessage(message.id);
-    }
+    if (!onDeleteMessage || !message?.id) return;
+
+    onDeleteMessage(message.id);
     setIsDeleteModalOpen(false);
   };
 

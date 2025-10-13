@@ -57,18 +57,19 @@ function MessageList({
   const handleDeleteMessage = async (messageId) => {
     const result = await deleteMessageAsync(messageId);
 
-    if (result && onRefreshMessages) {
-      showToast("메시지를 삭제하였습니다.", { type: "success" });
-      onRefreshMessages();
+    if (!result || !onRefreshMessages) {
+      // 오류 처리
+      if (deleteError) {
+        showToast("메시지 삭제 중 오류 발생했습니다. 다시시도해 주세요", {
+          type: "error",
+        });
+        console.error("메시지 삭제 중 오류 발생:", deleteError);
+      }
+      return;
     }
 
-    // 오류 처리
-    if (deleteError) {
-      showToast("메시지 삭제 중 오류 발생했습니다. 다시시도해 주세요", {
-        type: "error",
-      });
-      console.error("메시지 삭제 중 오류 발생:", deleteError);
-    }
+    showToast("메시지를 삭제하였습니다.", { type: "success" });
+    onRefreshMessages();
   };
 
   // 롤링페이퍼 삭제 확인 모달 열기 핸들러
@@ -78,9 +79,9 @@ function MessageList({
 
   // 롤링페이퍼 삭제 확인 핸들러
   const handleDeleteRollingPaperConfirm = () => {
-    if (onDeleteRollingPaper && toId) {
-      onDeleteRollingPaper(toId);
-    }
+    if (!onDeleteRollingPaper || !toId) return;
+
+    onDeleteRollingPaper(toId);
     setIsDeleteModalOpen(false);
   };
 

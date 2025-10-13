@@ -97,32 +97,33 @@ function RollingPaper() {
     // useAsync를 사용하여 이모지 반응을 서버에 전송
     const result = await postReactionAsync(id, requestData);
 
-    if (result) {
-      showToast("추가되었습니다!", { type: "success" });
-      // 반응 데이터를 다시 가져와서 업데이트
-      const updatedReactions = await getReactionAsync(id);
-      if (updatedReactions) {
-        setReactionEmojis(updatedReactions);
-      }
+    if (!result) return;
 
-      // 롤링페이퍼 정보도 다시 가져와서 topReactions 업데이트
-      const updatedRollingPaper = await getBackgroundAsync(id);
-      if (updatedRollingPaper) {
-        setBackgroundData(updatedRollingPaper);
-      }
+    showToast("추가되었습니다!", { type: "success" });
+
+    // 반응 데이터를 다시 가져와서 업데이트
+    const updatedReactions = await getReactionAsync(id);
+    if (updatedReactions) {
+      setReactionEmojis(updatedReactions);
+    }
+
+    // 롤링페이퍼 정보도 다시 가져와서 topReactions 업데이트
+    const updatedRollingPaper = await getBackgroundAsync(id);
+    if (updatedRollingPaper) {
+      setBackgroundData(updatedRollingPaper);
     }
   };
 
   const handleKakaoShare = () => {
-    if (window.Kakao) {
-      const kakao = window.Kakao;
-      if (!kakao.isInitialized()) {
-        kakao.init(kakaoAppKey);
-      }
-      window.Kakao.Share.sendCustom({
-        templateId: 124671,
-      });
+    if (!window.Kakao) return;
+
+    const kakao = window.Kakao;
+    if (!kakao.isInitialized()) {
+      kakao.init(kakaoAppKey);
     }
+    window.Kakao.Share.sendCustom({
+      templateId: 124671,
+    });
   };
 
   const handleUrlShare = () => {
@@ -134,22 +135,24 @@ function RollingPaper() {
 
   const handleDeleteRollingPaper = async (id) => {
     const result = await deleteRollingPaper(id);
-    if (result) {
-      // 삭제 성공 정보를 sessionStorage에 저장
-      sessionStorage.setItem(
-        "toastInfo",
-        JSON.stringify({
-          show: true,
-          message: "롤링페이퍼가 삭제되었습니다.",
-          type: "success",
-        })
-      );
 
-      // 즉시 페이지 이동
-      navigate("/list");
-    } else {
+    if (!result) {
       showToast("롤링페이퍼 삭제 중 오류가 발생했습니다.", { type: "error" });
+      return;
     }
+
+    // 삭제 성공 정보를 sessionStorage에 저장
+    sessionStorage.setItem(
+      "toastInfo",
+      JSON.stringify({
+        show: true,
+        message: "롤링페이퍼가 삭제되었습니다.",
+        type: "success",
+      })
+    );
+
+    // 즉시 페이지 이동
+    navigate("/list");
   };
 
   // 모든 에러를 통합
