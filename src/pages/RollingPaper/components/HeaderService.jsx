@@ -9,7 +9,6 @@ import ArrowDownIcon from "@/assets/images/icons/arrow-down.svg";
 import "./HeaderService.scss";
 
 /**
- * 롤링페이퍼 서비스 헤더 컴포넌트
  * @param {Object} props
  * @param {Object} props.rollingPaper - 롤링페이퍼 데이터
  * @param {string} props.rollingPaper.name - 롤링페이퍼 수신자 이름
@@ -24,6 +23,7 @@ import "./HeaderService.scss";
  * @param {boolean} [props.isPostEditPage] - 현재 관리자모드 페이지인지 여부
  * @param {string} [props.className] - 추가 CSS 클래스
  */
+
 function HeaderService({
   rollingPaper,
   reactionEmojis = [],
@@ -111,24 +111,23 @@ function HeaderService({
 
   // 이벤트 핸들러
   const handleEmojiClick = (emojiData) => {
-    // console.log("선택된 이모지:", emojiData.emoji);
-    if (onEmojiClick) {
-      onEmojiClick(emojiData);
-    }
+    if (!onEmojiClick) return;
+
+    onEmojiClick(emojiData);
     setIsEmojiPickerOpen(false);
   };
 
   const handleKakaoShare = () => {
-    if (onKakaoShare) {
-      onKakaoShare();
-    }
+    if (!onKakaoShare) return;
+
+    onKakaoShare();
     setIsShareDropdownOpen(false);
   };
 
   const handleUrlShare = () => {
-    if (onUrlShare) {
-      onUrlShare();
-    }
+    if (!onUrlShare) return;
+
+    onUrlShare();
     setIsShareDropdownOpen(false);
   };
 

@@ -1,4 +1,3 @@
-/* 모달 백드롭 */
 .confirm-modal-backdrop {
   position: fixed;
   top: 0;
@@ -14,7 +13,6 @@
   box-sizing: border-box;
 }
 
-/* 모달 콘텐츠 */
 .confirm-modal-content {
   background: var(--c-white);
   border-radius: 16px;
@@ -27,7 +25,6 @@
   animation: confirmModalFadeIn 0.2s ease-out;
 }
 
-/* 페이드인 애니메이션 */
 @keyframes confirmModalFadeIn {
   from {
     opacity: 0;
@@ -39,7 +36,6 @@
   }
 }
 
-/* 모달 헤더 */
 .confirm-modal-header {
   padding: 24px 24px 16px 24px;
   border-bottom: 1px solid var(--c-gray200);
@@ -52,7 +48,6 @@
   text-align: center;
 }
 
-/* 모달 바디 */
 .confirm-modal-body {
   padding: 24px;
   text-align: center;
@@ -65,7 +60,6 @@
   line-height: 1.5;
 }
 
-/* 모달 푸터 */
 .confirm-modal-footer {
   padding: 16px 24px 24px 24px;
   display: flex;
@@ -83,14 +77,13 @@
   border: 1px solid var(--c-gray300);
 }
 
-/* 480px 이하 반응형 */
 @media (max-width: 480px) {
   .confirm-modal-backdrop {
     padding: 20px;
   }
 
   .confirm-modal-content {
-    max-width: calc(100vw - 40px); /* 좌우 여백 20px */
+    max-width: calc(100vw - 40px);
     min-width: 250px;
   }
 
@@ -117,34 +110,6 @@
 
   .confirm-modal-cancel-btn,
   .confirm-modal-confirm-btn {
-    max-width: none; /* 모바일에서는 균등 분할 */
+    max-width: none;
   }
 }
-
-// /* 그 이상 화면에서 좌우 여백 24px 확보 */
-// @media (min-width: 481px) {
-//   .confirm-modal-backdrop {
-//     padding: 24px;
-//   }
-
-//   .confirm-modal-content {
-//     max-width: calc(100vw - 48px); /* 좌우 여백 24px */
-//   }
-// }
-
-// /* 매우 작은 화면 대응 */
-// @media (max-width: 320px) {
-//   .confirm-modal-content {
-//     min-width: 240px;
-//   }
-
-//   .confirm-modal-footer {
-//     flex-direction: column;
-//     gap: 8px;
-//   }
-
-//   .confirm-modal-cancel-btn,
-//   .confirm-modal-confirm-btn {
-//     max-width: none;
-//   }
-// }

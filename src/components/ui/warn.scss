@@ -19,7 +19,6 @@
     color: #878787;
   }
 
-  // big variant 스타일
   &--big {
     .warn--title {
       font-size: 24px;
@@ -31,7 +30,6 @@
     }
   }
 
-  // black variant 스타일
   &--black {
     .warn--title {
       color: var(--c-black);

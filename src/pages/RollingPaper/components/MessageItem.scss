@@ -14,7 +14,6 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
   }
 
-  // 추가 메시지
   &--add-message {
     background: var(--c-white);
     cursor: pointer;
@@ -60,7 +59,6 @@
     align-items: flex-start;
     gap: 14px;
     position: relative;
-    //margin-bottom: 16px;
   }
 
   &--avatar {
@@ -71,7 +69,7 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
-    min-width: 0; // flex item의 overflow 방지
+    min-width: 0;
   }
 
   &--sender-name,
@@ -113,9 +111,8 @@
   &--text {
     @include typo(18, 400);
     color: var(--c-gray600);
-    line-height: 1.5;
+    line-height: 1.2;
 
-    /* 3줄 텍스트 */
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -124,7 +121,6 @@
     word-break: break-word;
     text-overflow: ellipsis;
 
-    /* 높이 제한으로 확실한 3줄 보장 */
     max-height: calc(1.5em * 3);
     min-height: calc(1.5em * 1);
     margin-bottom: 16px;
@@ -144,7 +140,6 @@
     letter-spacing: -0.06px;
   }
 
-  // 좌우 여백 24px 고정
   @media (max-width: 1248px) {
     width: 100%;
     height: 280px;
@@ -154,17 +149,17 @@
     }
   }
 
-  // Tablet 스타일 (768px 이하) - 2개 컬럼
+  // Tablet 스타일 (768px 이하)
   @media (max-width: 1024px) {
-    width: 100%; /* 컨테이너에 맞게 조정 */
+    width: 100%;
     height: 284px;
 
     &--sender-name {
-      max-width: 200px; /* 태블릿 크기에 맞게 조정 */
+      max-width: 200px;
     }
 
     &--sender-name-edit {
-      max-width: 160px; /* 태블릿 크기에 맞게 조정 */
+      max-width: 160px;
     }
 
     &--text {
@@ -208,11 +203,11 @@
   }
 
   @media (max-width: 540px) {
-    width: 100%; /* 작은 화면에서도 유연한 크기 */
+    width: 100%;
 
     &--sender-name {
       @include typo(18, 400);
-      max-width: 100px; /* 더 작게 조정 */
+      max-width: 100px;
     }
 
     &--sender-name--highlight {
@@ -226,9 +221,9 @@
     }
   }
 
-  // Mobile 스타일 (480px 이하) - 1개 컬럼
+  // Mobile 스타일 (480px 이하)
   @media (max-width: 480px) {
-    width: 100%; /* 모바일에서 전체 너비 사용 */
+    width: 100%;
     height: 230px;
     padding: 20px;
 
@@ -238,11 +233,11 @@
     }
 
     &--sender-name {
-      max-width: 250px; /* 모바일에서 아주 작게 */
+      max-width: 250px;
     }
 
     &--sender-name-edit {
-      max-width: 200px; /* 모바일에서 아주 작게 */
+      max-width: 200px;
     }
 
     &--text {
@@ -254,6 +249,7 @@
       display: -webkit-box;
       -webkit-box-orient: vertical;
       text-overflow: ellipsis;
+      line-height: 1.5;
     }
 
     &--date {

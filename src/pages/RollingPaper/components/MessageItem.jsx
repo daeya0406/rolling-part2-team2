@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@/components/ui/Avatar";
 import Badge from "@/components/ui/Badge";
@@ -10,7 +10,6 @@ import AddIcon from "@/assets/images/icons/add.svg";
 import Button from "@/components/ui/Button";
 
 /**
- * 메시지 카드 컴포넌트 - 일반 메시지 표시 또는 새 메시지 추가 카드
  * @param {Object} props
  * @param {Object} [props.message] - 메시지 데이터 (일반 메시지 모드일 때 필수)
  * @param {string} props.message.sender - 발신자 이름
@@ -39,23 +38,49 @@ function MessageItem({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const navigate = useNavigate(); // React Router 네비게이션
 
+  // 모달이 열릴 때 외부 스크롤 방지
+  useEffect(() => {
+    if (!isModalOpen && !isDeleteModalOpen) return;
+
+    // 현재 스크롤 위치
+    const scrollY = window.scrollY;
+
+    // 스크롤 방지
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
+    return () => {
+      // 스크롤 복원
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+
+      // 원래 스크롤 위치로 복원
+      window.scrollTo(0, scrollY);
+    };
+  }, [isModalOpen, isDeleteModalOpen]);
+
   // 추가 메세지 클릭 핸들러
   const handleAddMessageClick = () => {
     if (onAddClick) {
       onAddClick();
-    } else if (toId) {
-      // toId에서 불필요한 슬래시 제거
-      const cleanId = String(toId).replace(/\/+$/, "");
-      // /post/{id}/message로 이동
-      navigate(`/post/${cleanId}/message`);
+      return;
     }
+
+    if (!toId) return;
+
+    const cleanId = String(toId).replace(/\/+$/, "");
+    navigate(`/post/${cleanId}/message`);
   };
 
   // 일반 메시지 클릭 핸들러 (모달 열기)
   const handleMessageClick = () => {
-    if (!isAddMessage && message) {
-      setIsModalOpen(true);
-    }
+    if (isAddMessage || !message) return;
+
+    setIsModalOpen(true);
   };
 
   // 모달 닫기 핸들러
@@ -65,15 +90,15 @@ function MessageItem({
 
   // 삭제 모달 열기 핸들러
   const handleDeleteClick = (e) => {
-    e.stopPropagation(); // 클릭 이벤트 전파 방지
+    e.stopPropagation();
     setIsDeleteModalOpen(true);
   };
 
   // 삭제 확인 핸들러
   const handleDeleteConfirm = () => {
-    if (onDeleteMessage && message?.id) {
-      onDeleteMessage(message.id);
-    }
+    if (!onDeleteMessage || !message?.id) return;
+
+    onDeleteMessage(message.id);
     setIsDeleteModalOpen(false);
   };
 

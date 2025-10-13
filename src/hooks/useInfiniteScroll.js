@@ -21,7 +21,6 @@ export function useInfiniteScroll({
   const [internalLoading, setInternalLoading] = useState(false);
   const observerRef = useRef(null);
 
-  // 계산 값들
   const hasMore = visibleCount < items.length;
   const totalLoading = isLoading || internalLoading;
 
