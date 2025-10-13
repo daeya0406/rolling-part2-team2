@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getRecipients } from "@/apis/getRecipients";
+import { getRecipients } from "@/apis";
 import RollingSlider from "@/pages/List/components/RollingSlider";
 import Button from "@/components/ui/Button";
 import { showToast } from "@/components/ui/Toast";
@@ -30,7 +30,7 @@ function List() {
       }
     }
 
-    getRecipients(2)
+    getRecipients(999, 0) // limit=999, offset=0으로 모든 수신자 조회
       .then((cards) => {
         // 인기순은 작성자 카운트 순으로 정렬함
         const popular = [...cards].sort((a, b) => b.count - a.count);

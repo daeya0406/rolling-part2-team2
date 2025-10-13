@@ -10,12 +10,12 @@ import {
 } from "./config.js";
 
 /**
- * 수신자 목록을 조회합니다
- * @param {number} limit - 조회할 개수 (기본값: 20)
+ * 수신자 목록 조회
+ * @param {number} limit - 조회할 개수 (기본값: 999)
  * @param {number} offset - 시작 오프셋 (기본값: 0)
  * @returns {Promise<Object>} 수신자 목록 데이터
  */
-export async function getRecipients(limit = 20, offset = 0) {
+export async function getRecipients(limit = 999, offset = 0) {
   const response = await fetch(
     `${TEAM_API_BASE_URL}${ENDPOINTS.RECIPIENTS}/?limit=${limit}&offset=${offset}`,
     {

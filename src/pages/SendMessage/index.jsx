@@ -27,7 +27,7 @@ export default function SendMessage() {
   const [nameTouched, setNameTouched] = useState(false);
 
   const navigate = useNavigate();
-  const team = "19-2";
+  //const team = "19-2";
   const { id: recipientId } = useParams();
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function SendMessage() {
     e.preventDefault();
     try {
       await postMessage({
-        team,
+        //team,
         recipientId,
         sender,
         profileImageURL: profileImage,

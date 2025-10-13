@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getBackgroundImages } from "@/apis";
-import { postRecipient } from "@/apis/postRecipient";
+import { getBackgroundImages, postRecipient } from "@/apis";
 import "./style.scss";
 import checkIcon from "@/assets/images/icons/check.svg";
 import InputText from "../../components/ui/InputText";
@@ -77,7 +76,7 @@ export default function Post() {
     if (!isNameValid) return;
 
     const payload = {
-      team: "19-2",
+      //team: "19-2",
       name: trimmedName,
       backgroundColor:
         selectedBg.type === "color" ? selectedBg.value : COLORS[0],
@@ -88,7 +87,7 @@ export default function Post() {
     };
 
     try {
-      const result = await postRecipient("19-2", payload);
+      const result = await postRecipient(payload);
       navigate(`/post/${result.id}`);
       showToast("롤링페이퍼 생성 완료!", { type: "success" });
     } catch (err) {
