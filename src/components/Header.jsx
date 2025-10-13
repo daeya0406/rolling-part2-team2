@@ -11,7 +11,9 @@ function Header({ className = "" }) {
   const showCreateButton =
     currentPath === "/" || currentPath === "/main" || currentPath === "/list";
   const isPostDetailPage =
-    currentPath.startsWith("/post/") && !currentPath.includes("/edit");
+    currentPath.startsWith("/post/") &&
+    !currentPath.includes("/edit") &&
+    !currentPath.endsWith("/message");
 
   return (
     <header className={`header ${className}`}>

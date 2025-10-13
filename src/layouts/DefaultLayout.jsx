@@ -8,7 +8,7 @@ import "./default-layout.scss";
 export default function DefaultLayout() {
   const location = useLocation();
 
-  const hideHeaderPaths = ["/post/:id", "/post/:id/message"];
+  const hideHeaderPaths = ["/post/:id", "/post/:id/edit"];
   const mobileHideHeader = hideHeaderPaths.some((pattern) =>
     matchPath(pattern, location.pathname)
   );
