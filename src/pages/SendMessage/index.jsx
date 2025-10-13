@@ -13,6 +13,7 @@ import Avatar from "@/components/ui/Avatar";
 import DefaultAvatar from "@/assets/images/common/default-avatar.svg";
 import Loading from "@/components/ui/Loading";
 import Button from "@/components/ui/Button";
+import { showToast } from "@/components/ui/Toast";
 
 export default function SendMessage() {
   const [relation, setRelation] = useState("지인");
@@ -59,11 +60,11 @@ export default function SendMessage() {
         content: value,
         font: selectedFont,
       });
-      alert("메시지 전송 완료!");
+      showToast("메세지 전송 완료!", { type: "success" });
       navigate(`/post/${recipientId}`);
     } catch (err) {
-      console.error("❌ postMessage 에러:", err);
-      alert("메시지 전송 실패");
+      console.error("postMessage 에러:", err);
+      showToast("메세지 전송 실패", { type: "error" });
     }
   };
 

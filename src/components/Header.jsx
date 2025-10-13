@@ -3,7 +3,7 @@ import "./header.scss";
 import Button from "./ui/Button";
 import Icon from "./ui/Icon";
 
-function Header() {
+function Header({ className = "" }) {
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -11,10 +11,12 @@ function Header() {
   const showCreateButton =
     currentPath === "/" || currentPath === "/main" || currentPath === "/list";
   const isPostDetailPage =
-    currentPath.startsWith("/post/") && !currentPath.includes("/edit");
+    currentPath.startsWith("/post/") &&
+    !currentPath.includes("/edit") &&
+    !currentPath.endsWith("/message");
 
   return (
-    <header className="header">
+    <header className={`header ${className}`}>
       <div className="header__inner">
         <div className="header__logo">
           <Link to="/">
