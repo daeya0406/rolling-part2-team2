@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getProfileImages } from "@/apis/getProfileImages";
-import { postMessage } from "@/apis/postMessage";
+import { getProfileImages, postMessage } from "@/apis";
 
 // ReactQuill
 import ReactQuill from "react-quill-new";

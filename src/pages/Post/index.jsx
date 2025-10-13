@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getBackgroundImages } from "@/apis/getBackgroundImages";
+import { getBackgroundImages } from "@/apis";
 import { postRecipient } from "@/apis/postRecipient";
 import "./style.scss";
 import checkIcon from "@/assets/images/icons/check.svg";
