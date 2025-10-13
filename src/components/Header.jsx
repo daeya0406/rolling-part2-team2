@@ -3,6 +3,11 @@ import "./header.scss";
 import Button from "./ui/Button";
 import Icon from "./ui/Icon";
 
+/**
+ * @param {Object} props
+ * @param {string} [props.className=""] - 외부에서 전달받을 추가 클래스명 (선택)
+ */
+
 function Header({ className = "" }) {
   const location = useLocation();
   const currentPath = location.pathname;

@@ -7,10 +7,20 @@ import errorIcon from "@/assets/images/toast/error.svg";
 import warningIcon from "@/assets/images/toast/warning.svg";
 import infoIcon from "@/assets/images/toast/info.svg";
 
-// showToast 함수를 호출할 때 메시지와 type 매개변수를 전달함
+/**
+ * @param {string} message - 표시할 토스트 메시지 내용
+ * @param {Object} [options={}] - 선택적 옵션 객체
+ * @param {'success'|'error'|'warning'|'info'} [options.type='success'] - 토스트 type
+ * @param {number} [options.autoClose=5000] - 자동 닫힘 시간 (ms)
+ * @param {boolean} [options.hideProgressBar=false] - 진행바 숨김 여부
+ * @param {boolean} [options.closeOnClick=true] - 클릭 시 닫기 여부
+ * @param {boolean} [options.pauseOnHover=true] - 마우스 오버 시 일시정지 여부
+ * @param {boolean} [options.draggable=true] - 드래그로 닫기 허용 여부
+ * @param {string} [options.theme='dark'] - 테마 (light/dark)
+ */
+
 // eslint-disable-next-line
 export const showToast = (message, { type = "success", ...options } = {}) => {
-  // 타입별 컬러값과 아이콘 지정
   const colorGroup = {
     success: { color: "var(--c-success)", icon: successIcon },
     error: { color: "var(--c-error)", icon: errorIcon },
@@ -18,7 +28,6 @@ export const showToast = (message, { type = "success", ...options } = {}) => {
     info: { color: "var(--c-info)", icon: infoIcon },
   };
 
-  // 전달된 type이 colorGroup에 없으면 기본값(success)으로 나옴 (데이터 사용해서 방어코드 사용함)
   const { toastColor, icon: iconSrc } = colorGroup[type] || colorGroup.success;
 
   // basicOptions: react-toastify 기본 설정
@@ -48,7 +57,6 @@ export const showToast = (message, { type = "success", ...options } = {}) => {
     ),
   };
 
-  // 타입별 토스트 실행 (switch문 사용) 해서 타입별로 실행함
   switch (type) {
     case "success":
       toast.success(message, { ...basicOptions, ...options });
