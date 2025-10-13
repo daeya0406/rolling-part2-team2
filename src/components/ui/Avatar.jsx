@@ -28,6 +28,9 @@ function Avatar({
 }) {
   // 내부 선택 상태 관리
   const [internalSelected, setInternalSelected] = useState(false);
+  // 이미지 로딩 상태 관리
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   // selected prop이 명시적으로 전달되었으면 그것을 사용하고, 없으면 내부 상태 사용
   const isSelected = selected !== undefined ? selected : internalSelected;
@@ -41,6 +44,16 @@ function Avatar({
     if (onClick) {
       onClick();
     }
+  };
+
+  // 이미지 로드 핸들러
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  // 이미지 에러 핸들러
+  const handleImageError = () => {
+    setImageError(true);
   };
 
   const avatarClasses = [
@@ -68,7 +81,27 @@ function Avatar({
 
   return (
     <div className={avatarClasses} onClick={onClick ? handleClick : undefined}>
-      <img src={src} alt={alt} className="avatar--image" />
+      {/* 로딩 중일 때 스켈레톤 표시 */}
+      {!imageLoaded && !imageError && src && (
+        <div className="avatar--skeleton" />
+      )}
+
+      {/* 실제 이미지 */}
+      {src && (
+        <img
+          src={src}
+          alt={alt}
+          className={`avatar--image ${
+            imageLoaded ? "avatar--image--loaded" : ""
+          }`}
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+          style={{ opacity: imageLoaded ? 1 : 0 }}
+        />
+      )}
+
+      {/* 에러 시 또는 src가 없을 때 fallback */}
+      {(imageError || !src) && <div className="avatar--fallback">👤</div>}
     </div>
   );
 }

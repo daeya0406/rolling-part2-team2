@@ -113,7 +113,7 @@
   &--text {
     @include typo(18, 400);
     color: var(--c-gray600);
-    line-height: 1.5;
+    line-height: 1.2;
 
     /* 3줄 텍스트 */
     overflow: hidden;
@@ -254,6 +254,7 @@
       display: -webkit-box;
       -webkit-box-orient: vertical;
       text-overflow: ellipsis;
+      line-height: 1.5;
     }
 
     &--date {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@/components/ui/Avatar";
 import Badge from "@/components/ui/Badge";
@@ -38,6 +38,31 @@ function MessageItem({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const navigate = useNavigate(); // React Router 네비게이션
+
+  // 모달이 열릴 때 외부 스크롤 방지
+  useEffect(() => {
+    if (isModalOpen || isDeleteModalOpen) {
+      // 현재 스크롤 위치 저장
+      const scrollY = window.scrollY;
+
+      // 스크롤 방지
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+
+      return () => {
+        // 스크롤 복원
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+
+        // 원래 스크롤 위치로 복원
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isModalOpen, isDeleteModalOpen]);
 
   // 추가 메세지 클릭 핸들러
   const handleAddMessageClick = () => {
