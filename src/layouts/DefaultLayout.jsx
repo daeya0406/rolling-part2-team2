@@ -1,13 +1,20 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, matchPath } from "react-router-dom";
 import Header from "../components/Header";
 import TopButton from "../components/ui/TopButton";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function DefaultLayout() {
+  const location = useLocation();
+
+  const hideHeaderPaths = ["/post/:id", "/post/:id/message"];
+  const mobileHideHeader = hideHeaderPaths.some((pattern) =>
+    matchPath(pattern, location.pathname)
+  );
+
   return (
     <div>
-      <Header />
+      <Header className={mobileHideHeader ? "mobile-hide-header" : ""} />
 
       <main>
         <Outlet />
