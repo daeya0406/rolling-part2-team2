@@ -1,14 +1,14 @@
-// 라운드 값 (공통 처리)
+/* 라운드 값 */
 $radius-lg: 12px;
 $radius-md: 6px;
 
-// 버튼 높이 값 (공통 처리)
+/* 버튼 높이 값 */
 $btn-height-lg: 56px;
 $btn-height-md: 40px;
 $btn-height-sm: 36px;
 $btn-height-xs: 28px;
 
-// 버튼 기초 (공통 처리)
+/* 버튼 기초 */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -25,7 +25,7 @@ $btn-height-xs: 28px;
   }
 }
 
-// 버튼 사이즈
+/* 버튼 사이즈 */
 .btn--lg {
   height: $btn-height-lg;
   padding: 0 24px;
@@ -53,7 +53,7 @@ $btn-height-xs: 28px;
   @include typo(14, 400);
 }
 
-// 버튼 스타일 : Variants
+/* 버튼 스타일 : Variants */
 .btn--primary {
   background: var(--c-purple600);
   color: var(--c-white);
@@ -99,7 +99,7 @@ $btn-height-xs: 28px;
   }
 }
 
-// 아이콘-only 버튼 (정사각형)
+/* 아이콘-only 버튼 (정사각형) */
 .btn--icon {
   display: inline-flex;
   align-items: center;
@@ -122,7 +122,7 @@ $btn-height-xs: 28px;
   }
 }
 
-// 정사각형 사이즈 정의
+/* 정사각형 사이즈 정의 */
 .btn--icon-lg {
   width: $btn-height-lg;
   height: $btn-height-lg;
@@ -140,7 +140,7 @@ $btn-height-xs: 28px;
   height: $btn-height-xs;
 }
 
-// 아이콘-only (직사각형)
+/* 아이콘-only (직사각형) */
 .btn--icon-box {
   display: inline-flex;
   align-items: center;
@@ -164,11 +164,11 @@ $btn-height-xs: 28px;
   }
 }
 
-// 아이콘+텍스트 (직사각형 Box)
+/* 아이콘+텍스트 (직사각형 Box) */
 .btn--with-icon {
   display: inline-flex;
   align-items: center;
-  gap: 8px; // 아이콘과 텍스트 간격
+  gap: 8px;
   padding: 0 16px;
   height: 40px;
   border-radius: 8px;
@@ -188,14 +188,14 @@ $btn-height-xs: 28px;
   }
 }
 
-// 아이콘 컬러 변경 처리
+/* 아이콘 컬러 변경 처리 */
 .btn__icon {
   display: inline-flex;
   align-items: center;
-  fill: currentColor; // 텍스트 컬러 따라감
+  fill: currentColor;
 }
 
-// 버튼 Disabled (공통 처리)
+/* 버튼 Disabled */
 .btn:disabled {
   background-color: var(--c-gray300);
   color: var(--c-white);

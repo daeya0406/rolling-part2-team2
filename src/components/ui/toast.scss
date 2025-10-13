@@ -30,7 +30,7 @@
   margin-right: 10px;
 }
 
-/* 닫기 버튼, 아이콘 영역 */
+/* 닫기 버튼 및 아이콘 영역 */
 .toast__close,
 .Toastify__close-button {
   width: 28px;
@@ -45,7 +45,7 @@
   }
 }
 
-/* 공통 프로그레스바 */
+/* 공통 프로그레스바 (화면 크기에 맞게 조정) */
 .Toastify__progress-bar {
   height: 4px;
   border-radius: 0 0 8px 8px;
@@ -65,7 +65,7 @@
     width: 100%;
 
     .Toastify__toast {
-      width: calc(100% - 48px); // 화면 크기에 맞게 조정
+      width: calc(100% - 48px);
       margin: 0 24px 10px;
     }
   }
@@ -74,7 +74,7 @@
 @media (max-width: 480px) {
   .Toastify__toast-container {
     .Toastify__toast {
-      width: calc(100% - 40px); // 화면 크기에 맞게 조정
+      width: calc(100% - 40px);
       margin: 0 20px 5px;
     }
   }
