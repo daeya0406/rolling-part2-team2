@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getProfileImages } from "@/apis/getProfileImages";
-import { postMessage } from "@/apis/postMessage";
+import { getProfileImages, postMessage } from "@/apis";
 
 // ReactQuill
 import ReactQuill from "react-quill-new";
@@ -28,7 +27,7 @@ export default function SendMessage() {
   const [nameTouched, setNameTouched] = useState(false);
 
   const navigate = useNavigate();
-  const team = "19-2";
+  //const team = "19-2";
   const { id: recipientId } = useParams();
 
   useEffect(() => {
@@ -53,7 +52,7 @@ export default function SendMessage() {
     e.preventDefault();
     try {
       await postMessage({
-        team,
+        //team,
         recipientId,
         sender,
         profileImageURL: profileImage,

@@ -6,7 +6,7 @@ import ConfirmModal from "@/components/ui/ConfirmModal";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import "./MessageList.scss";
 import Button from "@/components/ui/Button";
-import { deleteMessage } from "@/apis/api";
+import { deleteMessage } from "@/apis";
 import useAsync from "@/hooks/useAsync";
 import { showToast } from "@/components/ui/Toast";
 

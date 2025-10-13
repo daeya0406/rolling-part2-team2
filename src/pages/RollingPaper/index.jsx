@@ -13,7 +13,7 @@ import {
   getReactions,
   postReactions,
   deleteRollingPaper,
-} from "@/apis/api";
+} from "@/apis";
 import useAsync from "@/hooks/useAsync";
 
 function RollingPaper() {
