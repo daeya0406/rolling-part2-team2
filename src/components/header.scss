@@ -9,6 +9,12 @@
   background: var(--c-white);
   height: 64px;
 
+  &.mobile-hide-header {
+    @media (max-width: 480px) {
+      z-index: -1;
+    }
+  }
+
   &__inner {
     display: grid;
     grid-template-columns: auto 1fr auto;
