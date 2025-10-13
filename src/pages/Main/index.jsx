@@ -1,4 +1,3 @@
-//import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@/components/ui/Button";
 import point01Image from "@/assets/images/main/main-point01.png";
