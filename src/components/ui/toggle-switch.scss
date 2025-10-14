@@ -1,0 +1,81 @@
+.toggle-switch-wrapper {
+  position: fixed;
+  top: 12px;
+  left: calc(50vw + 442px);
+  z-index: 9999;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; // 스위치와 텍스트 간격
+  border-radius: 8px;
+  border: 1px solid var(--c-gray300);
+  transition: background-color 0.3s;
+  background-color: var(--c-white);
+  &:hover {
+    background-color: var(--c-gray100);
+  }
+  @media (max-width: 1248px) {
+    left: auto;
+    right: 24px;
+  }
+  @media (max-width: 480px) {
+    width: 140px;
+    top: 6px;
+  }
+
+  .switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+
+    input {
+      display: none;
+    }
+
+    .slider {
+      position: relative;
+      cursor: pointer;
+      width: 42px;
+      height: 24px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--c-gray400);
+      transition: 0.4s;
+      border-radius: 12px;
+
+      &:before {
+        position: absolute;
+        content: "";
+        width: 18px;
+        height: calc(100% - 6px);
+        border-radius: 12px;
+        left: 3px;
+        bottom: 3px;
+        background-color: var(--c-white);
+        transition: 0.4s;
+      }
+    }
+
+    input:checked + .slider {
+      background-color: var(--c-purple600);
+
+      &:before {
+        transform: translateX(18px);
+      }
+    }
+
+    .switch-label {
+      @include typo(16, 400);
+      color: #333;
+      @media (max-width: 480px) {
+        @include typo(14, 400);
+      }
+    }
+  }
+}

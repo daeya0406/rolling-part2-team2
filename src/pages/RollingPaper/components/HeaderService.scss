@@ -258,12 +258,13 @@
 
       h1 {
         height: 52px;
-        padding: 12px 0;
+        padding: 8px 0;
         margin: 0;
         @include typo(24, 700);
         display: flex;
         align-items: center;
-        max-width: 100%;
+        max-width: calc(100% - 150px);
+        display: inline-block;
       }
 
       .header-right-section {
