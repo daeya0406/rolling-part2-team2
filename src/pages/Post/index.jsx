@@ -95,7 +95,7 @@ export default function Post() {
 
     try {
       const result = await postRecipient(payload);
-      navigate(`/post/${result.id}`); // 생성 후 페이지 이동
+      navigate(`/post/${result.id}`, { replace: true }); // 생성 후 페이지 이동
       showToast("롤링페이퍼 생성 완료!", { type: "success" });
     } catch (err) {
       console.error("post 에러:", err);

@@ -151,8 +151,16 @@ function RollingPaper() {
       })
     );
 
-    // 즉시 페이지 이동
-    navigate("/list");
+    // 관리자 모드에서 삭제하는 경우 히스토리를 더 적극적으로 정리
+    if (isPostEditPage) {
+      // 뒤로가기를 한 번 실행한 후 /list로 이동
+      window.history.back();
+      setTimeout(() => {
+        navigate("/list", { replace: true });
+      }, 50);
+    } else {
+      navigate("/list", { replace: true });
+    }
   };
 
   // 모든 에러를 통합

@@ -61,7 +61,7 @@ export default function SendMessage() {
         font: selectedFont,
       });
       showToast("메세지 전송 완료!", { type: "success" });
-      navigate(`/post/${recipientId}`);
+      navigate(`/post/${recipientId}`, { replace: true });
     } catch (err) {
       console.error("postMessage 에러:", err);
       showToast("메세지 전송 실패", { type: "error" });
