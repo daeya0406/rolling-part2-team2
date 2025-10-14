@@ -15,13 +15,11 @@ import "./RollingCard.scss";
  * @param {'beige'|'blue'|'green'|'purple'} [props.bgColor] - 배경 색상 키워드
  */
 
-// 패턴 이미지들을 static import
 import patternBeige from "@/assets/images/pattern/pattern-beige.svg";
 import patternBlue from "@/assets/images/pattern/pattern-blue.svg";
 import patternGreen from "@/assets/images/pattern/pattern-green.svg";
 import patternPurple from "@/assets/images/pattern/pattern-purple.svg";
 
-// 패턴 이미지 매핑 객체
 const patternImages = {
   beige: patternBeige,
   blue: patternBlue,
@@ -34,7 +32,7 @@ const getPatternImage = (color) => {
   return patternImages[color] || null;
 };
 
-/* 하나의 카드 UI를 보여주고 제목, 아바타 목록, 작성 인원 수, 리액션 영역으로 구성됨 */
+/* 하나의 카드 UI를 보여줌 */
 function RollingCard({ id, title, avatars, count, reactions, bgUrl, bgColor }) {
   const navigate = useNavigate();
 
@@ -61,11 +59,11 @@ function RollingCard({ id, title, avatars, count, reactions, bgUrl, bgColor }) {
   return (
     <div
       className={`rolling-card ${bgUrl ? "rolling-card--with-bg-image" : ""}`}
-      onClick={handleClick} // 카드 클릭 시 이동
+      onClick={handleClick} 
       style={{
-        backgroundImage: bgUrl ? `url(${bgUrl})` : undefined, // 배경 이미지 적용
-        backgroundColor: getBackgroundColor(), // 배경 컬러 (fallback 포함)
-        cursor: "pointer", // 마우스 커서 손모양으로
+        backgroundImage: bgUrl ? `url(${bgUrl})` : undefined, 
+        backgroundColor: getBackgroundColor(), 
+        cursor: "pointer", 
       }}
     >
       {/* 배경 이미지가 있을 때 오버레이 */}
