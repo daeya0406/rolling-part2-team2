@@ -71,22 +71,35 @@ npm run test
 
 ## 🛠️ Git 가이드라인
 
-1. 브랜치 전략
+1.  브랜치 전략
 
-   - main: 배포
-   - dev: 통합
-   - feature/<scope>: 기능 단위 작업
+    - main: 배포
+    - dev: 통합
+    - feature/<scope>: 기능 단위 작업
 
-2. 커밋 컨벤션
+2.  커밋 컨벤션
 
-   - feat: ... (새 기능)
-   - fix: ... (버그 수정)
-   - refactor: ... (리팩토링)
-   - docs: ... (문서/README 수정)
+    - feat: ... (새 기능)
+    - fix: ... (버그 수정)
+    - refactor: ... (리팩토링)
+    - docs: ... (문서/README 수정)
 
-3. PR 규칙
-   - 최소 1명 코드리뷰 승인 후 머지
-   - PR 제목: [feat] 보드 생성 기능
+3.  버전 관리
+
+    - 배포 전 dev → main 머지 시 버전 업데이트 진행
+    - `package.json`의 version 수정  
+      예시: `"version": "1.0.3"`
+    - 커밋 메시지 예시 및 버전 규칙
+      ```
+      chore(release): v1.0.1  // 패치 버전(버그 수정)
+      chore(release): v1.1.0 // 마이너 버전(기능 추가)
+      chore(release): v2.0.0 // 메이저 버전(큰 변경)
+      ```
+
+4.  PR 규칙
+
+    - 최소 1명 코드리뷰 승인 후 머지
+    - PR 제목: [feat] 보드 생성 기능
 
 ---
 
