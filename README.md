@@ -2,13 +2,13 @@
 
 <img width="1600" height="500" alt="README 넣을 배너" src="https://github.com/user-attachments/assets/98b0db77-9c09-479b-a544-5254234b36b3" />
 
-## 소개
+## ☺️ 소개
 
 서로 메시지를 남길 수 있는 **롤링페이퍼**를 만드는 프로젝트입니다.
 
 ---
 
-## 기술 스택
+## 🛠️ 기술 스택
 
 - **프레임워크**: React 19 + Vite + ES6
 - **라우팅**: React Router 7
@@ -17,14 +17,14 @@
 
 ---
 
-## Features
+## ✨ Features
 
 - 반응형 UI + 접근성 고려
 - CRUD 작업 기반 작업
 
 ---
 
-## Team (파트2-2팀)
+## 👥 Team (파트2-2팀)
 
 - **김정대**: 팀장, 프로젝트 세팅, 배포, 페이지 작업(롤링페이지 만들기[/post], 메세지보내기[post/:id/message]), 로딩 컴포넌트
 - **윤시현**: 리팩토링, 프로젝트 정리 및 개선, 헤더, 팝업, 페이지 작업(롤링페이지[/post/:id, /post/:id/edit]), 무한스크롤 구현, 커스텀 훅
@@ -50,7 +50,7 @@ src/
 
 ---
 
-## ⚙️ Starting
+## 🚩 Starting
 
 ```bash
 # 1. 레포 클론
@@ -73,7 +73,7 @@ npm run test
 
 ---
 
-## 🛠️ Git 가이드라인
+## ⚙️ Git 가이드라인
 
 1.  브랜치 전략
 
