@@ -1,4 +1,8 @@
-# 롤링페이퍼 기초 프로젝트 ( 파트2-2팀 )
+# 롤링페이퍼
+
+<img width="1600" height="500" alt="README 넣을 배너" src="https://github.com/user-attachments/assets/98b0db77-9c09-479b-a544-5254234b36b3" />
+
+## 소개
 
 서로 메시지를 남길 수 있는 **롤링페이퍼**를 만드는 프로젝트입니다.
 
