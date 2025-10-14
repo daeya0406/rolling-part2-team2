@@ -1,22 +1,27 @@
 .list {
-  /* 페이지 전체 여백/레이아웃 설정 */
   padding: 40px 0;
   max-width: 1200px;
   margin: 0 auto;
 
-  /* 슬라이더 영역 스타일 */
   &__section {
     margin-bottom: 64px;
+    min-height: 260px;
   }
 
-  /* 제목 스타일 */
+  &__loading-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 260px;
+    border-radius: 8px;
+  }
+
   &__title {
     @include typo(24, 700);
     margin-bottom: 20px;
     color: var(--c-gray900);
   }
 
-  /* 하단 버튼 영역 */
   &__bottom {
     display: flex;
     justify-content: center;
@@ -48,10 +53,6 @@
 
 @media (max-width: 1248px) {
   .list {
-    // &__section {
-    //   padding: 0 24px;
-    // }
-
     &__title {
       margin-left: 24px;
     }
@@ -69,10 +70,6 @@
 
 @media (max-width: 480px) {
   .list {
-    // &__section {
-    //   padding: 0 20px;
-    // }
-
     &__title {
       margin-left: 20px;
     }
