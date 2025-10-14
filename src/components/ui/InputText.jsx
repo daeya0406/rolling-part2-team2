@@ -1,5 +1,6 @@
 import "./input-text.scss";
 
+// input 컴포넌트
 export default function InputText({
   id,
   value,
@@ -20,6 +21,7 @@ export default function InputText({
         onBlur={onBlur}
         placeholder={placeholder}
       />
+      {/* 값이 비었을 때 표시 */}
       {error && <p className="input-error-text">값을 입력해 주세요.</p>}
     </div>
   );
