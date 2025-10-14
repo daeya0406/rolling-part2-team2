@@ -5,23 +5,6 @@ h2 {
 }
 
 .write-wrap {
-  display: grid;
-  row-gap: 50px;
-  max-width: 768px;
-  padding: 0 24px;
-  section {
-    .title-wrap {
-      margin-bottom: 24px;
-      h2 {
-        margin-bottom: 4px;
-      }
-      p {
-        @include typo(16, 400);
-        color: var(--c-gray500);
-      }
-    }
-  }
-
   .profile-images-wrap {
     display: flex;
     align-items: center;
