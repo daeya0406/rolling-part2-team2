@@ -136,17 +136,6 @@ function HeaderService({
       <div className="header-content">
         <div className="header-title-section">
           <h1>To. {rollingPaper?.name || "..."}</h1>
-          {/* 480px 이하에서만 보이는 관리자모드 버튼 */}
-          {toId && !isPostEditPage && (
-            <Link to={`/post/${toId}/edit`} className="mobile-admin-link">
-              <Button
-                label="관리자모드"
-                size="xs"
-                variant="outline"
-                className="mobile-admin-button"
-              />
-            </Link>
-          )}
         </div>
         {/* 모바일에서만 보이는 구분선 */}
         <Divider

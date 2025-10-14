@@ -5,20 +5,23 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./default-layout.scss";
 
+// 기본 레이아웃 컴포넌트
 export default function DefaultLayout() {
-  const location = useLocation();
+  const location = useLocation(); // 현재 라우트 정보
 
+  // 헤더 숨김 경로 설정
   const hideHeaderPaths = ["/post/:id", "/post/:id/edit"];
-  const mobileHideHeader = hideHeaderPaths.some((pattern) =>
-    matchPath(pattern, location.pathname)
+  const mobileHideHeader = hideHeaderPaths.some(
+    (pattern) => matchPath(pattern, location.pathname) // 현재 경로가 숨김 경로에 해당하는지 확인
   );
 
   return (
     <div>
+      {/* 조건에 따라 헤더 숨김 */}
       <Header className={mobileHideHeader ? "mobile-hide-header" : ""} />
 
       <main>
-        <Outlet />
+        <Outlet /> {/* 라우트 컴포넌트 렌더링 */}
         <TopButton />
       </main>
 
