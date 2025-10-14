@@ -5,9 +5,10 @@ h2 {
 }
 
 .write-wrap {
-  margin: 47px auto 60px;
+  display: grid;
+  row-gap: 50px;
   max-width: 768px;
-  padding: 0 24px;
+  padding: 47px 24px 60px;
   section {
     .title-wrap {
       margin-bottom: 24px;
