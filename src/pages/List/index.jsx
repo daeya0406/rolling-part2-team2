@@ -83,7 +83,7 @@ function List() {
           label="나도 만들어 보기"
           size="lg"
           variant="primary"
-          onClick={() => navigate("/post")} // 버튼 클릭 시 /post 페이지로 이동
+          onClick={() => navigate("/post", { state: { from: '/list' } })} // 버튼 클릭 시 /post 페이지로 이동
         />
       </div>
     </main>

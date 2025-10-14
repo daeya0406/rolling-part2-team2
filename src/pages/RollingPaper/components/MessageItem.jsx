@@ -73,7 +73,10 @@ function MessageItem({
     if (!toId) return;
 
     const cleanId = String(toId).replace(/\/+$/, "");
-    navigate(`/post/${cleanId}/message`);
+    navigate(`/post/${cleanId}/message`, { 
+      replace: true,
+      state: { fromRollingPaper: true } 
+    });
   };
 
   // 일반 메시지 클릭 핸들러 (모달 열기)

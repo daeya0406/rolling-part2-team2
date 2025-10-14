@@ -29,9 +29,9 @@ function Header({ className = "" }) {
     basePath = basePath.replace(/\/+$/, ""); // 끝에 슬래시 남을 경우 대비해 제거
 
     if (val) {
-      navigate(`${basePath}/edit`);
+      navigate(`${basePath}/edit`, { replace: true });
     } else {
-      navigate(basePath);
+      navigate(basePath, { replace: true });
     }
   };
 
