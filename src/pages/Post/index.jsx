@@ -8,24 +8,34 @@ import Loading from "@/components/ui/Loading";
 import Button from "@/components/ui/Button";
 import { showToast } from "@/components/ui/Toast";
 
+// 선택 가능한 컬러 배열
 const COLORS = ["beige", "purple", "blue", "green"];
 
+// 롤링페이퍼 생성 페이지
 export default function Post() {
   const navigate = useNavigate();
 
   // 상태
   const [name, setName] = useState("");
-  const [nameTouched, setNameTouched] = useState(false);
+  const [nameTouched, setNameTouched] = useState(false); // 입력 필드 터치 여부
   const [tabBtn, setTabBtn] = useState("color"); // 'color' | 'image'
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true); // 초기 로딩 true
   const [loadedImages, setLoadedImages] = useState([]); // 로드된 이미지 관리
-
   const [selectedBg, setSelectedBg] = useState({
     type: "color",
     value: COLORS[0],
-  });
+  }); // 선택된 배경
 
+  // 이름 검증
+  const MAX_NAME_LEN = 20;
+  const trimmedName = name.trim();
+  const isNameValid =
+    trimmedName.length > 0 && trimmedName.length <= MAX_NAME_LEN;
+  const showNameError = nameTouched && !isNameValid;
+  const handleNameBlur = () => setNameTouched(true);
+
+  // 이미지 데이터 가져오기(image 탭)
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -44,12 +54,14 @@ export default function Post() {
     if (tabBtn === "image") fetchImages();
   }, [tabBtn]);
 
+  // 이름 입력 필드 포커스 시 에러 초기화
   const handleNameFocus = () => {
     if (nameTouched) {
       setNameTouched(false);
     }
   };
 
+  // 탭 변경
   const handleTabClick = (tab) => {
     setTabBtn(tab);
     if (tab === "color") {
@@ -59,17 +71,12 @@ export default function Post() {
     }
   };
 
+  // 배경 선택
   const handleSelect = (type, value) => {
     setSelectedBg({ type, value });
   };
 
-  const MAX_NAME_LEN = 20;
-  const trimmedName = name.trim();
-  const isNameValid =
-    trimmedName.length > 0 && trimmedName.length <= MAX_NAME_LEN;
-  const showNameError = nameTouched && !isNameValid;
-  const handleNameBlur = () => setNameTouched(true);
-
+  // 폼 제출
   const handleSubmit = async (e) => {
     e.preventDefault();
     setNameTouched(true);
@@ -88,7 +95,7 @@ export default function Post() {
 
     try {
       const result = await postRecipient(payload);
-      navigate(`/post/${result.id}`);
+      navigate(`/post/${result.id}`); // 생성 후 페이지 이동
       showToast("롤링페이퍼 생성 완료!", { type: "success" });
     } catch (err) {
       console.error("post 에러:", err);
@@ -98,6 +105,7 @@ export default function Post() {
 
   return (
     <form className="write-wrap" onSubmit={handleSubmit}>
+      {/* 받는 사람 이름 입력 */}
       <section>
         <h2 className="title">To.</h2>
         <InputText
@@ -110,6 +118,8 @@ export default function Post() {
           error={showNameError}
         />
       </section>
+
+      {/* 배경 선택 */}
       <section>
         <div className="title-wrap">
           <h2>배경화면을 선택해 주세요.</h2>
@@ -131,6 +141,8 @@ export default function Post() {
             이미지
           </button>
         </div>
+
+        {/* 컬러 선택 */}
         {tabBtn === "color" && (
           <ul className="color-grid">
             {COLORS.map((c) => {
@@ -155,6 +167,8 @@ export default function Post() {
             })}
           </ul>
         )}
+
+        {/* 이미지 선택 */}
         {tabBtn === "image" && (
           <>
             {images.length > 0 ? (
@@ -180,6 +194,7 @@ export default function Post() {
                           }
                           className={isLoaded ? "fade-in-img" : "fade-out-img"}
                         />
+                        {/* 로드 되지 않았을 때 */}
                         {!isLoaded && (
                           <div className="image-loading-overlay">
                             <Loading size="lg" />
@@ -210,6 +225,8 @@ export default function Post() {
           </>
         )}
       </section>
+
+      {/* 생성하기 버튼 */}
       <Button
         label="생성하기"
         className="button-submit"

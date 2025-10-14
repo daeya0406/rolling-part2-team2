@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getProfileImages, postMessage } from "@/apis";
-
-// ReactQuill
-import ReactQuill from "react-quill-new";
+import ReactQuill from "react-quill-new"; // 텍스트 편집기 ReactQuill 라이브러리
 import "react-quill-new/dist/quill.snow.css";
 
 import "./style.scss";
@@ -15,21 +13,22 @@ import Loading from "@/components/ui/Loading";
 import Button from "@/components/ui/Button";
 import { showToast } from "@/components/ui/Toast";
 
+// 메시지 보내기 페이지
 export default function SendMessage() {
-  const [relation, setRelation] = useState("지인");
-  const [selectedFont, setSelectedFont] = useState("Noto Sans");
-  const [profileImages, setProfileImages] = useState([]);
-  const [profileImage, setProfileImage] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [loadedImages, setLoadedImages] = useState([]);
-  const [value, setValue] = useState("");
-  const [sender, setSender] = useState("");
-  const [nameTouched, setNameTouched] = useState(false);
+  const [relation, setRelation] = useState("지인"); // 관계 선택
+  const [selectedFont, setSelectedFont] = useState("Noto Sans"); // 폰트 선택
+  const [profileImages, setProfileImages] = useState([]); // 프로필 이미지 리스트
+  const [profileImage, setProfileImage] = useState(""); // 선택된 이미지
+  const [loading, setLoading] = useState(true); // 이미지 로딩 상태
+  const [loadedImages, setLoadedImages] = useState([]); // 로드 된 이미지
+  const [value, setValue] = useState(""); // 메세지 내용
+  const [sender, setSender] = useState(""); // 보낸사람 이름
+  const [nameTouched, setNameTouched] = useState(false); // 이름 입력 여부
 
   const navigate = useNavigate();
-  //const team = "19-2";
-  const { id: recipientId } = useParams();
+  const { id: recipientId } = useParams(); // URL에서 수신자 ID
 
+  // 프로필 이미지 가져오기
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -48,6 +47,7 @@ export default function SendMessage() {
     fetchImages();
   }, []);
 
+  // 폼 제출
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -85,6 +85,7 @@ export default function SendMessage() {
 
   return (
     <form className="write-wrap" onSubmit={handleSubmit}>
+      {/* 이름 입력 */}
       <section>
         <h2>From.</h2>
         <InputText
@@ -98,6 +99,7 @@ export default function SendMessage() {
         />
       </section>
 
+      {/* 프로필 이미지 선택 */}
       <section>
         <h2>프로필 이미지</h2>
         <div className="profile-images-wrap">
@@ -130,6 +132,7 @@ export default function SendMessage() {
                             setLoadedImages((prev) => [...prev, url])
                           }
                         />
+                        {/* 로드되기 전 로딩 처리 */}
                         {!isLoaded && (
                           <div className="image-loading-overlay">
                             <Loading size="sm" />
@@ -143,6 +146,7 @@ export default function SendMessage() {
         </div>
       </section>
 
+      {/* 관계 선택 */}
       <section>
         <h2>관계 선택</h2>
         <SelectRelation
@@ -153,6 +157,7 @@ export default function SendMessage() {
         />
       </section>
 
+      {/* 롤링페이퍼 작성 */}
       <section>
         <h2>롤링페이퍼 작성</h2>
         <ReactQuill
@@ -164,12 +169,13 @@ export default function SendMessage() {
         />
       </section>
 
+      {/* 폰트 선택 */}
       <section>
         <h2>폰트 선택</h2>
         <SelectRelation
           value={selectedFont}
           onChange={setSelectedFont}
-          dropdownMode="blockDown"
+          dropdownMode="blockDown" // select가 영역을 가지고 display:block 형태로 떨어지는 상태
           options={[
             "Noto Sans",
             "Pretendard",
