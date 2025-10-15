@@ -24,10 +24,10 @@
 ![/list 반응형](https://github.com/user-attachments/assets/e7d2f227-9a79-4cf5-b4fe-6dfe7570e29e)
 
 - 무한스크롤<br>
-![무한스크롤](https://github.com/user-attachments/assets/d3bae55e-10dc-4152-bca4-8f492fb3412c)
+![무한스크롤](https://github.com/user-attachments/assets/866e38e9-dfd1-49ba-afdd-f4ababae105b)
 
 - 관리자 모드 토글(+ 메세지 삭제)<br>
-![관리자 모드 토글](https://github.com/user-attachments/assets/55f62c14-698e-4122-8d25-b669e0202138)
+![관리자 모드 토글](https://github.com/user-attachments/assets/36ffb62f-5b5f-4ac2-9bf7-dbd9f6e8cf52)
 
 - 롤링페이지 생성<br>
 ![롤링페이지 생성](https://github.com/user-attachments/assets/5818be76-8961-4b77-a399-f700f67f88c5)
