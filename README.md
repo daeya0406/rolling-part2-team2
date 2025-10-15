@@ -1,5 +1,3 @@
-# 롤링페이퍼
-
 <img width="1600" height="500" alt="README 넣을 배너" src="https://github.com/user-attachments/assets/98b0db77-9c09-479b-a544-5254234b36b3" />
 
 ## ☺️ 소개
@@ -19,8 +17,48 @@
 
 ## ✨ Features
 
-- 반응형 UI + 접근성 고려
-- CRUD 작업 기반 작업
+<table>
+  <tr>
+    <th align="center" colspan="2">반응형 UI + 접근성 고려</th>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="https://github.com/user-attachments/assets/6a3c8373-5ce8-475c-9185-c836fa8ae606"><br>
+    </td>
+  </tr>
+  <tr>
+    <th align="center" colspan="2">슬라이드 반응형</th>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="https://github.com/user-attachments/assets/e7d2f227-9a79-4cf5-b4fe-6dfe7570e29e"><br>
+    </td>
+  </tr>
+  <tr>
+    <th align="center">무한스크롤</th>
+    <th align="center">관리자 모드 토글(+ 메시지 삭제)</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/866e38e9-dfd1-49ba-afdd-f4ababae105b"><br>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/36ffb62f-5b5f-4ac2-9bf7-dbd9f6e8cf52"><br>
+    </td>
+  </tr>
+  <tr>
+    <th align="center">롤링페이지 생성</th>
+    <th align="center">메시지 보내기</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/5818be76-8961-4b77-a399-f700f67f88c5"><br>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/3e3db5ac-be47-4014-b961-50a47c945eb8"><br>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -104,6 +142,12 @@ npm run test
 
     - 최소 1명 코드리뷰 승인 후 머지
     - PR 제목: [feat] 보드 생성 기능
+
+---
+
+## 🧩 문서 & 일정 관리
+
+![Notion 활용](https://github.com/user-attachments/assets/2e2e91a8-46bc-493e-85da-e452963cb214)
 
 ---
 
