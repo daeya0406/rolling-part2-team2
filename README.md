@@ -19,41 +19,43 @@
 
 <table>
   <tr>
+    <th align="center" colspan="2">반응형 UI + 접근성 고려</th>
+  </tr>
+  <tr>
     <td align="center" colspan="2">
-      <b>반응형 UI + 접근성 고려</b><br>
       <img src="https://github.com/user-attachments/assets/6a3c8373-5ce8-475c-9185-c836fa8ae606"><br>
-      다양한 해상도 및 접근성 대응
     </td>
+  </tr>
+  <tr>
+    <th align="center" colspan="2">슬라이드 반응형</th>
   </tr>
   <tr>
     <td align="center" colspan="2">
-      <b>슬라이드</b><br>
       <img src="https://github.com/user-attachments/assets/e7d2f227-9a79-4cf5-b4fe-6dfe7570e29e"><br>
-      Swiper.js를 활용한 슬라이드 구현
     </td>
   </tr>
   <tr>
+    <th align="center">무한스크롤</th>
+    <th align="center">관리자 모드 토글(+ 메시지 삭제)</th>
+  </tr>
+  <tr>
     <td align="center">
-      <b>무한스크롤</b><br>
       <img src="https://github.com/user-attachments/assets/866e38e9-dfd1-49ba-afdd-f4ababae105b"><br>
-      Intersection Observer 기반 콘텐츠 로드
     </td>
     <td align="center">
-      <b>관리자 모드 토글(+ 메시지 삭제)</b><br>
       <img src="https://github.com/user-attachments/assets/36ffb62f-5b5f-4ac2-9bf7-dbd9f6e8cf52"><br>
-      관리자 전용 삭제/관리 기능
     </td>
   </tr>
   <tr>
+    <th align="center">롤링페이지 생성</th>
+    <th align="center">메시지 보내기</th>
+  </tr>
+  <tr>
     <td align="center">
-      <b>롤링페이지 생성</b><br>
       <img src="https://github.com/user-attachments/assets/5818be76-8961-4b77-a399-f700f67f88c5"><br>
-      사용자 맞춤 롤링페이지 생성
     </td>
     <td align="center">
-      <b>메시지 보내기</b><br>
       <img src="https://github.com/user-attachments/assets/3e3db5ac-be47-4014-b961-50a47c945eb8"><br>
-      작성된 메시지 전송 및 확인
     </td>
   </tr>
 </table>
