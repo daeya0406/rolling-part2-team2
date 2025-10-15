@@ -1,4 +1,4 @@
-# 롤링페이퍼
+![Kapture 2025-10-15 at 11 04 57](https://github.com/user-attachments/assets/97a48bd9-3cda-400a-ab63-efea5d359d62)# 롤링페이퍼
 
 <img width="1600" height="500" alt="README 넣을 배너" src="https://github.com/user-attachments/assets/98b0db77-9c09-479b-a544-5254234b36b3" />
 
@@ -21,6 +21,9 @@
 
 - 반응형 UI + 접근성 고려
 - CRUD 작업 기반 작업
+
+![메인페이지 반응형](https://github.com/user-attachments/assets/6a3c8373-5ce8-475c-9185-c836fa8ae606)
+![/list 반응형](https://github.com/user-attachments/assets/e7d2f227-9a79-4cf5-b4fe-6dfe7570e29e)
 
 ---
 
