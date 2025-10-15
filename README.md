@@ -17,22 +17,22 @@
 
 ## ✨ Features
 
-- 반응형 UI + 접근성 고려
+- 반응형 UI + 접근성 고려<br>
 ![메인페이지 반응형](https://github.com/user-attachments/assets/6a3c8373-5ce8-475c-9185-c836fa8ae606)
 
-- 슬라이드
+- 슬라이드<br>
 ![/list 반응형](https://github.com/user-attachments/assets/e7d2f227-9a79-4cf5-b4fe-6dfe7570e29e)
 
-- 무한스크롤
+- 무한스크롤<br>
 ![무한스크롤](https://github.com/user-attachments/assets/d3bae55e-10dc-4152-bca4-8f492fb3412c)
 
-- 관리자 모드 토글(+ 메세지 삭제)
+- 관리자 모드 토글(+ 메세지 삭제)<br>
 ![관리자 모드 토글](https://github.com/user-attachments/assets/55f62c14-698e-4122-8d25-b669e0202138)
 
-- 롤링페이지 생성
+- 롤링페이지 생성<br>
 ![롤링페이지 생성](https://github.com/user-attachments/assets/452f2388-53d5-4368-89f1-989edd05ef33)
 
-- 메세지 보내기
+- 메세지 보내기<br>
 ![메세지 보내기](https://github.com/user-attachments/assets/3e3db5ac-be47-4014-b961-50a47c945eb8)
 
 ---
