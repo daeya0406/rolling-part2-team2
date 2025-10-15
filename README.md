@@ -24,23 +24,27 @@
       <img src="https://github.com/user-attachments/assets/6a3c8373-5ce8-475c-9185-c836fa8ae606" width="250"><br>
       다양한 해상도 및 접근성 대응
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <b>슬라이드</b><br>
       <img src="https://github.com/user-attachments/assets/e7d2f227-9a79-4cf5-b4fe-6dfe7570e29e" width="250"><br>
       Swiper.js를 활용한 슬라이드 구현
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <b>무한스크롤</b><br>
       <img src="https://github.com/user-attachments/assets/866e38e9-dfd1-49ba-afdd-f4ababae105b" width="250"><br>
       Intersection Observer 기반 콘텐츠 로드
     </td>
-  </tr>
-  <tr>
     <td align="center">
       <b>관리자 모드 토글(+ 메시지 삭제)</b><br>
       <img src="https://github.com/user-attachments/assets/36ffb62f-5b5f-4ac2-9bf7-dbd9f6e8cf52" width="250"><br>
       관리자 전용 삭제/관리 기능
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <b>롤링페이지 생성</b><br>
       <img src="https://github.com/user-attachments/assets/5818be76-8961-4b77-a399-f700f67f88c5" width="250"><br>
