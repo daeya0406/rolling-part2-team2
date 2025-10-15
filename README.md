@@ -30,7 +30,8 @@
 ![관리자 모드 토글](https://github.com/user-attachments/assets/55f62c14-698e-4122-8d25-b669e0202138)
 
 - 롤링페이지 생성<br>
-![롤링페이지 생성](https://github.com/user-attachments/assets/452f2388-53d5-4368-89f1-989edd05ef33)
+![롤링페이지 생성](https://github.com/user-attachments/assets/5818be76-8961-4b77-a399-f700f67f88c5)
+
 
 - 메세지 보내기<br>
 ![메세지 보내기](https://github.com/user-attachments/assets/3e3db5ac-be47-4014-b961-50a47c945eb8)
