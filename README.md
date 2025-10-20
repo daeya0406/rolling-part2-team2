@@ -8,10 +8,28 @@
 
 ## 🛠️ 기술 스택
 
-- **프레임워크**: React 19 + Vite + ES6
-- **라우팅**: React Router 7
-- **스타일링**: SCSS
-- **라이브러리**: React-Quill, Swiper
+- **프레임워크**: React 19 + Vite + ES6  
+  <p align="left">
+    <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+    <img src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+    <img src="https://img.shields.io/badge/es6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+  </p>
+
+- **라우팅**: React Router 7  
+  <p align="left">
+    <img src="https://img.shields.io/badge/react%20router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
+  </p>
+
+- **스타일링**: SCSS  
+  <p align="left">
+    <img src="https://img.shields.io/badge/scss-CC6699?style=for-the-badge&logo=sass&logoColor=white">
+  </p>
+
+- **라이브러리**: React-Quill, Swiper  
+  <p align="left">
+    <img src="https://img.shields.io/badge/react%20quill-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+    <img src="https://img.shields.io/badge/swiper-6332F6?style=for-the-badge&logo=swiper&logoColor=white">
+  </p>
 
 ---
 
