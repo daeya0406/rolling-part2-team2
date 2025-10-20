@@ -3,8 +3,9 @@ import Divider from "./ui/Divider";
 import Icon from "./ui/Icon";
 
 /**
+ * Footer 컴포넌트
  * @param {Object} props
- * @param {string} [props.className=""] 
+ * @param {string} [props.className=""]
  */
 function Footer({ className = "" }) {
   const teamMembers = [
