@@ -65,7 +65,7 @@ function Footer({ className = "" }) {
           </div>
 
           <div className="footer__copyright">
-            <p>© 2025 Codeit Sprint 19 Part 2 - Team 2</p>
+            <span>© 2025 Codeit Sprint 19 Part 2 - Team 2</span>
           </div>
         </div>
       </div>
