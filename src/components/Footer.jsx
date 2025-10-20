@@ -33,12 +33,12 @@ function Footer({ className = "" }) {
                     >
                       <span className="footer__member-name">{member.name}</span>
                     </a>
-                    {index < teamMembers.length - 1 && (
+                    {index < teamMembers.length && (
                       <Divider 
                         width={1} 
                         height={20} 
                         marginX={16} 
-                        className="footer__divider"
+                        className={`footer__divider ${index === teamMembers.length - 1 ? 'footer__divider--last' : ''}`}
                       />
                     )}
                   </div>

@@ -123,7 +123,7 @@
     }
 
     &__info {
-      gap: 30px;
+      gap: 8px;
     }
 
     &__member-name {
@@ -190,6 +190,11 @@
 
     &__copyright {
       @include typo(12, 400);
+    }
+
+    // 모바일에서 마지막 Divider 숨김
+    &__divider--last {
+      display: none;
     }
   }
 }
