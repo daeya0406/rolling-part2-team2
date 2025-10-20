@@ -30,7 +30,12 @@
     <img src="https://img.shields.io/badge/react%20quill-61DAFB?style=for-the-badge&logo=react&logoColor=black">
     <img src="https://img.shields.io/badge/swiper-6332F6?style=for-the-badge&logo=swiper&logoColor=white">
   </p>
-
+  
+- **배포환경**: Vercel
+  <p align="left">
+    <img src="https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white">
+  </p>
+  
 ---
 
 ## ✨ Features
