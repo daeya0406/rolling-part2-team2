@@ -170,10 +170,10 @@ npm run test
 
 ## 🧩 문서 & 일정 관리
 
-<img width="800" height="800" alt="notion관리" src="https://github.com/user-attachments/assets/7474ceba-fa95-4a41-8cb2-a00cebd23476" />
-</br>
 ![Notion 활용](https://github.com/user-attachments/assets/2e2e91a8-46bc-493e-85da-e452963cb214)
 
+</br>
+<img width="800" height="800" alt="notion관리" src="https://github.com/user-attachments/assets/7474ceba-fa95-4a41-8cb2-a00cebd23476" />
 ---
 
 ## 📅 일정 계획
