@@ -1,64 +1,158 @@
-footer {
-  position: relative;
-  z-index: -1;
-  background-color: var(--c-surface);
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--c-gray200);
+  background: var(--c-white);
+  padding: 40px 0;
+  margin-top: auto;
 
-  .footer-inner {
+  &__inner {
     display: flex;
-    gap: 80px;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
-    max-width: 1248px;
-    padding: 40px 24px 100px;
-    .logo-icon {
-      width: 96px;
-      height: 38px;
-    }
-    address {
-      font-style: normal;
-      color: var(--c-gray600);
-      ul {
-        display: flex;
-        flex-flow: column;
-        justify-content: flex-start;
-        align-items: baseline;
-        gap: 4px;
-        li {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          h2 {
-            color: var(--c-gray600);
-            @include typo(15, 700);
-            margin-bottom: 0;
-            span {
-              @include typo(15, 400);
-              color: var(--c-gray400);
-              margin: 0 8px;
-            }
-          }
-          dl {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-          }
-        }
-      }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+  }
+
+  &__team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__members {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__member {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__member-name {
+    @include typo(14, 500);
+    color: var(--c-gray800);
+    white-space: nowrap;
+    min-width: 54px;
+    text-align: left;
+  }
+
+  &__member-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    
+    &:hover .footer__github-icon {
+      opacity: 0.7;
     }
   }
 
+  &__github-icon {
+    width: 20px;
+    height: 20px;
+    transition: opacity 0.2s ease;
+    filter: brightness(0.8);
+  }
+
+  &__copyright {
+    @include typo(12, 400);
+    color: var(--c-gray500);
+    text-align: center;
+  }
+
+  // Header와 동일한 반응형 패딩 적용
   @media (max-width: 1248px) {
+    &__inner {
+      max-width: 100%;
+      padding: 0 24px;
+    }
   }
 
-  /* 태블릿 (1024px) */
+  // 태블릿 (1024px)
   @media (max-width: 1024px) {
+    padding: 30px 0;
+    
+    &__inner {
+      padding: 0 24px;
+    }
+
+    &__content {
+      gap: 18px;
+    }
+
+    &__member {
+      gap: 8px;
+    }
+
+    &__member-name {
+      @include typo(12, 500);
+      min-width: 50px;
+    }
+
+    &__github-icon {
+      width: 18px;
+      height: 18px;
+    }
   }
 
-  /* 모바일 (480px) */
+  // 모바일 (480px)
   @media (max-width: 480px) {
-    .footer-inner {
-      flex-flow: column;
-      gap: 24px;
-      padding-top: 40px;
+    padding: 20px 0;
+    
+    &__inner {
+      padding: 0 20px;
+    }
+
+    &__content {
+      gap: 20px;
+    }
+
+    &__members {
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+
+    &__member {
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__member-name {
+      @include typo(14, 500);
+      min-width: auto;
+      text-align: center;
+    }
+
+    &__github-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    &__copyright {
+      @include typo(12, 400);
+    }
+
+    // 모바일에서 Divider 숨김
+    &__divider {
+      display: none;
     }
   }
 }

@@ -17,11 +17,11 @@ export default function DefaultLayout() {
   );
 
   return (
-    <div>
+    <div className="default-layout">
       {/* 조건에 따라 헤더 숨김 */}
       <Header className={mobileHideHeader ? "mobile-hide-header" : ""} />
 
-      <main>
+      <main className="default-layout__main">
         <Outlet /> {/* 라우트 컴포넌트 렌더링 */}
         <TopButton />
       </main>
