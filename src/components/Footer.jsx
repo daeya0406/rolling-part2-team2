@@ -3,7 +3,6 @@ import Divider from "./ui/Divider";
 import Icon from "./ui/Icon";
 
 /**
- * Footer 컴포넌트
  * @param {Object} props
  * @param {string} [props.className=""]
  */
@@ -14,34 +13,50 @@ function Footer({ className = "" }) {
     { name: "이나래", github: "https://github.com/jerryko570" },
   ];
 
+  const projectGithub = "https://github.com/daeya0406/rolling-part2-team2";
+
   return (
     <footer className={`footer ${className}`}>
       <div className="footer__inner">
         <div className="footer__content">
           <div className="footer__team">
-            <div className="footer__members">
-              {teamMembers.map((member, index) => (
-                <div key={member.name} className="footer__member">
-                  <span className="footer__member-name">{member.name}</span>
-                  <a
-                    href={member.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="footer__member-link"
-                    aria-label={`${member.name} GitHub`}
-                  >
-                    <Icon name="github-mark" className="footer__github-icon" />
-                  </a>
-                  {index < teamMembers.length - 1 && (
-                    <Divider 
-                      width={1} 
-                      height={20} 
-                      marginX={16} 
-                      className="footer__divider"
-                    />
-                  )}
-                </div>
-              ))}
+            <div className="footer__info">
+              <div className="footer__members">
+                {teamMembers.map((member, index) => (
+                  <div key={member.name} className="footer__member">
+                    <a
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer__member-link"
+                      aria-label={`${member.name} GitHub`}
+                    >
+                      <span className="footer__member-name">{member.name}</span>
+                    </a>
+                    {index < teamMembers.length - 1 && (
+                      <Divider 
+                        width={1} 
+                        height={20} 
+                        marginX={16} 
+                        className="footer__divider"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              <div className="footer__project">
+                <span className="footer__project-label">Project GitHub :</span>
+                <a
+                  href={projectGithub}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer__project-link"
+                  aria-label="프로젝트 GitHub 저장소"
+                >
+                  <Icon name="github-mark" className="footer__github-icon" />
+                </a>
+              </div>
             </div>
           </div>
           
