@@ -34,17 +34,21 @@ function Footer({ className = "" }) {
                       <span className="footer__member-name">{member.name}</span>
                     </a>
                     {index < teamMembers.length && (
-                      <Divider 
-                        width={1} 
-                        height={20} 
-                        marginX={16} 
-                        className={`footer__divider ${index === teamMembers.length - 1 ? 'footer__divider--last' : ''}`}
+                      <Divider
+                        width={1}
+                        height={20}
+                        marginX={16}
+                        className={`footer__divider ${
+                          index === teamMembers.length - 1
+                            ? "footer__divider--last"
+                            : ""
+                        }`}
                       />
                     )}
                   </div>
                 ))}
               </div>
-              
+
               <div className="footer__project">
                 <span className="footer__project-label">Project GitHub :</span>
                 <a
@@ -59,9 +63,9 @@ function Footer({ className = "" }) {
               </div>
             </div>
           </div>
-          
+
           <div className="footer__copyright">
-            <span>© Codeit 19-2 team</span>
+            <p>© 2025 Codeit Sprint 19 Part 2 - Team 2</p>
           </div>
         </div>
       </div>
