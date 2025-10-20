@@ -1,0 +1,156 @@
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--c-gray200);
+  background: #f6f5fb;
+  padding: 40px 0;
+  margin-top: auto;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+  }
+
+  &__team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__members {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__member {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__member-name {
+    @include typo(14, 500);
+    color: var(--c-gray800);
+    white-space: nowrap;
+    min-width: 54px;
+    text-align: left;
+  }
+
+  &__member-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    
+    &:hover .footer__github-icon {
+      opacity: 0.7;
+    }
+  }
+
+  &__github-icon {
+    width: 20px;
+    height: 20px;
+    transition: opacity 0.2s ease;
+    filter: brightness(0.8);
+  }
+
+  &__copyright {
+    @include typo(12, 400);
+    color: var(--c-gray500);
+    text-align: center;
+  }
+
+  @media (max-width: 1248px) {
+    &__inner {
+      max-width: 100%;
+      padding: 0 24px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    padding: 30px 0;
+    
+    &__inner {
+      padding: 0 24px;
+    }
+
+    &__content {
+      gap: 18px;
+    }
+
+    &__member {
+      gap: 8px;
+    }
+
+    &__member-name {
+      @include typo(12, 500);
+      min-width: 50px;
+    }
+
+    &__github-icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px 0;
+    
+    &__inner {
+      padding: 0 20px;
+    }
+
+    &__content {
+      gap: 20px;
+    }
+
+    &__members {
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+
+    &__member {
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__member-name {
+      @include typo(14, 500);
+      min-width: auto;
+      text-align: center;
+    }
+
+    &__github-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    &__copyright {
+      @include typo(12, 400);
+    }
+
+    // 모바일에서 Divider 숨김
+    &__divider {
+      display: none;
+    }
+  }
+}
