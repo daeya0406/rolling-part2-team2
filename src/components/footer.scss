@@ -31,6 +31,13 @@
     gap: 16px;
   }
 
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+  }
+
   &__members {
     display: flex;
     align-items: center;
@@ -42,18 +49,39 @@
   &__member {
     display: flex;
     align-items: center;
-    gap: 8px;
   }
 
   &__member-name {
     @include typo(14, 500);
     color: var(--c-gray800);
     white-space: nowrap;
-    min-width: 54px;
-    text-align: left;
+    text-align: center;
+    padding: 0 8px;
   }
 
   &__member-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    
+    &:hover .footer__member-name {
+      color: var(--c-purple600);
+    }
+  }
+
+  &__project {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__project-label {
+    @include typo(14, 500);
+    color: var(--c-gray800);
+    white-space: nowrap;
+  }
+
+  &__project-link {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -64,8 +92,8 @@
   }
 
   &__github-icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     transition: opacity 0.2s ease;
     filter: brightness(0.8);
   }
@@ -76,7 +104,6 @@
     text-align: center;
   }
 
-  // Header와 동일한 반응형 패딩 적용
   @media (max-width: 1248px) {
     &__inner {
       max-width: 100%;
@@ -84,7 +111,6 @@
     }
   }
 
-  // 태블릿 (1024px)
   @media (max-width: 1024px) {
     padding: 30px 0;
     
@@ -96,22 +122,25 @@
       gap: 18px;
     }
 
-    &__member {
+    &__info {
       gap: 8px;
     }
 
     &__member-name {
       @include typo(12, 500);
-      min-width: 50px;
+      padding: 0 6px;
+    }
+
+    &__project-label {
+      @include typo(12, 500);
     }
 
     &__github-icon {
-      width: 18px;
-      height: 18px;
+      width: 22px;
+      height: 22px;
     }
   }
 
-  // 모바일 (480px)
   @media (max-width: 480px) {
     padding: 20px 0;
     
@@ -123,35 +152,48 @@
       gap: 20px;
     }
 
-    &__members {
+    &__info {
       flex-direction: column;
       gap: 16px;
+    }
+
+    &__members {
+      flex-direction: row;
+      gap: 0;
       align-items: center;
+      justify-content: center;
     }
 
     &__member {
-      gap: 10px;
       justify-content: center;
       align-items: center;
     }
 
     &__member-name {
       @include typo(14, 500);
-      min-width: auto;
       text-align: center;
+      padding: 0;
+    }
+
+    &__project {
+      justify-content: center;
+    }
+
+    &__project-label {
+      @include typo(14, 500);
     }
 
     &__github-icon {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
     }
 
     &__copyright {
       @include typo(12, 400);
     }
 
-    // 모바일에서 Divider 숨김
-    &__divider {
+    // 모바일에서 마지막 Divider 숨김
+    &__divider--last {
       display: none;
     }
   }
