@@ -16,6 +16,9 @@ export default function DefaultLayout() {
     (pattern) => matchPath(pattern, location.pathname) // 현재 경로가 숨김 경로에 해당하는지 확인
   );
 
+  // Footer에서 필요한 메인 페이지 여부 확인
+  const isMainPage = location.pathname === "/";
+
   return (
     <div className="default-layout">
       {/* 조건에 따라 헤더 숨김 */}
@@ -26,7 +29,8 @@ export default function DefaultLayout() {
         <TopButton />
       </main>
 
-      <Footer />
+      {/* 메인 페이지만 className 다르게 전달 */}
+      <Footer className={isMainPage ? "footer__main" : ""} />
 
       <ToastContainer
         position="bottom-center"
