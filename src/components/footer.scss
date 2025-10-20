@@ -1,0 +1,64 @@
+footer {
+  position: relative;
+  z-index: -1;
+  background-color: var(--c-surface);
+
+  .footer-inner {
+    display: flex;
+    gap: 80px;
+    margin: 0 auto;
+    max-width: 1248px;
+    padding: 40px 24px 100px;
+    .logo-icon {
+      width: 96px;
+      height: 38px;
+    }
+    address {
+      font-style: normal;
+      color: var(--c-gray600);
+      ul {
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: baseline;
+        gap: 4px;
+        li {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          h2 {
+            color: var(--c-gray600);
+            @include typo(15, 700);
+            margin-bottom: 0;
+            span {
+              @include typo(15, 400);
+              color: var(--c-gray400);
+              margin: 0 8px;
+            }
+          }
+          dl {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1248px) {
+  }
+
+  /* 태블릿 (1024px) */
+  @media (max-width: 1024px) {
+  }
+
+  /* 모바일 (480px) */
+  @media (max-width: 480px) {
+    .footer-inner {
+      flex-flow: column;
+      gap: 24px;
+      padding-top: 40px;
+    }
+  }
+}
